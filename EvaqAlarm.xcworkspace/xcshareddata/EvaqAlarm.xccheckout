@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A2117B41-5D11-4A84-8872-B83404BB20A9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>EvaqAlarm</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F40A7FE47EBABE08A38B66619163B41945920F0B</key>
+		<string>https://bitbucket.org/serejahh/evaqalarm.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>EvaqAlarm.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F40A7FE47EBABE08A38B66619163B41945920F0B</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/serejahh/evaqalarm.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F40A7FE47EBABE08A38B66619163B41945920F0B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F40A7FE47EBABE08A38B66619163B41945920F0B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>evaqalarm</string>
+		</dict>
+	</array>
+</dict>
+</plist>

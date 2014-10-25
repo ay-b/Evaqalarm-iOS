@@ -7,8 +7,10 @@
 //
 
 #import "EAMainViewController.h"
+#import "NSString+Date.h"
 
 #import <CoreLocation/CoreLocation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface EAMainViewController () <CLLocationManagerDelegate>
 
@@ -57,7 +59,7 @@
 
 - (void)p_sendLocation
 {
-    NSLog(@"location: (%lf; %lf) at %@", self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, self.parkingDate);
+    NSLog(@"location: (%lf; %lf) at %@", self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
 }
 
 #pragma mark - Button handlers
