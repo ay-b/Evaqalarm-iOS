@@ -17,6 +17,7 @@
 		BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD919EA119FB7541009B7E55 /* LaunchScreen.xib */; };
 		BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD919EB819FB7573009B7E55 /* CoreLocation.framework */; };
 		BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919EBB19FB7587009B7E55 /* EAMainViewController.m */; };
+		BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9D84E19FB813B00D5D359 /* EAConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		BD919EB819FB7573009B7E55 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD919EBA19FB7587009B7E55 /* EAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMainViewController.h; sourceTree = "<group>"; };
 		BD919EBB19FB7587009B7E55 /* EAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMainViewController.m; sourceTree = "<group>"; };
+		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
+		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				BD1029EA19FB7B2E005A18B9 /* Podfile */,
 				BD1029E719FB7AC0005A18B9 /* NSString+Date.h */,
 				BD1029E819FB7AC0005A18B9 /* NSString+Date.m */,
+				BDF9D84D19FB813B00D5D359 /* EAConstants.h */,
+				BDF9D84E19FB813B00D5D359 /* EAConstants.m */,
 			);
 			name = "Custom classes";
 			path = "EvaqAlarm/Custom classes";
@@ -115,13 +120,13 @@
 		BD919E9119FB7540009B7E55 /* EvaqAlarm */ = {
 			isa = PBXGroup;
 			children = (
-				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
-				BD919E9719FB7540009B7E55 /* AppDelegate.m */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
 				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
 				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
+				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
+				BD919E9719FB7540009B7E55 /* AppDelegate.m */,
 				BD919E9219FB7540009B7E55 /* Supporting Files */,
 			);
 			path = EvaqAlarm;
@@ -299,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
+				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
 				BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */,

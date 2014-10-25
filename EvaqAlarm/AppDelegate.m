@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "EAConstants.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+    
     return YES;
 }
 
@@ -40,6 +50,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Push notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  {
+    NSString *pushToken = [[[[deviceToken description]
+                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                            stringByReplacingOccurrencesOfString:@">" withString:@""]
+                           stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[NSUserDefaults standardUserDefaults] setObject:pushToken forKey:EAPushToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Push token is: %@", pushToken);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Failed to get push token, error: %@", error);
+}
+
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Received notification: %@", userInfo);
 }
 
 @end
