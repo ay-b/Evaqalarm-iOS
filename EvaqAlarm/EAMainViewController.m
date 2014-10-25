@@ -42,7 +42,9 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
