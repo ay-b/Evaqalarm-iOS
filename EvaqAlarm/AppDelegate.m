@@ -46,6 +46,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -55,14 +57,16 @@
 #pragma mark - Push notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken  {
-    NSString *pushToken = [[[[deviceToken description]
+    NSString *pushToken = [[[deviceToken description]
                              stringByReplacingOccurrencesOfString:@"<" withString:@""]
-                            stringByReplacingOccurrencesOfString:@">" withString:@""]
-                           stringByReplacingOccurrencesOfString:@" " withString:@""];
+                            stringByReplacingOccurrencesOfString:@">" withString:@""];
+    NSString *uid = [pushToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     [[NSUserDefaults standardUserDefaults] setObject:pushToken forKey:EAPushToken];
+    [[NSUserDefaults standardUserDefaults] setObject:uid forKey:EAUID];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSLog(@"Push token is: %@", pushToken);
+    NSLog(@"Push token is: %@", deviceToken);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

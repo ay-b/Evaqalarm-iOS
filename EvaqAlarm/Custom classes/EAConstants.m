@@ -9,3 +9,4 @@
 #import "EAConstants.h"
 
 NSString *const EAPushToken = @"PushToken";
+NSString *const EAUID = @"UID";
