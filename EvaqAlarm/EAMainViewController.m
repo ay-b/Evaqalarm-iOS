@@ -7,6 +7,7 @@
 //
 
 #import "EAMainViewController.h"
+#import "EAConstants.h"
 #import "NSString+Date.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -59,14 +60,23 @@
 
 - (void)p_sendLocation
 {
-    NSLog(@"location: (%lf; %lf) at %@", self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
+    NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    NSDictionary *parameters = @{@"foo": @"bar"};
+//    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Request error: %@", error);
+//    }];
 }
 
 #pragma mark - Button handlers
 
-- (IBAction)alarmButtonPressed
+- (IBAction)alarmButtonPressed:(UILongPressGestureRecognizer*)gesture
 {
-    if (self.parkingLocation) {
+    if (gesture.state == UIGestureRecognizerStateEnded && self.parkingLocation) {
         [self p_sendLocation];
     }
 }
