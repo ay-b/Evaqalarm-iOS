@@ -1,24 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dyJ-ZV-lCp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Main View Controller-->
+        <scene sceneID="7RZ-u1-qR3">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="dyJ-ZV-lCp" customClass="EAMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="aOL-7g-lTJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="g19-Rg-Aqg"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="RB7-UV-ps8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c70-pY-RBp">
+                                <rect key="frame" x="531" y="497" width="51" height="31"/>
+                                <connections>
+                                    <action selector="parkingSwitchChanged:" destination="dyJ-ZV-lCp" eventType="valueChanged" id="fyW-rv-UQX"/>
+                                </connections>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQr-gd-su6">
+                                <rect key="frame" x="20" y="548" width="560" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fQP-gT-NBb"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="alarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="SWP-bD-53D"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Парковка" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8t-ob-8jl">
+                                <rect key="frame" x="20" y="507" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dQr-gd-su6" firstAttribute="top" secondItem="I8t-ob-8jl" secondAttribute="bottom" constant="20" id="JcT-VW-GnR"/>
+                            <constraint firstItem="g19-Rg-Aqg" firstAttribute="top" secondItem="dQr-gd-su6" secondAttribute="bottom" constant="8" symbolic="YES" id="d8C-dx-fqm"/>
+                            <constraint firstAttribute="trailing" secondItem="dQr-gd-su6" secondAttribute="trailing" constant="20" symbolic="YES" id="dRl-H8-Kbe"/>
+                            <constraint firstItem="dQr-gd-su6" firstAttribute="leading" secondItem="I8t-ob-8jl" secondAttribute="leading" id="fLl-1p-u02"/>
+                            <constraint firstItem="dQr-gd-su6" firstAttribute="leading" secondItem="RB7-UV-ps8" secondAttribute="leading" constant="20" symbolic="YES" id="fdb-nz-9tI"/>
+                            <constraint firstItem="c70-pY-RBp" firstAttribute="trailing" secondItem="dQr-gd-su6" secondAttribute="trailing" id="h43-fB-le8"/>
+                            <constraint firstItem="c70-pY-RBp" firstAttribute="bottom" secondItem="I8t-ob-8jl" secondAttribute="bottom" id="luN-Tn-zoy"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="alarmButton" destination="dQr-gd-su6" id="dQp-A3-0gM"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
