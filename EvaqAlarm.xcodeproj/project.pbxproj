@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
 		BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1029E819FB7AC0005A18B9 /* NSString+Date.m */; };
-		BD1029EB19FB7B2E005A18B9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = BD1029EA19FB7B2E005A18B9 /* Podfile */; };
+		BD593B9219FC0DD600E65363 /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9119FC0DD600E65363 /* EAShareViewController.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
 		BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9C19FB7541009B7E55 /* Main.storyboard */; };
@@ -37,7 +37,8 @@
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BD1029E719FB7AC0005A18B9 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		BD1029E819FB7AC0005A18B9 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
-		BD1029EA19FB7B2E005A18B9 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BD593B9019FC0DD600E65363 /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
+		BD593B9119FC0DD600E65363 /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD919E9319FB7540009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919E9419FB7540009B7E55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		BD1029E619FB7AA8005A18B9 /* Custom classes */ = {
 			isa = PBXGroup;
 			children = (
-				BD1029EA19FB7B2E005A18B9 /* Podfile */,
 				BD1029E719FB7AC0005A18B9 /* NSString+Date.h */,
 				BD1029E819FB7AC0005A18B9 /* NSString+Date.m */,
 				BDF9D84D19FB813B00D5D359 /* EAConstants.h */,
@@ -123,9 +123,11 @@
 		BD919E9119FB7540009B7E55 /* EvaqAlarm */ = {
 			isa = PBXGroup;
 			children = (
+				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
-				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
+				BD593B9019FC0DD600E65363 /* EAShareViewController.h */,
+				BD593B9119FC0DD600E65363 /* EAShareViewController.m */,
 				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
@@ -265,7 +267,6 @@
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
 				BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */,
 				BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */,
-				BD1029EB19FB7B2E005A18B9 /* Podfile in Resources */,
 				BD919EA019FB7541009B7E55 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +320,7 @@
 			files = (
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
+				BD593B9219FC0DD600E65363 /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
 				BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */,

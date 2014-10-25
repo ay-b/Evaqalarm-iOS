@@ -13,7 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
 
-@interface EAMainViewController () <CLLocationManagerDelegate>
+@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate>
 
 @property CLLocationManager *locationManager;
 @property CLLocation *parkingLocation;
@@ -23,7 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
 
-- (IBAction)alarmButtonPressed;
+- (IBAction)alarmButtonPressed:(UILongPressGestureRecognizer*)gesture;
 - (IBAction)parkingSwitchChanged:(UISwitch*)sender;
 
 @end
@@ -48,11 +48,15 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+    else {
+        [self.locationManager startUpdatingLocation];
+        [self.locationManager stopUpdatingLocation];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //[self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     [super viewWillDisappear:animated];
 }
 
@@ -60,8 +64,13 @@
 
 - (void)p_sendLocation
 {
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
     NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
+    
+    NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
     
 //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    NSDictionary *parameters = @{@"foo": @"bar"};
@@ -72,12 +81,18 @@
 //    }];
 }
 
+- (void)p_sendAlarm
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
 #pragma mark - Button handlers
 
 - (IBAction)alarmButtonPressed:(UILongPressGestureRecognizer*)gesture
 {
-    if (gesture.state == UIGestureRecognizerStateEnded && self.parkingLocation) {
-        [self p_sendLocation];
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self p_sendAlarm];
     }
 }
 
@@ -87,6 +102,7 @@
         self.parkingLocation = self.locationManager.location;
         self.parkingDate = [NSDate date];
         self.alarmButton.enabled = YES;
+        [self p_sendLocation];
     }
     else {
         self.parkingLocation = nil;

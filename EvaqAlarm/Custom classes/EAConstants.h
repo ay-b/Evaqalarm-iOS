@@ -11,3 +11,8 @@
 extern NSString *const EAPushToken;
 extern NSString *const EAUID;
 
+extern NSString *const EAVKAppKey;
+extern NSString *const EAFBAppId;
+
+extern NSString *const EAShareMessage;
+extern NSString *const EAShareLink;

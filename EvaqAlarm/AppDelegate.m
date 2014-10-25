@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "EAConstants.h"
 
+#import <vk-ios-sdk/VKSdk.h>
+#import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
+
 @interface AppDelegate ()
 
 @end
@@ -52,6 +55,17 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([[url scheme] hasPrefix:[NSString stringWithFormat:@"vk%@", EAVKAppKey]]) {
+        return [VKSdk processOpenURL:url fromApplication:sourceApplication];
+    }
+    else if ([[url scheme] hasPrefix:[NSString stringWithFormat:@"fb%@", EAFBAppId]]) {
+        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    }
+    return YES;
 }
 
 #pragma mark - Push notifications

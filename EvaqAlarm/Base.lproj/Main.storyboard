@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dyJ-ZV-lCp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jTn-bj-veT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -58,6 +58,13 @@
                             <constraint firstItem="c70-pY-RBp" firstAttribute="bottom" secondItem="I8t-ob-8jl" secondAttribute="bottom" id="luN-Tn-zoy"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="zhr-3I-TaM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Tqo-su-ie3">
+                            <connections>
+                                <segue destination="2R7-he-6cw" kind="show" id="hoN-4u-Ivw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="alarmButton" destination="dQr-gd-su6" id="dQp-A3-0gM"/>
                     </connections>
@@ -69,6 +76,82 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
+        </scene>
+        <!--Расскажи всем-->
+        <scene sceneID="EyN-ku-q2D">
+            <objects>
+                <viewController id="2R7-he-6cw" customClass="EAShareViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CtW-HJ-Lzp"/>
+                        <viewControllerLayoutGuide type="bottom" id="tQN-cG-Roe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="717-DF-feI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLw-a4-aoE">
+                                <rect key="frame" x="20" y="72" width="560" height="102"/>
+                                <mutableString key="text">EvaqAlarm - социальная программа. Поэтому, чем больше людей себе её установят, тем больше вероятность, что не придётся тратить время, нервы и деньги на вызволение своего автомобиля со стоянки на краю географии.
+Расскажите о ней друзьям, помогайте друг-другу!</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg8-i1-wu8">
+                                <rect key="frame" x="20" y="194" width="560" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="VK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="vkButtonPressed:" destination="2R7-he-6cw" eventType="touchUpInside" id="9rw-aM-df4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIe-dV-Da2">
+                                <rect key="frame" x="20" y="248" width="560" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="FB">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fbButtonPressed:" destination="2R7-he-6cw" eventType="touchUpInside" id="Fel-Km-c1f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fg8-i1-wu8" firstAttribute="leading" secondItem="vLw-a4-aoE" secondAttribute="leading" id="168-h3-Hbz"/>
+                            <constraint firstItem="YIe-dV-Da2" firstAttribute="top" secondItem="fg8-i1-wu8" secondAttribute="bottom" constant="20" id="2iT-qh-O1K"/>
+                            <constraint firstItem="vLw-a4-aoE" firstAttribute="leading" secondItem="717-DF-feI" secondAttribute="leading" constant="20" symbolic="YES" id="3YC-8b-YSM"/>
+                            <constraint firstItem="vLw-a4-aoE" firstAttribute="top" secondItem="CtW-HJ-Lzp" secondAttribute="bottom" constant="8" symbolic="YES" id="4Pe-jV-gwv"/>
+                            <constraint firstItem="fg8-i1-wu8" firstAttribute="trailing" secondItem="vLw-a4-aoE" secondAttribute="trailing" id="4Vy-tg-pKO"/>
+                            <constraint firstItem="vLw-a4-aoE" firstAttribute="trailing" secondItem="YIe-dV-Da2" secondAttribute="trailing" id="VZ6-of-Ltf"/>
+                            <constraint firstItem="fg8-i1-wu8" firstAttribute="top" secondItem="vLw-a4-aoE" secondAttribute="bottom" constant="20" id="imu-sC-kJh"/>
+                            <constraint firstAttribute="trailing" secondItem="vLw-a4-aoE" secondAttribute="trailing" constant="20" symbolic="YES" id="mF0-ZC-cjZ"/>
+                            <constraint firstItem="vLw-a4-aoE" firstAttribute="leading" secondItem="YIe-dV-Da2" secondAttribute="leading" id="vcJ-ze-TRI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Расскажи всем" id="Scg-iP-dhB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tf9-L7-I3W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1016" y="222"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="W5W-yf-hvg">
+            <objects>
+                <navigationController id="jTn-bj-veT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nu0-PY-ZEe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dyJ-ZV-lCp" kind="relationship" relationship="rootViewController" id="uyI-f7-NSP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="idd-j5-VHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-364" y="222"/>
         </scene>
     </scenes>
 </document>
