@@ -25,6 +25,7 @@ static const NSInteger kTopOffset = 45 + 6; // radius = 12, so we should offset 
 
 static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+static NSString *const kAnimationName = @"RadialAnimation";
 
 #define kGreenColor [UIColor colorWithRed:169/255.0 green:219/255.0 blue:72/255.0 alpha:1]
 #define kRedColor [UIColor colorWithRed:255/255.0 green:59/255.0 blue:48/255.0 alpha:1]
@@ -40,6 +41,7 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 @property CLLocationManager *locationManager;
 @property CLLocation *parkingLocation;
 @property NSDate *parkingDate;
+@property NSArray *alertButtonComponents;
 
 #pragma mark - UI
 
@@ -65,7 +67,12 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
     [self updateLocationManager];
     
     self.instructionLabel.text = kParkingDisabledString;
-    [self.alarmButton setBackgroundColor:kGrayColor];
+    //[self.alarmButton setBackgroundColor:kGrayColor];
+    
+    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
+    for (CAShapeLayer* circle in self.alertButtonComponents) {
+        [self.view.layer addSublayer:circle];
+    }
 }
 
 - (void)updateLocationManager
@@ -116,7 +123,12 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
     NSLog(@"tap");
     
     isParking = !isParking;
-    [self.alarmButton setBackgroundColor:isParking ? kGreenColor : kGrayColor];
+    UIColor *color = isParking ? kGreenColor : kGrayColor;
+    for (CAShapeLayer* circle in self.alertButtonComponents) {
+        circle.strokeColor = color.CGColor;
+    }
+    self.instructionLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
+    //[self.alarmButton setBackgroundColor:isParking ? kGreenColor : kGrayColor];
     
     if (isParking) {
         //[self p_sendLocation];
@@ -147,7 +159,6 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
-    return YES;
 }
 
 #pragma mark - Private API
@@ -160,39 +171,64 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
     isAnimationStarted = YES;
     isAlarmSent = NO;
     
-    
-    
-    // Set up the shape of the circle
-    int radius = 100;
-    CAShapeLayer *circle = [CAShapeLayer layer];
-    // Make a circular shape
-    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
-                                             cornerRadius:radius].CGPath;
-    // Center the shape in self.view
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight);
-
-    // Configure the apperence of the circle
-    circle.fillColor = [UIColor clearColor].CGColor;
-    circle.strokeColor = kRedColor.CGColor;
-    circle.lineWidth = 12;
-
-    // Add to parent layer
-    [self.view.layer addSublayer:circle];
-
     // Configure animation
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    drawAnimation.duration            = kAnimationDuration; // "animate over 10 seconds or so.."
-    drawAnimation.repeatCount         = 1.0;  // Animate only once..
-
-    // Animate from no part of the stroke being drawn to the entire stroke being drawn
+    drawAnimation.duration = kAnimationDuration;
+    drawAnimation.repeatCount = 1.0;
     drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    drawAnimation.toValue   = [NSNumber numberWithFloat:1.0f];
+    drawAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    //drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
 
-    // Experiment with timing to get the appearence to look the way you want
-    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
+    for (CAShapeLayer* circle in circles) {
+        [self.view.layer addSublayer:circle];
+        [circle addAnimation:drawAnimation forKey:kAnimationName];
+    }
+}
 
-    // Add the animation to the circle
-    [circle addAnimation:drawAnimation forKey:@"drawCircleAnimation"];
+- (CAShapeLayer*)p_circle1WithColor:(UIColor*)color
+{
+    int lineWidth = 12;
+    int radius = 100 - lineWidth/2;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight);
+    circle.fillColor = [UIColor clearColor].CGColor;
+    circle.strokeColor = color.CGColor;
+    circle.lineWidth = lineWidth;
+    
+    return circle;
+}
+
+- (CAShapeLayer*)p_circle2WithColor:(UIColor*)color
+{
+    int lineWidth = 14;
+    int radius = 82 - lineWidth/2;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19);
+    circle.fillColor = [UIColor clearColor].CGColor;
+    circle.strokeColor = color.CGColor;
+    circle.lineWidth = lineWidth;
+    
+    return circle;
+}
+
+- (CAShapeLayer*)p_circle3WithColor:(UIColor*)color
+{
+    int lineWidth = 60;
+    int radius = 60 - lineWidth/2;
+    
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64);
+    circle.fillColor = [UIColor clearColor].CGColor;
+    circle.strokeColor = color.CGColor;
+    circle.lineWidth = lineWidth;
+    
+    return circle;
 }
 
 - (void)p_stopAnimation
@@ -201,16 +237,14 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
     NSLog(@"cancel animation");
     
     dispatch_async(dispatch_get_main_queue(), ^{
-    for (CALayer *layer in self.view.layer.sublayers) {
-        
-            if ([layer isKindOfClass:[CAShapeLayer class]]) {
-        [layer removeAllAnimations];
-        [layer removeFromSuperlayer];
+        NSArray *layers = [self.view.layer.sublayers copy];
+        for (CALayer *layer in layers) {
+            if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
+                [layer removeAllAnimations];
+                [layer removeFromSuperlayer];
             }
-        
-    }
-        });
-    //[self.view.layer removeAllAnimations];
+        }
+    });
 }
 
 #pragma mark Server

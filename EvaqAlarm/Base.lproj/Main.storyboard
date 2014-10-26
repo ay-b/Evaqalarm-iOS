@@ -45,7 +45,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-hD-vSb">
                                 <rect key="frame" x="200" y="65" width="200" height="200"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="t0Q-hD-vSb" secondAttribute="height" multiplier="1:1" id="014-uo-PBY"/>
@@ -92,7 +92,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.19999999999999998" id="pYz-dM-MoY">
+                <pongPressGestureRecognizer allowableMovement="100000" minimumPressDuration="0.19999999999999998" id="pYz-dM-MoY">
                     <connections>
                         <action selector="starAnimation:" destination="dyJ-ZV-lCp" id="9Hd-zH-AJp"/>
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="3aW-Nk-02h"/>
@@ -104,7 +104,7 @@
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="0ME-vH-KkR"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="0.0" minimumPressDuration="2" id="3nh-4R-jWC">
+                <pongPressGestureRecognizer allowableMovement="100000" minimumPressDuration="2" id="3nh-4R-jWC">
                     <connections>
                         <action selector="sendAlarm:" destination="dyJ-ZV-lCp" id="6FE-NN-UXe"/>
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="Ulr-fR-4cP"/>
