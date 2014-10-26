@@ -30,6 +30,7 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 {
     BOOL isParking;
     BOOL isAlarmSent;
+    BOOL isAnimationStarted;
     NSTimer *alarmTimer;
 }
 @property CLLocationManager *locationManager;
@@ -142,6 +143,12 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 
 - (IBAction)tap:(id)sender
 {
+    if (isAnimationStarted) {
+        return;
+    }
+    
+    NSLog(@"tap");
+    
     isParking = !isParking;
     [self.alarmButton setBackgroundColor:isParking ? kGreenColor : kGrayColor];
     
@@ -153,7 +160,11 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        [self p_sendAlarm];
+        isAlarmSent = YES;
+        isAnimationStarted = NO; // [self p_stopAnimation];
+        //[self p_sendAlarm];
+        
+         NSLog(@"alarm sent");
     }
 }
 
@@ -168,7 +179,7 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
+    return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
     return YES;
 }
 
@@ -179,11 +190,13 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 - (void)p_startAnimation
 {
     NSLog(@"start animation");
+    isAnimationStarted = YES;
     isAlarmSent = NO;
 }
 
 - (void)p_stopAnimation
 {
+    isAnimationStarted = NO;
     NSLog(@"cancel animation");
 }
 

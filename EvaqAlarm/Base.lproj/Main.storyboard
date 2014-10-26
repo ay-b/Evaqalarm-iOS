@@ -98,7 +98,7 @@
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="3aW-Nk-02h"/>
                     </connections>
                 </pongPressGestureRecognizer>
-                <tapGestureRecognizer id="geO-jk-TJE">
+                <tapGestureRecognizer delaysTouchesEnded="NO" id="geO-jk-TJE">
                     <connections>
                         <action selector="tap:" destination="dyJ-ZV-lCp" id="5dA-IP-Nxq"/>
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="0ME-vH-KkR"/>
