@@ -15,6 +15,7 @@
 		BD2E4C5519FD66B800E00FD9 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5219FD66B800E00FD9 /* share.png */; };
 		BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5319FD66B800E00FD9 /* share@2x.png */; };
 		BD2E4C5719FD66B800E00FD9 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5419FD66B800E00FD9 /* share@3x.png */; };
+		BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2E4C5A19FD901800E00FD9 /* Reachability.m */; };
 		BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9619FCED0000E65363 /* EALoginViewController.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
@@ -49,6 +50,8 @@
 		BD2E4C5219FD66B800E00FD9 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		BD2E4C5319FD66B800E00FD9 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		BD2E4C5419FD66B800E00FD9 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		BD2E4C5919FD901800E00FD9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		BD2E4C5A19FD901800E00FD9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BD593B9519FCED0000E65363 /* EALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALoginViewController.h; sourceTree = "<group>"; };
 		BD593B9619FCED0000E65363 /* EALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EALoginViewController.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +124,15 @@
 				BD2E4C4E19FD663500E00FD9 /* logo@3x.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		BD2E4C5819FD901800E00FD9 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				BD2E4C5919FD901800E00FD9 /* Reachability.h */,
+				BD2E4C5A19FD901800E00FD9 /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		BD919E8619FB7540009B7E55 = {
@@ -199,6 +211,7 @@
 		BD9AC97B19FB96280088150F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD2E4C5819FD901800E00FD9 /* Reachability */,
 				BD2E4C4B19FD663500E00FD9 /* Images */,
 				BD9AC97C19FB96280088150F /* alarm.wav */,
 			);
@@ -353,6 +366,7 @@
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
 				BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */,
+				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
 				BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */,

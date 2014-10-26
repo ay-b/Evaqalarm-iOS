@@ -15,6 +15,7 @@
 #import <DTProgressView.h>
 #import <VK-ios-sdk/VKSdk.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "Reachability.h"
 
 static const NSInteger kFacebookButton = 0;
 static const NSInteger kVkontakteButton = 1;
@@ -64,19 +65,8 @@ static NSString *const kAnimationName = @"RadialAnimation";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateLocationManager];
-    
-    self.instructionLabel.text = kParkingDisabledString;
-    //[self.alarmButton setBackgroundColor:kGrayColor];
-    
-    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
-    for (CAShapeLayer* circle in self.alertButtonComponents) {
-        [self.view.layer addSublayer:circle];
-    }
-}
 
-- (void)updateLocationManager
-{
+    // prepare location manager
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -84,8 +74,12 @@ static NSString *const kAnimationName = @"RadialAnimation";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-//    [self.locationManager startUpdatingLocation];
-//    [self.locationManager stopUpdatingLocation];
+    // prepare the view
+    self.instructionLabel.text = kParkingDisabledString;
+    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
+    for (CAShapeLayer* circle in self.alertButtonComponents) {
+        [self.view.layer addSublayer:circle];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -119,8 +113,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
     if (isAnimationStarted) {
         return;
     }
-    
-    NSLog(@"tap");
+    //NSLog(@"tap");
     
     isParking = !isParking;
     UIColor *color = isParking ? kGreenColor : kGrayColor;
@@ -128,10 +121,9 @@ static NSString *const kAnimationName = @"RadialAnimation";
         circle.strokeColor = color.CGColor;
     }
     self.instructionLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
-    //[self.alarmButton setBackgroundColor:isParking ? kGreenColor : kGrayColor];
     
     if (isParking) {
-        //[self p_sendLocation];
+        [self p_sendLocation];
     }
 }
 
@@ -251,7 +243,18 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 - (void)p_sendLocation
 {
-    [self updateLocationManager];
+    //self.parkingLocation = self.locationManager.location;
+    
+    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if (status == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    if (!self.parkingLocation) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    
     
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
     NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
