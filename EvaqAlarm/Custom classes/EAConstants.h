@@ -16,3 +16,5 @@ extern NSString *const EAFBAppId;
 
 extern NSString *const EAShareMessage;
 extern NSString *const EAShareLink;
+
+extern NSString *const EAAlreadyLogged;

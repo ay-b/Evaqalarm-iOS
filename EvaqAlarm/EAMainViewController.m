@@ -12,19 +12,35 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
+#import <DTProgressView.h>
+#import <VK-ios-sdk/VKSdk.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate>
+static const NSInteger kFacebookButton = 0;
+static const NSInteger kVkontakteButton = 1;
 
+static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+
+#define kGreenColor [UIColor colorWithRed:169/255.0 green:219/255.0 blue:72/255.0 alpha:1]
+#define kRedColor [UIColor colorWithRed:255/255.0 green:59/255.0 blue:48/255.0 alpha:1]
+#define kGrayColor [UIColor colorWithRed:220/255.0 green:221/255.0 blue:221/255.0 alpha:1]
+
+@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, UIGestureRecognizerDelegate>
+{
+    BOOL isParking;
+    BOOL isAlarmSent;
+    NSTimer *alarmTimer;
+}
 @property CLLocationManager *locationManager;
 @property CLLocation *parkingLocation;
 @property NSDate *parkingDate;
 
 #pragma mark - UI
 
+- (IBAction)alarmButtonPressed:(UIButton*)sender;
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
-
-- (IBAction)alarmButtonPressed:(UILongPressGestureRecognizer*)gesture;
-- (IBAction)parkingSwitchChanged:(UISwitch*)sender;
+@property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
 
 @end
 
@@ -35,23 +51,67 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //[self.locationManager startUpdatingLocation];
+    [self.locationManager startUpdatingLocation];
+    
+    
+    
+//    [self setupProgressView];
+//    [self increaseProgress];
+    
+//    // Set up the shape of the circle
+//    int radius = 100;
+//    CAShapeLayer *circle = [CAShapeLayer layer];
+//    // Make a circular shape
+//    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
+//                                             cornerRadius:radius].CGPath;
+//    // Center the shape in self.view
+//    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius,
+//                                  45);
+//    
+//    // Configure the apperence of the circle
+//    circle.fillColor = [UIColor clearColor].CGColor;
+//    circle.strokeColor = [UIColor blackColor].CGColor;
+//    circle.lineWidth = 5;
+//    
+//    // Add to parent layer
+//    [self.view.layer addSublayer:circle];
+//    
+//    // Configure animation
+//    CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+//    drawAnimation.duration            = 10.0; // "animate over 10 seconds or so.."
+//    drawAnimation.repeatCount         = 1.0;  // Animate only once..
+//    
+//    // Animate from no part of the stroke being drawn to the entire stroke being drawn
+//    drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+//    drawAnimation.toValue   = [NSNumber numberWithFloat:1.0f];
+//    
+//    // Experiment with timing to get the appearence to look the way you want
+//    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+//    
+//    // Add the animation to the circle
+//    [circle addAnimation:drawAnimation forKey:@"drawCircleAnimation"];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self updateLocationManager];
     
+    self.instructionLabel.text = kParkingDisabledString;
+    [self.alarmButton setBackgroundColor:kGrayColor];
+}
+
+- (void)updateLocationManager
+{
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    else {
-        [self.locationManager startUpdatingLocation];
-        [self.locationManager stopUpdatingLocation];
-    }
+    
+//    [self.locationManager startUpdatingLocation];
+//    [self.locationManager stopUpdatingLocation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -60,10 +120,79 @@
     [super viewWillDisappear:animated];
 }
 
+#pragma mark - Button handlers
+
+- (IBAction)parkingSwitchChanged:(UISwitch*)sender
+{
+    if (sender.isOn) {
+        self.parkingLocation = self.locationManager.location;
+        self.parkingDate = [NSDate date];
+        [self p_sendLocation];
+    }
+    else {
+        self.parkingLocation = nil;
+    }
+}
+
+- (IBAction)showShare
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
+    [actionSheet showInView:[self.view window]];
+}
+
+- (IBAction)tap:(id)sender
+{
+    isParking = !isParking;
+    [self.alarmButton setBackgroundColor:isParking ? kGreenColor : kGrayColor];
+    
+    if (isParking) {
+        //[self p_sendLocation];
+    }
+}
+
+- (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self p_sendAlarm];
+    }
+}
+
+- (IBAction)starAnimation:(UILongPressGestureRecognizer*)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self p_startAnimation];
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded && !isAlarmSent) {
+        [self p_stopAnimation];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    return YES;
+}
+
 #pragma mark - Private API
+
+#pragma mark Animation
+
+- (void)p_startAnimation
+{
+    NSLog(@"start animation");
+    isAlarmSent = NO;
+}
+
+- (void)p_stopAnimation
+{
+    NSLog(@"cancel animation");
+}
+
+#pragma mark Server
 
 - (void)p_sendLocation
 {
+    [self updateLocationManager];
+    
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
     NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
     
@@ -72,13 +201,13 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    NSDictionary *parameters = @{@"foo": @"bar"};
-//    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Request error: %@", error);
-//    }];
+    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //    NSDictionary *parameters = @{@"foo": @"bar"};
+    //    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    //        NSLog(@"JSON: %@", responseObject);
+    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //        NSLog(@"Request error: %@", error);
+    //    }];
 }
 
 - (void)p_sendAlarm
@@ -87,34 +216,12 @@
     [alert show];
 }
 
-#pragma mark - Button handlers
-
-- (IBAction)alarmButtonPressed:(UILongPressGestureRecognizer*)gesture
-{
-    if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self p_sendAlarm];
-    }
-}
-
-- (IBAction)parkingSwitchChanged:(UISwitch*)sender
-{
-    if (sender.isOn) {
-        self.parkingLocation = self.locationManager.location;
-        self.parkingDate = [NSDate date];
-        self.alarmButton.enabled = YES;
-        [self p_sendLocation];
-    }
-    else {
-        self.parkingLocation = nil;
-        self.alarmButton.enabled = NO;
-    }
-}
-
 #pragma mark - CLLocation manager delegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     //NSLog(@"upd");
+    self.parkingLocation = [locations lastObject];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -126,6 +233,123 @@
 {
     NSLog(@"auth status: %i", status);
 }
+
+#pragma mark - UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == kFacebookButton) {
+        [self p_shareToFB];
+    }
+    else if (buttonIndex == kVkontakteButton) {
+        [self p_shareToVK];
+    }
+}
+
+#pragma mark - Social
+
+- (void)showAlertWithError:(NSError*)error
+{
+    NSString *msg = @"";
+    if (error) {
+        msg = @"Не удалось опубликовать пост. Попробуйте позже.";
+    }
+    else {
+        msg = @"Пост успешно опубликован.";
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:@"Расскажи всем" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+}
+
+#pragma mark FB
+
+- (void)p_shareToFB
+{
+    FBSession *session = [[FBSession alloc] initWithPermissions:@[@"publish_actions", @"publish_stream"]];
+    [FBSession setActiveSession:session];
+    [session openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
+            completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                [self p_publishToFB];
+            }];
+}
+
+- (void)p_publishToFB
+{
+    NSDictionary *params = @{@"link" : EAShareLink,
+                             @"picture": @"",
+                             @"name" : @"",
+                             @"caption" : @"",
+                             @"message" : EAShareMessage
+                             };
+    
+    [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [self showAlertWithError:error];
+    }];
+}
+
+#pragma mark VK
+
+- (void)p_shareToVK
+{
+    if ([VKSdk isLoggedIn]) {
+        [self p_publishToVK];
+    }
+    else {
+        [VKSdk authorize:@[VK_PER_WALL, VK_PER_FRIENDS, VK_PER_OFFLINE] revokeAccess:YES forceOAuth:NO inApp:NO];
+    }
+}
+
+- (void)p_publishToVK
+{
+    NSDictionary *parameters = @{@"message" : EAShareMessage, @"attachments:" : EAShareLink};
+    VKRequest *request = [[VKApi wall] post:parameters];
+    [request executeWithResultBlock:^(VKResponse *response) {
+        NSLog(@"share to vk done");
+        [self showAlertWithError:nil];
+    } errorBlock:^(NSError *error) {
+        NSLog(@"share to vk error: %@", error);
+        [self showAlertWithError:error];
+    }];
+}
+
+#pragma mark - VK sdk delegate
+
+- (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {}
+- (void)vkSdkTokenHasExpired:(VKAccessToken *)expiredToken {}
+- (void)vkSdkUserDeniedAccess:(VKError *)authorizationError {}
+- (void)vkSdkShouldPresentViewController:(UIViewController *)controller
+{
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken
+{
+    [self p_publishToVK];
+}
+
+//#pragma mark - SHAPE TEST
+//
+//-(void)increaseProgress
+//{
+//    if (self.progressView.progress == 1) {
+//        [self.progressView setProgress:0 animated:NO];
+//    }
+//    float random = (arc4random() % 10)/100.0;
+//    float progress = self.progressView.progress + random;
+//    [self.progressView setProgress:progress animated:YES];
+//    
+//    [self performSelector:@selector(increaseProgress) withObject:nil afterDelay:0.15];
+//}
+//
+//-(void)setupProgressView
+//{
+//    self.progressView.strokeColor = [UIColor redColor];
+//    CGFloat side = self.progressView.bounds.size.width - 5;
+//    CGRect circleRect = CGRectMake(5, 5, side-5, side-5);
+//    UIBezierPath * circlePath = [UIBezierPath bezierPathWithOvalInRect:circleRect];
+//    self.progressView.path = circlePath;
+//    self.progressView.lineWidth = 2;
+//}
 
 @end
 

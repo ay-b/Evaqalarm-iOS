@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
 		BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1029E819FB7AC0005A18B9 /* NSString+Date.m */; };
-		BD593B9219FC0DD600E65363 /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9119FC0DD600E65363 /* EAShareViewController.m */; };
+		BD2E4C4F19FD663500E00FD9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4C19FD663500E00FD9 /* logo.png */; };
+		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
+		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
+		BD2E4C5519FD66B800E00FD9 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5219FD66B800E00FD9 /* share.png */; };
+		BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5319FD66B800E00FD9 /* share@2x.png */; };
+		BD2E4C5719FD66B800E00FD9 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5419FD66B800E00FD9 /* share@3x.png */; };
+		BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9619FCED0000E65363 /* EALoginViewController.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
 		BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9C19FB7541009B7E55 /* Main.storyboard */; };
@@ -37,8 +43,14 @@
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BD1029E719FB7AC0005A18B9 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		BD1029E819FB7AC0005A18B9 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
-		BD593B9019FC0DD600E65363 /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
-		BD593B9119FC0DD600E65363 /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
+		BD2E4C4C19FD663500E00FD9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
+		BD2E4C5219FD66B800E00FD9 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		BD2E4C5319FD66B800E00FD9 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		BD2E4C5419FD66B800E00FD9 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		BD593B9519FCED0000E65363 /* EALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALoginViewController.h; sourceTree = "<group>"; };
+		BD593B9619FCED0000E65363 /* EALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EALoginViewController.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD919E9319FB7540009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919E9419FB7540009B7E55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -98,6 +110,19 @@
 			path = "EvaqAlarm/Custom classes";
 			sourceTree = "<group>";
 		};
+		BD2E4C4B19FD663500E00FD9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BD2E4C5219FD66B800E00FD9 /* share.png */,
+				BD2E4C5319FD66B800E00FD9 /* share@2x.png */,
+				BD2E4C5419FD66B800E00FD9 /* share@3x.png */,
+				BD2E4C4C19FD663500E00FD9 /* logo.png */,
+				BD2E4C4D19FD663500E00FD9 /* logo@2x.png */,
+				BD2E4C4E19FD663500E00FD9 /* logo@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		BD919E8619FB7540009B7E55 = {
 			isa = PBXGroup;
 			children = (
@@ -124,10 +149,10 @@
 			isa = PBXGroup;
 			children = (
 				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
+				BD593B9519FCED0000E65363 /* EALoginViewController.h */,
+				BD593B9619FCED0000E65363 /* EALoginViewController.m */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
-				BD593B9019FC0DD600E65363 /* EAShareViewController.h */,
-				BD593B9119FC0DD600E65363 /* EAShareViewController.m */,
 				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
@@ -174,6 +199,7 @@
 		BD9AC97B19FB96280088150F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD2E4C4B19FD663500E00FD9 /* Images */,
 				BD9AC97C19FB96280088150F /* alarm.wav */,
 			);
 			name = Resources;
@@ -265,9 +291,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
+				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,
+				BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */,
+				BD2E4C4F19FD663500E00FD9 /* logo.png in Resources */,
 				BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */,
+				BD2E4C5719FD66B800E00FD9 /* share@3x.png in Resources */,
 				BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */,
+				BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */,
 				BD919EA019FB7541009B7E55 /* Images.xcassets in Resources */,
+				BD2E4C5519FD66B800E00FD9 /* share.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +352,7 @@
 			files = (
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
-				BD593B9219FC0DD600E65363 /* EAShareViewController.m in Sources */,
+				BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
 				BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */,
