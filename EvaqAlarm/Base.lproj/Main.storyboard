@@ -104,7 +104,7 @@
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="0ME-vH-KkR"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="2" id="3nh-4R-jWC">
+                <pongPressGestureRecognizer allowableMovement="0.0" minimumPressDuration="2" id="3nh-4R-jWC">
                     <connections>
                         <action selector="sendAlarm:" destination="dyJ-ZV-lCp" id="6FE-NN-UXe"/>
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="Ulr-fR-4cP"/>
