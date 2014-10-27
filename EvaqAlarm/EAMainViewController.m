@@ -115,16 +115,17 @@ static NSString *const kAnimationName = @"RadialAnimation";
     }
     //NSLog(@"tap");
     
-    isParking = !isParking;
+    BOOL willParking = !isParking;
+    if (willParking && [self isReachable]) {
+        [self p_sendLocation];
+    }
+    
+    isParking = willParking;
     UIColor *color = isParking ? kGreenColor : kGrayColor;
     for (CAShapeLayer* circle in self.alertButtonComponents) {
         circle.strokeColor = color.CGColor;
     }
     self.instructionLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
-    
-    if (isParking) {
-        [self p_sendLocation];
-    }
 }
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
@@ -155,10 +156,29 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 #pragma mark - Private API
 
+- (BOOL)isReachable
+{
+    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if (status == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return NO;
+    }
+    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark Animation
 
 - (void)p_startAnimation
 {
+    
+    
     NSLog(@"start animation");
     isAnimationStarted = YES;
     isAlarmSent = NO;
@@ -227,16 +247,14 @@ static NSString *const kAnimationName = @"RadialAnimation";
 {
     isAnimationStarted = NO;
     NSLog(@"cancel animation");
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *layers = [self.view.layer.sublayers copy];
-        for (CALayer *layer in layers) {
-            if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
-                [layer removeAllAnimations];
-                [layer removeFromSuperlayer];
-            }
+
+    NSArray *layers = [self.view.layer.sublayers copy];
+    for (CALayer *layer in layers) {
+        if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
+            [layer removeAllAnimations];
+            [layer removeFromSuperlayer];
         }
-    });
+    }
 }
 
 #pragma mark Server
@@ -244,18 +262,6 @@ static NSString *const kAnimationName = @"RadialAnimation";
 - (void)p_sendLocation
 {
     //self.parkingLocation = self.locationManager.location;
-    
-    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if (status == NotReachable) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-    }
-    if (!self.parkingLocation) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-    }
-    
-    
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
     NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
     
