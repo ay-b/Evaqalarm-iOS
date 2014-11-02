@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbE-PL-ZZ1">
-                                <rect key="frame" x="545" y="28" width="35" height="35"/>
+                                <rect key="frame" x="536" y="28" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="tbE-PL-ZZ1" secondAttribute="height" multiplier="1:1" id="jXE-c2-9fU"/>
                                     <constraint firstAttribute="width" constant="44" id="oaL-2k-eWL"/>
@@ -27,18 +27,6 @@
                                 <state key="normal" image="share.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="jXE-c2-9fU"/>
-                                        <exclude reference="oaL-2k-eWL"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="jXE-c2-9fU"/>
-                                        <include reference="oaL-2k-eWL"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="showShare" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="Rxr-1W-2Yp"/>
                                 </connections>
@@ -89,6 +77,7 @@
                     <connections>
                         <outlet property="alarmButton" destination="t0Q-hD-vSb" id="rou-zx-Xow"/>
                         <outlet property="instructionLabel" destination="NhC-GU-0de" id="L0s-ox-AS9"/>
+                        <outlet property="shareButton" destination="tbE-PL-ZZ1" id="L24-rB-fSM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>

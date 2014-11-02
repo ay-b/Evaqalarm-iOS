@@ -46,9 +46,9 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 #pragma mark - UI
 
-- (IBAction)alarmButtonPressed:(UIButton*)sender;
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
 @property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @end
 
@@ -126,6 +126,11 @@ static NSString *const kAnimationName = @"RadialAnimation";
         circle.strokeColor = color.CGColor;
     }
     self.instructionLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
+
+    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = 0.5;
+    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
