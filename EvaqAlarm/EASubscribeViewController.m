@@ -81,4 +81,25 @@ static const NSTimeInterval kAnimationDuration = 0.3;
     [self p_updateView];
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    if (cell.selected) {
+        [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self p_updateView];
+        return nil;
+    }
+    return indexPath;
+}
+
+// hide last separator
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
+
 @end

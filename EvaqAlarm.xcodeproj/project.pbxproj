@@ -21,6 +21,7 @@
 		BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */; };
 		BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */; };
 		BD2F7F9A1A13ACC6009A3053 /* EAPlanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */; };
+		BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */; };
 		BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9619FCED0000E65363 /* EALoginViewController.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
@@ -64,6 +65,7 @@
 		BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASubscribeViewController.m; sourceTree = "<group>"; };
 		BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPlanTableViewCell.h; sourceTree = "<group>"; };
 		BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPlanTableViewCell.m; sourceTree = "<group>"; };
+		BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		BD593B9519FCED0000E65363 /* EALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALoginViewController.h; sourceTree = "<group>"; };
 		BD593B9619FCED0000E65363 /* EALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EALoginViewController.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +231,7 @@
 		BD9AC97B19FB96280088150F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */,
 				BD2F7F8B1A139F99009A3053 /* OpenSans-Regular.ttf */,
 				BD2E4C5819FD901800E00FD9 /* Reachability */,
 				BD2E4C4B19FD663500E00FD9 /* Images */,
@@ -324,6 +327,7 @@
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
+				BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */,
 				BD2F7F8C1A139F99009A3053 /* OpenSans-Regular.ttf in Resources */,
 				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
 				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,

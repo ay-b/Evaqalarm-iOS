@@ -16,22 +16,14 @@
 
 @implementation EAPlanTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
     [self.checkImageView setHighlighted:selected];
-
-    
-    [UIView animateWithDuration:0.3 animations:^{
-//        self.leftOffsetConstraint.constant = selected ? 62 : 15;
-//        [self.nameLabel layoutIfNeeded];
-//        [self.selectedIndicatorView layoutIfNeeded];
-    }];
-    
-    // Configure the view for the selected state
 }
 
 @end
