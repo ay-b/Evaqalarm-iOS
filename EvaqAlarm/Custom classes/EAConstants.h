@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#define kGreenColor [UIColor colorWithRed:169/255.0 green:219/255.0 blue:72/255.0 alpha:1]
+#define kRedColor [UIColor colorWithRed:255/255.0 green:59/255.0 blue:48/255.0 alpha:1]
+#define kGrayColor [UIColor colorWithRed:220/255.0 green:221/255.0 blue:221/255.0 alpha:1]
+
+static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+
+/* System */
 extern NSString *const EAPushToken;
 extern NSString *const EAUID;
 
@@ -16,5 +24,11 @@ extern NSString *const EAFBAppId;
 
 extern NSString *const EAShareMessage;
 extern NSString *const EAShareLink;
+/* System */
 
-extern NSString *const EAAlreadyLogged;
+/* URLs */
+extern NSString *const EAURLDomain;
+extern NSString *const EAURLSetParked;
+extern NSString *const EAURLClearParking;
+extern NSString *const EAURLSetAlarm;
+/* URLs */

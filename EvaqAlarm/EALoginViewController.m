@@ -14,17 +14,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:EAAlreadyLogged]) {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MainVC"];
-        [self.navigationController pushViewController:vc animated:NO];
-    }
 }
 
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender
 {
     [self performSegueWithIdentifier:@"toMain" sender:sender];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:EAAlreadyLogged];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

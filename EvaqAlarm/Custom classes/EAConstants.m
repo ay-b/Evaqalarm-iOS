@@ -18,4 +18,10 @@ NSString *const EAFBAppId = @"716180975136987";
 NSString *const EAShareMessage = @"text"; // Друзья, поможем друг другу в борьбе с произволом эвакуаторов! Ставим программу, пользуемся, распространяем дальше.
 NSString *const EAShareLink = @"http://evaqalarm.speind.me";
 
-NSString *const EAAlreadyLogged = @"AlreadyLogged";
+
+/* URLs */
+NSString *const EAURLDomain = @"http://evaqalarm.speind.com/";
+NSString *const EAURLClearParking = @"http://evaqalarm.speind.com/clearParking";
+NSString *const EAURLSetParked = @"http://evaqalarm.speind.com/ios/setParked";
+NSString *const EAURLSetAlarm = @"http://evaqalarm.speind.com/ios/setAlarm";
+/* URLs */
