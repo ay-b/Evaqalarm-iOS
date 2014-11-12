@@ -9,6 +9,9 @@
 #import "EASubscribeViewController.h"
 #import "EAPlanTableViewCell.h"
 
+#import <RMStore.h>
+#import <MKStoreKit/MKStoreManager.h>
+
 static NSString *const kCellIndentifier = @"PlanCell";
 static const NSTimeInterval kAnimationDuration = 0.3;
 
@@ -31,17 +34,28 @@ static const NSTimeInterval kAnimationDuration = 0.3;
     self.tableView.tableFooterView = [UIView new];
     
     self.plans = @[@{@"duration" : @"1 месяц",
-                     @"price" : @"50"},
+                     @"price" : @"50",
+                     @"uid" : @"me.speind.evaqalarm.subscription1"},
                    @{@"duration" : @"6 месяцев",
-                     @"price" : @"250"},
+                     @"price" : @"250",
+                     @"uid" : @"me.speind.evaqalarm.subscription6"},
                    @{@"duration" : @"12 месяцев",
-                     @"price" : @"450"}];
+                     @"price" : @"450",
+                     @"uid" : @"me.speind.evaqalarm.subscription12"}];
     
 }
 
 - (IBAction)purchaseButtonPressed:(id)sender
 {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSDictionary *plan = self.plans[indexPath.row];
+    NSString *uid = plan[@"uid"];
     
+    [[RMStore defaultStore] addPayment:uid success:^(SKPaymentTransaction *transaction) {
+        NSLog(@"Product purchased");
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        NSLog(@"Something went wrong");
+    }];
 }
 
 - (void)p_purchaseBought
