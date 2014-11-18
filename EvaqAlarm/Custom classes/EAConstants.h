@@ -15,6 +15,8 @@
 static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 
+static NSString *const EAAppStoreURL = @"";
+
 /* System */
 extern NSString *const EAPushToken;
 extern NSString *const EAUID;

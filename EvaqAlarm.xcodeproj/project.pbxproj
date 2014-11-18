@@ -33,6 +33,9 @@
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
 		BDC23B0C1A1B832A00849CBA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B0B1A1B832A00849CBA /* StoreKit.framework */; };
+		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
+		BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC23B101A1B944700849CBA /* button_cancel@2x.png */; };
+		BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B131A1B954200849CBA /* EAShareViewController.m */; };
 		BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9D84E19FB813B00D5D359 /* EAConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,11 @@
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDC23B0B1A1B832A00849CBA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
+		BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConfirmButton.m; sourceTree = "<group>"; };
+		BDC23B101A1B944700849CBA /* button_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cancel@2x.png"; sourceTree = "<group>"; };
+		BDC23B121A1B954200849CBA /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
+		BDC23B131A1B954200849CBA /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
 		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
 		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +135,8 @@
 				BD1029E819FB7AC0005A18B9 /* NSString+Date.m */,
 				BDF9D84D19FB813B00D5D359 /* EAConstants.h */,
 				BDF9D84E19FB813B00D5D359 /* EAConstants.m */,
+				BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */,
+				BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */,
 			);
 			name = "Custom classes";
 			path = "EvaqAlarm/Custom classes";
@@ -135,6 +145,7 @@
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BDC23B101A1B944700849CBA /* button_cancel@2x.png */,
 				BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */,
 				BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */,
 				BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */,
@@ -189,6 +200,8 @@
 				BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */,
 				BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */,
 				BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */,
+				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
+				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
 				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
@@ -333,6 +346,7 @@
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
+				BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */,
 				BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */,
 				BD2F7F8C1A139F99009A3053 /* OpenSans-Regular.ttf in Resources */,
 				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
@@ -399,6 +413,8 @@
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
+				BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */,
+				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
