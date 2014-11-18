@@ -12,25 +12,23 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
-#import <DTProgressView.h>
 #import <VK-ios-sdk/VKSdk.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "Reachability.h"
 
 static const NSInteger kFacebookButton = 0;
 static const NSInteger kVkontakteButton = 1;
-static const NSTimeInterval kAnimationDuration = 1.8;
+
+static const NSTimeInterval kAlertAnimationDuration = 1.8;
 
 static const NSInteger kStatusHeight = 20;
 static const NSInteger kTopOffset = 45 + 6; // radius = 12, so we should offset r/2
-
-static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
-static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kAnimationName = @"RadialAnimation";
 
-#define kGreenColor [UIColor colorWithRed:169/255.0 green:219/255.0 blue:72/255.0 alpha:1]
-#define kRedColor [UIColor colorWithRed:255/255.0 green:59/255.0 blue:48/255.0 alpha:1]
-#define kGrayColor [UIColor colorWithRed:220/255.0 green:221/255.0 blue:221/255.0 alpha:1]
+
+static const NSTimeInterval kMainScreenTimeInterval = 0.5;
+static const NSInteger kSharButtonSize = 44;
+
 
 @interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, UIGestureRecognizerDelegate>
 {
@@ -38,6 +36,8 @@ static NSString *const kAnimationName = @"RadialAnimation";
     BOOL isAlarmSent;
     BOOL isAnimationStarted;
     NSTimer *alarmTimer;
+    
+    BOOL mainScreenShown;
 }
 @property CLLocationManager *locationManager;
 @property CLLocation *parkingLocation;
@@ -46,9 +46,31 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 #pragma mark - UI
 
+- (IBAction)shareButtonPressed;
+- (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleOffsetConstraint;
+
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoSizeConstraint;
+
+@property (weak, nonatomic) IBOutlet UILabel *disclaimerLabel;
+
+#pragma mark Alarm button
+
+@property (weak, nonatomic) IBOutlet UIView *alarmButtonContainer;
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
-@property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
+
+#pragma mark Share
+
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareButtonWidthConstraint;
+
+#pragma mark Hint
+
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hintOffsetConstraint;
 
 @end
 
@@ -75,11 +97,13 @@ static NSString *const kAnimationName = @"RadialAnimation";
     }
     
     // prepare the view
-    self.instructionLabel.text = kParkingDisabledString;
+    self.hintLabel.text = kParkingDisabledString;
     self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
     for (CAShapeLayer* circle in self.alertButtonComponents) {
         [self.view.layer addSublayer:circle];
     }
+    
+    [self p_initialAnimationShow];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -88,24 +112,84 @@ static NSString *const kAnimationName = @"RadialAnimation";
     [super viewWillDisappear:animated];
 }
 
-#pragma mark - Button handlers
+#pragma mark - Animations
 
-- (IBAction)parkingSwitchChanged:(UISwitch*)sender
+- (void)p_initialAnimationShow
 {
-    if (sender.isOn) {
-        self.parkingLocation = self.locationManager.location;
-        self.parkingDate = [NSDate date];
-        [self p_sendLocation];
-    }
-    else {
-        self.parkingLocation = nil;
-    }
+    // hide hint
+    self.hintLabel.alpha = 0;
+    self.hintOffsetConstraint.constant = - self.hintLabel.frame.size.height;
+    [self.hintLabel layoutIfNeeded];
+    
+    // hide share button
+    self.shareButtonWidthConstraint.constant = 0;
+    [self.shareButton layoutIfNeeded];
+    
+    // title animation
+    self.titleLabel.alpha = 0;
+    self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
+    [self.titleLabel layoutIfNeeded];
+    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.titleOffsetConstraint.constant = 60;
+        [self.titleLabel layoutIfNeeded];
+        self.titleLabel.alpha = 1;
+    } completion:nil];
+    
+    // disclaimer animation
+    self.disclaimerLabel.alpha = 0;
+    //self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
+    //[self.disclaimerLabel layoutIfNeeded];
+    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        //self.titleOffsetConstraint.constant = 60;
+        //[self.disclaimerLabel layoutIfNeeded];
+        self.disclaimerLabel.alpha = 1;
+    } completion:nil];
 }
 
-- (IBAction)showShare
+- (void)p_initialAnimationHide
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
-    [actionSheet showInView:[self.view window]];
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        // hide title
+        self.titleLabel.alpha = 0;
+        self.disclaimerLabel.alpha = 0;
+        
+        // bigger button
+        self.logoSizeConstraint.constant = 200;
+        
+        [self.logoImageView layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [self p_postAnimation];
+    }];
+}
+
+- (void)p_postAnimation
+{
+    // share button animation
+    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = kMainScreenTimeInterval;
+    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    
+    // rotate share button
+    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.shareButtonWidthConstraint.constant = kSharButtonSize;
+        [self.shareButton layoutIfNeeded];
+    } completion:nil];
+    
+    // appearing hint label
+    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.hintOffsetConstraint.constant = 60;
+        [self.hintLabel layoutIfNeeded];
+        self.hintLabel.alpha = 1;
+    } completion:nil];
+}
+
+#pragma mark - Button handlers
+
+- (IBAction)shareButtonPressed
+{
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
+//    [actionSheet showInView:[self.view window]];
 }
 
 - (IBAction)tap:(id)sender
@@ -117,7 +201,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
     
     BOOL willParking = !isParking;
     if (willParking && [self isReachable]) {
-        [self p_sendLocation];
+        [self p_setParked];
     }
     
     isParking = willParking;
@@ -125,12 +209,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
     for (CAShapeLayer* circle in self.alertButtonComponents) {
         circle.strokeColor = color.CGColor;
     }
-    self.instructionLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
-
-    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
-    rotationAnimation.duration = 0.5;
-    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+    self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
 }
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
@@ -159,6 +238,14 @@ static NSString *const kAnimationName = @"RadialAnimation";
     return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
 }
 
+- (IBAction)tapOnView:(UITapGestureRecognizer *)sender
+{
+    if (!mainScreenShown) {
+        [self p_initialAnimationHide];
+        mainScreenShown = YES;
+    }
+}
+
 #pragma mark - Private API
 
 - (BOOL)isReachable
@@ -182,19 +269,17 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 - (void)p_startAnimation
 {
-    
-    
     NSLog(@"start animation");
     isAnimationStarted = YES;
     isAlarmSent = NO;
     
     // Configure animation
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    drawAnimation.duration = kAnimationDuration;
+    drawAnimation.duration = kAlertAnimationDuration;
     drawAnimation.repeatCount = 1.0;
     drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
     drawAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    //drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
 
     NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
     for (CAShapeLayer* circle in circles) {
@@ -210,7 +295,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 50);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -220,12 +305,12 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 - (CAShapeLayer*)p_circle2WithColor:(UIColor*)color
 {
-    int lineWidth = 14;
+    int lineWidth = 16;
     int radius = 82 - lineWidth/2;
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19 + 50);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -240,7 +325,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64 + 50);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -264,30 +349,60 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 #pragma mark Server
 
-- (void)p_sendLocation
+- (void)p_setParked
 {
     //self.parkingLocation = self.locationManager.location;
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
-    NSLog(@"%@ (%lf; %lf) at %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]);
+    if (!uid) {
+        uid = @"";
+    }
+
+    if (!self.parkingLocation) {
+        NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     
-    NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
+    NSDictionary *parameters = @{@"deviceId": uid,
+                                 @"lat" : [@(self.parkingLocation.coordinate.latitude) description],
+                                 @"lon" : [@(self.parkingLocation.coordinate.longitude) description]};
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"Set parked: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Set parked error: %@", error);
+//    }];
+}
+
+- (void)p_clearParking
+{
+    NSDictionary *parameters = @{@"deviceId": [[NSUserDefaults standardUserDefaults] objectForKey:EAUID]};
     
-    //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //    NSDictionary *parameters = @{@"foo": @"bar"};
-    //    [manager POST:@"http://example.com/resources.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    //        NSLog(@"JSON: %@", responseObject);
-    //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    //        NSLog(@"Request error: %@", error);
-    //    }];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"Clear parking: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Clear parking error: %@", error);
+//    }];
 }
 
 - (void)p_sendAlarm
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
+    
+    NSDictionary *parameters = @{@"deviceId": [[NSUserDefaults standardUserDefaults] objectForKey:EAUID],
+                                 @"lat" : [@(self.parkingLocation.coordinate.latitude) description],
+                                 @"lon" : [@(self.parkingLocation.coordinate.longitude) description]};
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Request error: %@", error);
+//    }];
 }
 
 #pragma mark - CLLocation manager delegate
@@ -300,7 +415,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"error: %@", error);
+    NSLog(@"location error: %@", error);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status

@@ -47,6 +47,8 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 
 - (IBAction)purchaseButtonPressed:(id)sender
 {
+    [self p_purchaseBought];
+    
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     NSDictionary *plan = self.plans[indexPath.row];
     NSString *uid = plan[@"uid"];

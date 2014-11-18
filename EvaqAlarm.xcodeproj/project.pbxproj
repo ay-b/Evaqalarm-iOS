@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
+		BD09DD4F1A1498EA003BECB2 /* button_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */; };
 		BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1029E819FB7AC0005A18B9 /* NSString+Date.m */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
@@ -22,7 +23,6 @@
 		BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */; };
 		BD2F7F9A1A13ACC6009A3053 /* EAPlanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */; };
 		BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */; };
-		BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD593B9619FCED0000E65363 /* EALoginViewController.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
 		BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9C19FB7541009B7E55 /* Main.storyboard */; };
@@ -31,6 +31,8 @@
 		BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD919EB819FB7573009B7E55 /* CoreLocation.framework */; };
 		BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919EBB19FB7587009B7E55 /* EAMainViewController.m */; };
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
+		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
+		BDC23B0C1A1B832A00849CBA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B0B1A1B832A00849CBA /* StoreKit.framework */; };
 		BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9D84E19FB813B00D5D359 /* EAConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,7 @@
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gray@3x.png"; sourceTree = "<group>"; };
 		BD1029E719FB7AC0005A18B9 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		BD1029E819FB7AC0005A18B9 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
@@ -66,8 +69,6 @@
 		BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPlanTableViewCell.h; sourceTree = "<group>"; };
 		BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPlanTableViewCell.m; sourceTree = "<group>"; };
 		BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		BD593B9519FCED0000E65363 /* EALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALoginViewController.h; sourceTree = "<group>"; };
-		BD593B9619FCED0000E65363 /* EALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EALoginViewController.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD919E9319FB7540009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919E9419FB7540009B7E55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,6 +83,8 @@
 		BD919EBA19FB7587009B7E55 /* EAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMainViewController.h; sourceTree = "<group>"; };
 		BD919EBB19FB7587009B7E55 /* EAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMainViewController.m; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
+		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BDC23B0B1A1B832A00849CBA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
 		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC23B0C1A1B832A00849CBA /* StoreKit.framework in Frameworks */,
+				BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */,
 				BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */,
 				36585C526DCF561B07C857A7 /* libPods.a in Frameworks */,
 			);
@@ -130,6 +135,7 @@
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */,
 				BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */,
 				BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */,
 				BD2F7F8D1A13A8F1009A3053 /* button@2x.png */,
@@ -177,8 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
-				BD593B9519FCED0000E65363 /* EALoginViewController.h */,
-				BD593B9619FCED0000E65363 /* EALoginViewController.m */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
 				BD2F7F951A13AA3E009A3053 /* EASubscribeViewController.h */,
@@ -222,6 +226,8 @@
 		BD919EBD19FB758A009B7E55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDC23B0B1A1B832A00849CBA /* StoreKit.framework */,
+				BDC23B091A1B826F00849CBA /* Security.framework */,
 				BD919EB819FB7573009B7E55 /* CoreLocation.framework */,
 				2261114A08CB4D1B418ECCCC /* libPods.a */,
 			);
@@ -334,6 +340,7 @@
 				BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */,
 				BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */,
 				BD2F7F931A13A9A4009A3053 /* cell_checked@2x.png in Resources */,
+				BD09DD4F1A1498EA003BECB2 /* button_gray@3x.png in Resources */,
 				BD2E4C5719FD66B800E00FD9 /* share@3x.png in Resources */,
 				BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */,
 				BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */,
@@ -391,7 +398,6 @@
 			files = (
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
-				BD593B9719FCED0000E65363 /* EALoginViewController.m in Sources */,
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */,
