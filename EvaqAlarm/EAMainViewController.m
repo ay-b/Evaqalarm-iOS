@@ -52,7 +52,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 #pragma mark - UI
 
-- (IBAction)shareButtonPressed;
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -202,8 +201,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (IBAction)shareButtonPressed
 {
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
-//    [actionSheet showInView:[self.view window]];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
+    [actionSheet showInView:[self.view window]];
 }
 
 - (IBAction)tap:(id)sender
@@ -385,6 +384,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"Set parked: %@", responseObject);
+        [self.preferences incerementParkingCount];
 //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //        NSLog(@"Set parked error: %@", error);
 //    }];

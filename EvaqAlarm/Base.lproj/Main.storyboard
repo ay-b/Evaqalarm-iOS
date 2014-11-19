@@ -103,7 +103,6 @@
                                         </state>
                                         <connections>
                                             <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="52j-kt-Y0X"/>
-                                            <segue destination="Y0s-mM-3jc" kind="presentation" identifier="toSubscribe" id="YNz-lP-hwZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -168,6 +167,7 @@
                         <outlet property="titleLabel" destination="cDi-Wa-xN1" id="bVT-6R-QFp"/>
                         <outlet property="titleOffsetConstraint" destination="9QK-Of-bpj" id="EMc-Cg-1Dn"/>
                         <segue destination="AyA-TV-sW8" kind="presentation" identifier="toSharing" id="Rml-20-nqc"/>
+                        <segue destination="Y0s-mM-3jc" kind="presentation" identifier="toSubscribe" id="jMx-WF-vpL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>

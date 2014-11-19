@@ -10,4 +10,6 @@
 
 @interface EAMainViewController : UIViewController
 
+- (IBAction)shareButtonPressed;
+
 @end

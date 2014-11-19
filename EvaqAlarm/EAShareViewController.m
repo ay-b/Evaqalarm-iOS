@@ -8,6 +8,7 @@
 
 #import "EAShareViewController.h"
 #import "EAConstants.h"
+#import "EAMainViewController.h"
 
 static NSString *const shareText = @"EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!";
 static NSString *const ratingText = @"EqvaqAlarm – отличное приложение, так ведь? Стоит поставить ему хорошую оценку, чтобы другие сразу видели это!";
@@ -37,11 +38,14 @@ static NSString *const ratingText = @"EqvaqAlarm – отличное прило
 - (IBAction)confirmButtonPressed
 {
     if (_sharing) {
-        
+        UINavigationController *nav = (UINavigationController*)self.presentingViewController;
+        EAMainViewController *vc = [nav.viewControllers lastObject];
+        [vc shareButtonPressed];
     }
     else {
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:EAAppStoreURL]];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
