@@ -231,10 +231,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bn-iE-98a">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bn-iE-98a" customClass="EAConfirmButton">
                                 <rect key="frame" x="225" y="470" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2UP-ha-Icp"/>
+                                    <constraint firstAttribute="width" constant="150" id="Zgu-HD-1P5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                 <state key="normal" title="Оплатить" backgroundImage="button.png">
@@ -333,8 +334,7 @@
         <!--Share View Controller-->
         <scene sceneID="zmS-XN-68f">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yjK-ph-OnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="AyA-TV-sW8" customClass="EAShareViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShareVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AyA-TV-sW8" customClass="EAShareViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BpT-Vd-UX7"/>
                         <viewControllerLayoutGuide type="bottom" id="Vhr-Iz-lnI"/>
@@ -392,12 +392,13 @@
                         <outlet property="textLabel" destination="KzR-aa-qMb" id="zzE-Bc-Yb2"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yjK-ph-OnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="956" y="927"/>
         </scene>
     </scenes>
     <resources>
-        <image name="button.png" width="150" height="40"/>
+        <image name="button.png" width="60" height="40"/>
         <image name="button_cancel.png" width="44" height="44"/>
         <image name="cell_checked.png" width="15" height="15"/>
         <image name="cell_unchecked.png" width="15" height="15"/>

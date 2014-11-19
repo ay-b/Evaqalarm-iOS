@@ -10,6 +10,6 @@
 
 @interface EAShareViewController : UIViewController
 
-@property BOOL isSharing;
+@property (getter = isSharing) BOOL sharing;
 
 @end

@@ -26,7 +26,7 @@ static NSString *const ratingText = @"EqvaqAlarm – отличное прило
 - (void)viewDidLoad
 { 
     [super viewDidLoad];
-    self.textLabel.text = _isSharing ? shareText : ratingText;
+    self.textLabel.text = _sharing ? shareText : ratingText;
 }
 
 - (IBAction)cancelButtonPressed
@@ -36,7 +36,7 @@ static NSString *const ratingText = @"EqvaqAlarm – отличное прило
 
 - (IBAction)confirmButtonPressed
 {
-    if (_isSharing) {
+    if (_sharing) {
         
     }
     else {

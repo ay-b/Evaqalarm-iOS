@@ -8,6 +8,8 @@
 
 #import "EAMainViewController.h"
 #import "EAConstants.h"
+#import "EAPreferences.h"
+#import "EAShareViewController.h"
 #import "NSString+Date.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -30,7 +32,9 @@ static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSInteger kSharButtonSize = 44;
 
 
-@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, UIGestureRecognizerDelegate>
+static NSString *const kShareVCStoryboardID = @"ShareVC";
+
+@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate>
 {
     BOOL isParking;
     BOOL isAlarmSent;
@@ -43,6 +47,8 @@ static const NSInteger kSharButtonSize = 44;
 @property CLLocation *parkingLocation;
 @property NSDate *parkingDate;
 @property NSArray *alertButtonComponents;
+
+@property (nonatomic) EAPreferences *preferences;
 
 #pragma mark - UI
 
@@ -110,6 +116,14 @@ static const NSInteger kSharButtonSize = 44;
 {
     [self.locationManager stopUpdatingLocation];
     [super viewWillDisappear:animated];
+}
+
+- (EAPreferences *)preferences
+{
+    if (!_preferences) {
+        _preferences = [[EAPreferences alloc] initWithDelegate:self];
+    }
+    return _preferences;
 }
 
 #pragma mark - Animations
@@ -514,6 +528,22 @@ static const NSInteger kSharButtonSize = 44;
 - (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken
 {
     [self p_publishToVK];
+}
+
+#pragma mark - EAPreferences delegate
+
+- (void)shouldPresentSharingView
+{
+    EAShareViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:kShareVCStoryboardID];
+    vc.sharing = YES;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)shouldPresentFeedbackView
+{
+    EAShareViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:kShareVCStoryboardID];
+    vc.sharing = NO;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

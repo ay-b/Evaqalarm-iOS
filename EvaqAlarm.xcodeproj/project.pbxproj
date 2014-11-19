@@ -36,6 +36,7 @@
 		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
 		BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC23B101A1B944700849CBA /* button_cancel@2x.png */; };
 		BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B131A1B954200849CBA /* EAShareViewController.m */; };
+		BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC7CF351A1C9499004ECBCE /* EAPreferences.m */; };
 		BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9D84E19FB813B00D5D359 /* EAConstants.m */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,8 @@
 		BDC23B101A1B944700849CBA /* button_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cancel@2x.png"; sourceTree = "<group>"; };
 		BDC23B121A1B954200849CBA /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
 		BDC23B131A1B954200849CBA /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
+		BDC7CF341A1C9499004ECBCE /* EAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPreferences.h; sourceTree = "<group>"; };
+		BDC7CF351A1C9499004ECBCE /* EAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPreferences.m; sourceTree = "<group>"; };
 		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
 		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +138,8 @@
 				BD1029E819FB7AC0005A18B9 /* NSString+Date.m */,
 				BDF9D84D19FB813B00D5D359 /* EAConstants.h */,
 				BDF9D84E19FB813B00D5D359 /* EAConstants.m */,
+				BDC7CF341A1C9499004ECBCE /* EAPreferences.h */,
+				BDC7CF351A1C9499004ECBCE /* EAPreferences.m */,
 				BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */,
 				BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */,
 			);
@@ -413,6 +418,7 @@
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
+				BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */,
 				BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,

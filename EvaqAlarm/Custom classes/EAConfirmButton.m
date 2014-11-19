@@ -12,7 +12,7 @@
 
 - (void)drawRect:(CGRect)rect {
     UIImage *image = [UIImage imageNamed:@"button"];
-    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(30, 20, 30, 20)];
+    image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 20, 30)];
     [self setBackgroundImage:image forState:UIControlStateNormal];
 }
 
