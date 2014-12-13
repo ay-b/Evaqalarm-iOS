@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jTn-bj-veT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jTn-bj-veT">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -36,7 +36,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C09-6v-k8r" userLabel="MAIN BUTTON container">
                                 <rect key="frame" x="200" y="115" width="200" height="200"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-hD-vSb" userLabel="MAIN BUTTON">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-hD-vSb" userLabel="MAIN BUTTON">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -88,6 +88,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.33333333333333331" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="60" y="498" width="280" height="42"/>
+                                </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYe-N5-Wav" userLabel="Share button container">
                                 <rect key="frame" x="536" y="28" width="44" height="44"/>
@@ -106,7 +109,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SYe-N5-Wav" secondAttribute="height" multiplier="1:1" id="92h-Qn-xvg"/>
                                     <constraint firstAttribute="width" constant="44" id="G2o-Kj-3hL"/>
@@ -119,6 +122,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="156" y="60" width="88" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXK-d5-SMl" userLabel="Disclaimer">
                                 <rect key="frame" x="20" y="285" width="560" height="82"/>
@@ -127,6 +133,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="250" width="360" height="126"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -143,7 +152,9 @@
                             <constraint firstAttribute="centerX" secondItem="NhC-GU-0de" secondAttribute="centerX" id="mxQ-Em-Wp5"/>
                             <constraint firstAttribute="centerX" secondItem="cDi-Wa-xN1" secondAttribute="centerX" id="x27-Zs-IBH"/>
                             <constraint firstItem="g19-Rg-Aqg" firstAttribute="top" secondItem="NhC-GU-0de" secondAttribute="bottom" constant="60" id="xyJ-qB-LGJ"/>
-                            <constraint firstItem="C09-6v-k8r" firstAttribute="top" secondItem="aOL-7g-lTJ" secondAttribute="bottom" constant="95" id="zBx-3H-64V"/>
+                            <constraint firstItem="C09-6v-k8r" firstAttribute="top" secondItem="aOL-7g-lTJ" secondAttribute="bottom" constant="95" id="zBx-3H-64V">
+                                <variation key="widthClass=compact" constant="60"/>
+                            </constraint>
                             <constraint firstItem="cDi-Wa-xN1" firstAttribute="centerX" secondItem="wXK-d5-SMl" secondAttribute="centerX" id="zMz-Ci-ZZd"/>
                             <constraint firstAttribute="trailing" secondItem="wXK-d5-SMl" secondAttribute="trailing" constant="20" id="zcr-DM-RFn"/>
                         </constraints>
@@ -164,7 +175,7 @@
                         <outlet property="logoSizeConstraint" destination="eZY-jD-eBn" id="hhP-RT-JN4"/>
                         <outlet property="shareButton" destination="tbE-PL-ZZ1" id="L24-rB-fSM"/>
                         <outlet property="shareButtonWidthConstraint" destination="kXZ-cA-XmJ" id="Asp-sq-i40"/>
-                        <outlet property="titleLabel" destination="cDi-Wa-xN1" id="bVT-6R-QFp"/>
+                        <outlet property="titleLabel" destination="cDi-Wa-xN1" id="H5z-E9-hCv"/>
                         <outlet property="titleOffsetConstraint" destination="9QK-Of-bpj" id="EMc-Cg-1Dn"/>
                         <segue destination="AyA-TV-sW8" kind="presentation" identifier="toSharing" id="Rml-20-nqc"/>
                         <segue destination="Y0s-mM-3jc" kind="presentation" identifier="toSubscribe" id="jMx-WF-vpL"/>
@@ -263,32 +274,45 @@
                                                         <constraint firstAttribute="width" secondItem="dmq-6g-M6V" secondAttribute="height" multiplier="1:1" id="EWP-Zt-Q5D"/>
                                                         <constraint firstAttribute="width" constant="15" id="afB-0W-bgw"/>
                                                     </constraints>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="30" y="23" width="15" height="15"/>
+                                                    </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-9t-9WI">
                                                     <rect key="frame" x="58" y="17" width="44" height="25"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="58" y="18" width="44" height="25"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="руб." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrV-VN-DLQ">
                                                     <rect key="frame" x="547" y="22" width="23" height="17"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="347" y="23" width="23" height="17"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="450" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yxa-w2-qM9">
                                                     <rect key="frame" x="503" y="13" width="42" height="33"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="24"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="303" y="14" width="42" height="33"/>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="303" y="14" width="42" height="33"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dmq-6g-M6V" firstAttribute="leading" secondItem="Ukv-E7-4Ji" secondAttribute="leading" constant="30" id="2uK-hX-7Mj"/>
                                                 <constraint firstAttribute="centerY" secondItem="Yxa-w2-qM9" secondAttribute="centerY" id="7VR-b6-GP2"/>
-                                                <constraint firstAttribute="centerY" secondItem="NrV-VN-DLQ" secondAttribute="centerY" constant="-1" id="7Vz-aQ-1mo">
-                                                    <variation key="widthClass=compact" constant="0.0"/>
-                                                </constraint>
+                                                <constraint firstAttribute="centerY" secondItem="NrV-VN-DLQ" secondAttribute="centerY" constant="-1" id="7Vz-aQ-1mo"/>
                                                 <constraint firstAttribute="centerY" secondItem="dmq-6g-M6V" secondAttribute="centerY" id="Ol8-AZ-5Nh"/>
                                                 <constraint firstItem="dmq-6g-M6V" firstAttribute="centerY" secondItem="dfs-9t-9WI" secondAttribute="centerY" id="Spg-fu-QdY"/>
                                                 <constraint firstAttribute="trailing" secondItem="NrV-VN-DLQ" secondAttribute="trailing" constant="30" id="Whi-AM-EVW"/>
@@ -374,6 +398,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="40" y="140" width="320" height="63"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

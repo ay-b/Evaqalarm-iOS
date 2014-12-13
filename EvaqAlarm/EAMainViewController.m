@@ -16,6 +16,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <VK-ios-sdk/VKSdk.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <pop/POP.h>
+#import <TSMessages/TSMessage.h>
 #import "Reachability.h"
 
 static const NSInteger kFacebookButton = 0;
@@ -29,6 +31,7 @@ static NSString *const kAnimationName = @"RadialAnimation";
 
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
+static const NSTimeInterval kTimeInterval = 0.2;
 static const NSInteger kSharButtonSize = 44;
 
 
@@ -101,12 +104,12 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    // prepare the view
-    self.hintLabel.text = kParkingDisabledString;
-    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
-    for (CAShapeLayer* circle in self.alertButtonComponents) {
-        [self.view.layer addSublayer:circle];
-    }
+//    // prepare the view
+//    self.hintLabel.text = kParkingDisabledString;
+//    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
+//    for (CAShapeLayer* circle in self.alertButtonComponents) {
+//        [self.view.layer addSublayer:circle];
+//    }
     
     [self p_initialAnimationShow];
 }
@@ -126,6 +129,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 }
 
 #pragma mark - Animations
+#pragma mark Initial
 
 - (void)p_initialAnimationShow
 {
@@ -142,7 +146,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.titleLabel.alpha = 0;
     self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
     [self.titleLabel layoutIfNeeded];
-    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:kMainScreenTimeInterval animations:^{
         self.titleOffsetConstraint.constant = 60;
         [self.titleLabel layoutIfNeeded];
         self.titleLabel.alpha = 1;
@@ -152,22 +156,23 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.disclaimerLabel.alpha = 0;
     //self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
     //[self.disclaimerLabel layoutIfNeeded];
-    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        //self.titleOffsetConstraint.constant = 60;
-        //[self.disclaimerLabel layoutIfNeeded];
+    [UIView animateWithDuration:kMainScreenTimeInterval animations:^{
+        self.titleOffsetConstraint.constant = 60;
+        [self.disclaimerLabel layoutIfNeeded];
         self.disclaimerLabel.alpha = 1;
     } completion:nil];
 }
 
 - (void)p_initialAnimationHide
 {
-    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:kTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         // hide title
         self.titleLabel.alpha = 0;
         self.disclaimerLabel.alpha = 0;
         
         // bigger button
         self.logoSizeConstraint.constant = 200;
+        self.logoImageView.image = [UIImage imageNamed:@"button_default"];
         
         [self.logoImageView layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -194,7 +199,54 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         self.hintOffsetConstraint.constant = 60;
         [self.hintLabel layoutIfNeeded];
         self.hintLabel.alpha = 1;
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        self.alarmButton.enabled = YES;
+    }];
+}
+
+#pragma mark Alarm
+
+- (void)p_startAnimation
+{
+    EALog(@"start animation");
+    isAnimationStarted = YES;
+    isAlarmSent = NO;
+    
+    // Configure animation
+    CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    drawAnimation.duration = kAlertAnimationDuration;
+    drawAnimation.repeatCount = 1.0;
+    drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    drawAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
+    NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
+    for (CAShapeLayer* circle in circles) {
+        [self.view.layer addSublayer:circle];
+        [circle addAnimation:drawAnimation forKey:kAnimationName];
+    }
+}
+
+- (void)p_stopAnimation
+{
+    isAnimationStarted = NO;
+    EALog(@"cancel animation");
+    
+    NSArray *layers = [self.view.layer.sublayers copy];
+    for (CALayer *layer in layers) {
+        if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
+            [layer removeAllAnimations];
+            [layer removeFromSuperlayer];
+        }
+    }
+}
+
+- (void)p_startPopAnimation
+{
+//    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
+//    scaleAnimation.repeatForever = YES;
+//    [self.logoImageView.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSmallAnimation"];
 }
 
 #pragma mark - Button handlers
@@ -210,7 +262,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     if (isAnimationStarted) {
         return;
     }
-    //NSLog(@"tap");
+    //EALog(@"tap");
     
     BOOL willParking = !isParking;
     if (willParking && [self isReachable]) {
@@ -218,10 +270,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
     
     isParking = willParking;
-    UIColor *color = isParking ? kGreenColor : kGrayColor;
-    for (CAShapeLayer* circle in self.alertButtonComponents) {
-        circle.strokeColor = color.CGColor;
-    }
+    self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
     self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
 }
 
@@ -231,9 +280,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         isAlarmSent = YES;
         isAnimationStarted = NO;
         [self p_stopAnimation];
-        //[self p_sendAlarm];
-
-         NSLog(@"alarm sent");
+        [self p_sendAlarm];
     }
 }
 
@@ -263,52 +310,31 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (BOOL)isReachable
 {
-    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if (status == NotReachable) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return NO;
-    }
-    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return NO;
-    }
+//    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+//    if (status == NotReachable) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//        return NO;
+//    }
+//    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//        return NO;
+//    }
     
     return YES;
 }
 
-#pragma mark Animation
-
-- (void)p_startAnimation
-{
-    NSLog(@"start animation");
-    isAnimationStarted = YES;
-    isAlarmSent = NO;
-    
-    // Configure animation
-    CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    drawAnimation.duration = kAlertAnimationDuration;
-    drawAnimation.repeatCount = 1.0;
-    drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    drawAnimation.toValue = [NSNumber numberWithFloat:1.0f];
-    drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-
-    NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
-    for (CAShapeLayer* circle in circles) {
-        [self.view.layer addSublayer:circle];
-        [circle addAnimation:drawAnimation forKey:kAnimationName];
-    }
-}
+#pragma mark Elements
 
 - (CAShapeLayer*)p_circle1WithColor:(UIColor*)color
 {
-    int lineWidth = 12;
+    int lineWidth = 11;
     int radius = 100 - lineWidth/2;
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 50);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 14.5);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -318,12 +344,12 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (CAShapeLayer*)p_circle2WithColor:(UIColor*)color
 {
-    int lineWidth = 16;
+    int lineWidth = 15;
     int radius = 82 - lineWidth/2;
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19 + 50);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19 + 15);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -338,7 +364,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64 + 50);
+    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64 + 15);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -346,26 +372,12 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     return circle;
 }
 
-- (void)p_stopAnimation
-{
-    isAnimationStarted = NO;
-    NSLog(@"cancel animation");
-
-    NSArray *layers = [self.view.layer.sublayers copy];
-    for (CALayer *layer in layers) {
-        if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
-            [layer removeAllAnimations];
-            [layer removeFromSuperlayer];
-        }
-    }
-}
-
-#pragma mark Server
+#pragma mark Server API
 
 - (void)p_setParked
 {
     //self.parkingLocation = self.locationManager.location;
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAUID];
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
     if (!uid) {
         uid = @"";
     }
@@ -377,91 +389,72 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         return;
     }
     
-    NSDictionary *parameters = @{@"deviceId": uid,
-                                 @"lat" : [@(self.parkingLocation.coordinate.latitude) description],
-                                 @"lon" : [@(self.parkingLocation.coordinate.longitude) description]};
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
+                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                            }
+                                };
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"Set parked: %@", responseObject);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [TSMessage showNotificationWithTitle:@"Парковка успешно активирована." type:TSMessageNotificationTypeSuccess];
         [self.preferences incerementParkingCount];
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Set parked error: %@", error);
-//    }];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Set parked error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
+    }];
 }
 
 - (void)p_clearParking
 {
     NSDictionary *parameters = @{@"deviceId": [[NSUserDefaults standardUserDefaults] objectForKey:EAUID]};
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"Clear parking: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Clear parking error: %@", error);
-//    }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"Clear parking: %@", responseObject);
+        [TSMessage showNotificationWithTitle:@"Парковка успешно деактивирована." type:TSMessageNotificationTypeError];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Clear parking error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
+    }];
 }
 
 - (void)p_sendAlarm
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение будет отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
-    NSDictionary *parameters = @{@"deviceId": [[NSUserDefaults standardUserDefaults] objectForKey:EAUID],
-                                 @"lat" : [@(self.parkingLocation.coordinate.latitude) description],
-                                 @"lon" : [@(self.parkingLocation.coordinate.longitude) description]};
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
+    if (!uid) {
+        uid = @"";
+    }
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"Request error: %@", error);
-//    }];
-}
-
-#pragma mark - CLLocation manager delegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    //NSLog(@"upd");
-    self.parkingLocation = [locations lastObject];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"location error: %@", error);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    NSLog(@"auth status: %i", status);
-}
-
-#pragma mark - UIActionSheet delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == kFacebookButton) {
-        [self p_shareToFB];
-    }
-    else if (buttonIndex == kVkontakteButton) {
-        [self p_shareToVK];
-    }
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
+                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                             }
+                                 };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"Set alarm done");
+        [TSMessage showNotificationWithTitle:@"Тревога отправлена." type:TSMessageNotificationTypeSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Set alarm error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось отправить тревогу." type:TSMessageNotificationTypeError];
+    }];
 }
 
 #pragma mark - Social
 
-- (void)showAlertWithError:(NSError*)error
+- (void)p_showAlertWithError:(NSError*)error
 {
-    NSString *msg = @"";
     if (error) {
-        msg = @"Не удалось опубликовать пост. Попробуйте позже.";
+        [TSMessage showNotificationWithTitle:@"Не удалось опубликовать пост. Попробуйте позже." type:TSMessageNotificationTypeError];
     }
     else {
-        msg = @"Пост успешно опубликован.";
+        [TSMessage showNotificationWithTitle:@"Пост успешно опубликован." type:TSMessageNotificationTypeSuccess];
     }
-    
-    [[[UIAlertView alloc] initWithTitle:@"Расскажи всем" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
 }
 
 #pragma mark FB
@@ -486,7 +479,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
                              };
     
     [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        [self showAlertWithError:error];
+        [self p_showAlertWithError:error];
     }];
 }
 
@@ -507,12 +500,42 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     NSDictionary *parameters = @{@"message" : EAShareMessage, @"attachments:" : EAShareLink};
     VKRequest *request = [[VKApi wall] post:parameters];
     [request executeWithResultBlock:^(VKResponse *response) {
-        NSLog(@"share to vk done");
-        [self showAlertWithError:nil];
+        EALog(@"share to vk done");
+        [self p_showAlertWithError:nil];
     } errorBlock:^(NSError *error) {
-        NSLog(@"share to vk error: %@", error);
-        [self showAlertWithError:error];
+        EALog(@"share to vk error: %@", error);
+        [self p_showAlertWithError:error];
     }];
+}
+
+#pragma mark - CLLocation manager delegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    //EALog(@"upd");
+    self.parkingLocation = [locations lastObject];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    EALog(@"location error: %@", error);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    EALog(@"auth status: %i", status);
+}
+
+#pragma mark - UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == kFacebookButton) {
+        [self p_shareToFB];
+    }
+    else if (buttonIndex == kVkontakteButton) {
+        [self p_shareToVK];
+    }
 }
 
 #pragma mark - VK sdk delegate

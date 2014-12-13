@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
-		BD09DD4F1A1498EA003BECB2 /* button_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */; };
 		BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1029E819FB7AC0005A18B9 /* NSString+Date.m */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
@@ -23,6 +22,12 @@
 		BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */; };
 		BD2F7F9A1A13ACC6009A3053 /* EAPlanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */; };
 		BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */; };
+		BD4C8F891A1F8057008044CB /* button_alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F831A1F8057008044CB /* button_alarm@2x.png */; };
+		BD4C8F8A1A1F8057008044CB /* button_alarm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F841A1F8057008044CB /* button_alarm@3x.png */; };
+		BD4C8F8D1A1F8057008044CB /* button_parked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F871A1F8057008044CB /* button_parked@2x.png */; };
+		BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F881A1F8057008044CB /* button_parked@3x.png */; };
+		BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F8F1A1F8106008044CB /* button_default@2x.png */; };
+		BD4C8F921A1F8106008044CB /* button_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F901A1F8106008044CB /* button_default@3x.png */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
 		BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9C19FB7541009B7E55 /* Main.storyboard */; };
@@ -54,7 +59,6 @@
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_gray@3x.png"; sourceTree = "<group>"; };
 		BD1029E719FB7AC0005A18B9 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		BD1029E819FB7AC0005A18B9 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
@@ -73,6 +77,12 @@
 		BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPlanTableViewCell.h; sourceTree = "<group>"; };
 		BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPlanTableViewCell.m; sourceTree = "<group>"; };
 		BD2F7F9D1A13B789009A3053 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		BD4C8F831A1F8057008044CB /* button_alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm@2x.png"; sourceTree = "<group>"; };
+		BD4C8F841A1F8057008044CB /* button_alarm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm@3x.png"; sourceTree = "<group>"; };
+		BD4C8F871A1F8057008044CB /* button_parked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_parked@2x.png"; sourceTree = "<group>"; };
+		BD4C8F881A1F8057008044CB /* button_parked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_parked@3x.png"; sourceTree = "<group>"; };
+		BD4C8F8F1A1F8106008044CB /* button_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_default@2x.png"; sourceTree = "<group>"; };
+		BD4C8F901A1F8106008044CB /* button_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_default@3x.png"; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD919E9319FB7540009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919E9419FB7540009B7E55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -150,8 +160,13 @@
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD4C8F8F1A1F8106008044CB /* button_default@2x.png */,
+				BD4C8F901A1F8106008044CB /* button_default@3x.png */,
+				BD4C8F831A1F8057008044CB /* button_alarm@2x.png */,
+				BD4C8F841A1F8057008044CB /* button_alarm@3x.png */,
+				BD4C8F871A1F8057008044CB /* button_parked@2x.png */,
+				BD4C8F881A1F8057008044CB /* button_parked@3x.png */,
 				BDC23B101A1B944700849CBA /* button_cancel@2x.png */,
-				BD09DD4E1A1498EA003BECB2 /* button_gray@3x.png */,
 				BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */,
 				BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */,
 				BD2F7F8D1A13A8F1009A3053 /* button@2x.png */,
@@ -321,6 +336,7 @@
 					};
 					BD919EA719FB7541009B7E55 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 7KU9HT6JZ6;
 						TestTargetID = BD919E8E19FB7540009B7E55;
 					};
 				};
@@ -350,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
+				BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
 				BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */,
 				BD2F7F9E1A13B789009A3053 /* OpenSans-Light.ttf in Resources */,
@@ -357,10 +374,14 @@
 				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
 				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,
 				BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */,
+				BD4C8F891A1F8057008044CB /* button_alarm@2x.png in Resources */,
+				BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */,
+				BD4C8F8D1A1F8057008044CB /* button_parked@2x.png in Resources */,
 				BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */,
 				BD2F7F931A13A9A4009A3053 /* cell_checked@2x.png in Resources */,
-				BD09DD4F1A1498EA003BECB2 /* button_gray@3x.png in Resources */,
+				BD4C8F921A1F8106008044CB /* button_default@3x.png in Resources */,
 				BD2E4C5719FD66B800E00FD9 /* share@3x.png in Resources */,
+				BD4C8F8A1A1F8057008044CB /* button_alarm@3x.png in Resources */,
 				BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */,
 				BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */,
 				BD919EA019FB7541009B7E55 /* Images.xcassets in Resources */,
@@ -483,7 +504,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -495,6 +517,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -503,6 +526,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "0aef6b84-ebe7-4ce5-9b29-339d37a40def";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -524,12 +548,14 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -537,6 +563,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "0aef6b84-ebe7-4ce5-9b29-339d37a40def";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -547,8 +574,8 @@
 			baseConfigurationReference = 60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -562,8 +589,8 @@
 			baseConfigurationReference = 1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexander Yankovskiy (DS8B7QLL42)";
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -576,6 +603,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -587,6 +616,7 @@
 				INFOPLIST_FILE = EvaqAlarmTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvaqAlarm.app/EvaqAlarm";
 			};
 			name = Debug;
@@ -595,6 +625,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -602,6 +634,7 @@
 				INFOPLIST_FILE = EvaqAlarmTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvaqAlarm.app/EvaqAlarm";
 			};
 			name = Release;

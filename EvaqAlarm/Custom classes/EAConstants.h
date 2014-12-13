@@ -34,3 +34,10 @@ extern NSString *const EAURLSetParked;
 extern NSString *const EAURLClearParking;
 extern NSString *const EAURLSetAlarm;
 /* URLs */
+
+// Debug Logging
+#if 1
+#define EALog(x, ...) NSLog(x, ## __VA_ARGS__);
+#else
+#define EALog(x, ...)
+#endif

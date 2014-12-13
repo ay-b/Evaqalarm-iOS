@@ -9,7 +9,7 @@
 #import "EAConstants.h"
 
 #warning set url to appstore
-NSString *const EAAppStoreURL = @"http://evaqalarm.speind.me";
+NSString *const EAAppStoreURL = @"http://evaqalarm.speind.com/";
 
 /* System */
 NSString *const EAPushToken = @"PushToken";
