@@ -9,6 +9,8 @@
 #import "EAPreferences.h"
 #import "EASubscriptionPlan.h"
 #import "EAConstants.h"
+@import UIKit;
+@import CoreLocation;
 
 static NSString *const kParkingCount = @"ParkingCount";
 
@@ -68,6 +70,26 @@ static NSString *const kParkingCount = @"ParkingCount";
     EASubscriptionPlan *plan12 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription12" price:@"450" duration:@"12 месяцев"];
 
     return @[plan1, plan6, plan12];
+}
+
++ (BOOL)fullAccessEnabled
+{
+    return [self p_isPushEnabled] && [self p_isLocationEnabled];
+}
+
++ (BOOL)p_isLocationEnabled
+{
+    return [CLLocationManager locationServicesEnabled];
+}
+
++ (BOOL)p_isPushEnabled
+{
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        return [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    }
+    
+    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    return !(types == UIRemoteNotificationTypeNone);
 }
 
 @end

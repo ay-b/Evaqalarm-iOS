@@ -11,7 +11,8 @@
 #warning set url to appstore
 NSString *const EAAppStoreURL = @"http://evaqalarm.speind.com/";
 
-NSString *const EAReceiveAlarmNotification = @"EAReceiveAlarmNotification";
+NSString *const EAReceiveAlarmNotification = @"ReceiveAlarmNotification";
+NSString *const EACheckPermissionsNotification = @"CheckPermissionsNotification";
 
 /* System */
 NSString *const EAPushToken = @"PushToken";

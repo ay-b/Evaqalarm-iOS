@@ -18,6 +18,7 @@ static NSString *const kParkingDisabledString = @"Нажмите кнопку д
 extern NSString *const EAAppStoreURL;
 
 extern NSString *const EAReceiveAlarmNotification;
+extern NSString *const EACheckPermissionsNotification;
 
 /* System */
 extern NSString *const EAPushToken;

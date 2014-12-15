@@ -28,4 +28,6 @@
 
 + (NSArray*)availablePlans;
 
++ (BOOL)fullAccessEnabled;
+
 @end

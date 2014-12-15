@@ -11,6 +11,7 @@
 #import "EAPreferences.h"
 #import "EAShareViewController.h"
 #import "NSString+Date.h"
+#import "EAAccessDeniedViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -28,7 +29,7 @@ static const NSTimeInterval kAlertAnimationDuration = 1.8;
 static const NSInteger kStatusHeight = 20;
 static const NSInteger kTopOffset = 45 + 6; // radius = 12, so we should offset r/2
 static NSString *const kAnimationName = @"RadialAnimation";
-
+static NSString *const kPopAnimation = @"PopAnimation";
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kTimeInterval = 0.2;
@@ -43,6 +44,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL isAlarmSent;
     BOOL isAnimationStarted;
     NSTimer *alarmTimer;
+    POPSpringAnimation *scaleAnimation;
     
     BOOL mainScreenShown;
 }
@@ -56,6 +58,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 #pragma mark - UI
 
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
+- (IBAction)praiseAlarmSender;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleOffsetConstraint;
@@ -90,14 +93,14 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     [super viewWillAppear:animated];
     [self.locationManager startUpdatingLocation];
-    
-    //[self p_show:![self p_fullAccessEnable]];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    [self.hintLabel sizeToFit];
+    
     // prepare location manager
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -106,8 +109,11 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
+    [self p_checkPermissions];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
-        isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
+    isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
     
     [self p_initialAnimationShow];
 }
@@ -124,12 +130,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         _preferences = [[EAPreferences alloc] initWithDelegate:self];
     }
     return _preferences;
-}
-
-- (void)p_receiveAlarm:(NSNotification*)notification
-{
-    NSLog(@"push: %@", notification.userInfo);
-    [TSMessage showNotificationWithTitle:@"Wow!" type:TSMessageNotificationTypeMessage];
 }
 
 #pragma mark - Server API
@@ -310,7 +310,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)p_stopAnimation
 {
     isAnimationStarted = NO;
-    EALog(@"cancel animation");
+    EALog(@"Cancel animation");
     
     NSArray *layers = [self.view.layer.sublayers copy];
     for (CALayer *layer in layers) {
@@ -323,10 +323,26 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_startPopAnimation
 {
-    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    self.alarmButton.enabled = NO;
+    self.hintLabel.text = @"Оцените полезность сигнала тревоги";
+    self.logoImageView.image = [UIImage imageNamed:@"button_alarm"];
+
+    if (!scaleAnimation) {
+        scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    }
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
     scaleAnimation.repeatForever = YES;
-    [self.logoImageView.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSmallAnimation"];
+    [self.logoImageView.layer pop_addAnimation:scaleAnimation forKey:kPopAnimation];
+}
+
+- (void)p_stopPopAnimation
+{
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
+    scaleAnimation.repeatForever = NO;
+
+    self.alarmButton.enabled = YES;
+    self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
+    self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
 }
 
 #pragma mark - Button handlers
@@ -344,7 +360,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
     
     BOOL willParking = !isParking;
-    if ([self isReachable]) {
+    if ([self p_isReachable]) {
         if (willParking) {
             [self p_setParked];
         }
@@ -355,6 +371,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     
     isParking = willParking;
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
+    
     self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
 }
 
@@ -390,44 +407,48 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
 }
 
+- (IBAction)praiseAlarmSender
+{
+    [self p_stopPopAnimation];
+}
+
 #pragma mark - Private API
 
-- (BOOL)isReachable
+- (void)p_checkPermissions
 {
-    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if (status == NotReachable) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return NO;
-    }
-    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return NO;
+    BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
+            
+    if (shoudShowView) {
+        [TSMessage showNotificationWithTitle:@":(" type:TSMessageNotificationTypeError];
+            }
+    else {
+        [TSMessage showNotificationWithTitle:@":)" type:TSMessageNotificationTypeSuccess];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    return YES;
+//    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//
+//    visualEffectView.frame = self.view.frame;
+//    [self.view addSubview:visualEffectView];
+//
+//    UIView *view = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
+//    view.frame = self.view.frame;
+//    [self.view addSubview:view];
 }
 
-- (BOOL)p_fullAccessEnable
+- (void)p_receiveAlarm:(NSNotification*)notification
 {
-    return [self isReachable] && [EAPreferences uid].length > 0;
+    EALog(@"Push. Alarm sender: %@", notification.userInfo[@"senderId"]);
+    [self p_startPopAnimation];
 }
 
-- (void)p_show:(BOOL)show
+- (BOOL)p_isReachable
 {
-    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    
-    visualEffectView.frame = self.view.frame;
-    [self.view addSubview:visualEffectView];
-    
-    UIView *view = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
-    view.frame = self.view.frame;
-    [self.view addSubview:view];
+    return [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
 }
 
-#pragma mark Elements
+#pragma mark - Design elements
 
 - (CAShapeLayer*)p_circle1WithColor:(UIColor*)color
 {
@@ -529,10 +550,10 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     NSDictionary *parameters = @{@"message" : EAShareMessage, @"attachments:" : EAShareLink};
     VKRequest *request = [[VKApi wall] post:parameters];
     [request executeWithResultBlock:^(VKResponse *response) {
-        EALog(@"share to vk done");
+        EALog(@"Share to vk done");
         [self p_showAlertWithError:nil];
     } errorBlock:^(NSError *error) {
-        EALog(@"share to vk error: %@", error);
+        EALog(@"Share to vk error: %@", error);
         [self p_showAlertWithError:error];
     }];
 }
@@ -541,18 +562,17 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    //EALog(@"upd");
     self.parkingLocation = [locations lastObject];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    EALog(@"location error: %@", error);
+    EALog(@"Location error: %@", error);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    EALog(@"auth status: %i", status);
+    EALog(@"Auth status: %i", status);
 }
 
 #pragma mark - UIActionSheet delegate

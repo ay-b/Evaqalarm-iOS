@@ -37,6 +37,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [FBAppEvents activateApp];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EACheckPermissionsNotification object:self];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -75,7 +76,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:userInfo];
 }
 
 #ifdef __IPHONE_8_0
