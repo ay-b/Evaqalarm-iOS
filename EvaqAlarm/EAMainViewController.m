@@ -90,6 +90,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     [super viewWillAppear:animated];
     [self.locationManager startUpdatingLocation];
+    
+    //[self p_show:![self p_fullAccessEnable]];
 }
 
 - (void)viewDidLoad
@@ -104,12 +106,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-//    // prepare the view
-//    self.hintLabel.text = kParkingDisabledString;
-//    self.alertButtonComponents = @[[self p_circle1WithColor:kGrayColor], [self p_circle2WithColor:kGrayColor], [self p_circle3WithColor:kGrayColor]];
-//    for (CAShapeLayer* circle in self.alertButtonComponents) {
-//        [self.view.layer addSublayer:circle];
-//    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
+        isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
     
     [self p_initialAnimationShow];
 }
@@ -126,6 +124,86 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         _preferences = [[EAPreferences alloc] initWithDelegate:self];
     }
     return _preferences;
+}
+
+- (void)p_receiveAlarm:(NSNotification*)notification
+{
+    NSLog(@"push: %@", notification.userInfo);
+    [TSMessage showNotificationWithTitle:@"Wow!" type:TSMessageNotificationTypeMessage];
+}
+
+#pragma mark - Server API
+
+- (void)p_setParked
+{
+    //self.parkingLocation = self.locationManager.location;
+    NSString *uid = [EAPreferences uid];
+    
+    if (!self.parkingLocation) {
+        NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
+                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                             }
+                                 };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"Set parking done");
+        
+        [self.preferences incerementParkingCount];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:EAParkedNow];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [TSMessage showNotificationWithTitle:@"Парковка успешно активирована." type:TSMessageNotificationTypeSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Set parked error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
+    }];
+}
+
+- (void)p_clearParking
+{
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid]}};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"Clear parking done");
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:EAParkedNow];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [TSMessage showNotificationWithTitle:@"Парковка успешно деактивирована." type:TSMessageNotificationTypeSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Clear parking error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
+    }];
+}
+
+- (void)p_sendAlarm
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение будет отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    
+    NSString *uid = [EAPreferences uid];
+    
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
+                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                             }
+                                 };
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"Set alarm done");
+        [TSMessage showNotificationWithTitle:@"Тревога отправлена." type:TSMessageNotificationTypeSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"Set alarm error: %@", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось отправить тревогу." type:TSMessageNotificationTypeError];
+    }];
 }
 
 #pragma mark - Animations
@@ -172,7 +250,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         
         // bigger button
         self.logoSizeConstraint.constant = 200;
-        self.logoImageView.image = [UIImage imageNamed:@"button_default"];
+        
+        self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
+        //self.logoImageView.image = [UIImage imageNamed:@"button_default"];
         
         [self.logoImageView layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -243,10 +323,10 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_startPopAnimation
 {
-//    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
-//    scaleAnimation.repeatForever = YES;
-//    [self.logoImageView.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSmallAnimation"];
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
+    scaleAnimation.repeatForever = YES;
+    [self.logoImageView.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSmallAnimation"];
 }
 
 #pragma mark - Button handlers
@@ -262,11 +342,15 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     if (isAnimationStarted) {
         return;
     }
-    //EALog(@"tap");
     
     BOOL willParking = !isParking;
-    if (willParking && [self isReachable]) {
-        [self p_setParked];
+    if ([self isReachable]) {
+        if (willParking) {
+            [self p_setParked];
+        }
+        else {
+            [self p_clearParking];
+        }
     }
     
     isParking = willParking;
@@ -284,7 +368,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
 }
 
-- (IBAction)starAnimation:(UILongPressGestureRecognizer*)sender
+- (IBAction)startAnimation:(UILongPressGestureRecognizer*)sender
 {
     if (sender.state == UIGestureRecognizerStateBegan) {
         [self p_startAnimation];
@@ -294,35 +378,53 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
-}
-
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender
 {
-    if (!mainScreenShown) {
+    if (!mainScreenShown  && [sender.view isEqual:self.view]) {
         [self p_initialAnimationHide];
         mainScreenShown = YES;
     }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
 }
 
 #pragma mark - Private API
 
 - (BOOL)isReachable
 {
-//    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-//    if (status == NotReachable) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//        [alert show];
-//        return NO;
-//    }
-//    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//        [alert show];
-//        return NO;
-//    }
+    NetworkStatus status = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if (status == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Ошибка при работе с сетью." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return NO;
+    }
+    if (!self.parkingLocation || !self.parkingLocation.coordinate.latitude || !self.parkingLocation.coordinate.longitude) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Включите доступ к геолокации." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+        return NO;
+    }
     
     return YES;
+}
+
+- (BOOL)p_fullAccessEnable
+{
+    return [self isReachable] && [EAPreferences uid].length > 0;
+}
+
+- (void)p_show:(BOOL)show
+{
+    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    visualEffectView.frame = self.view.frame;
+    [self.view addSubview:visualEffectView];
+    
+    UIView *view = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
+    view.frame = self.view.frame;
+    [self.view addSubview:view];
 }
 
 #pragma mark Elements
@@ -370,79 +472,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     circle.lineWidth = lineWidth;
     
     return circle;
-}
-
-#pragma mark Server API
-
-- (void)p_setParked
-{
-    //self.parkingLocation = self.locationManager.location;
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
-    if (!uid) {
-        uid = @"";
-    }
-
-    if (!self.parkingLocation) {
-        NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
-    
-    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
-                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
-                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
-                                            }
-                                };
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [TSMessage showNotificationWithTitle:@"Парковка успешно активирована." type:TSMessageNotificationTypeSuccess];
-        [self.preferences incerementParkingCount];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        EALog(@"Set parked error: %@", error);
-        [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
-    }];
-}
-
-- (void)p_clearParking
-{
-    NSDictionary *parameters = @{@"deviceId": [[NSUserDefaults standardUserDefaults] objectForKey:EAUID]};
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        EALog(@"Clear parking: %@", responseObject);
-        [TSMessage showNotificationWithTitle:@"Парковка успешно деактивирована." type:TSMessageNotificationTypeError];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        EALog(@"Clear parking error: %@", error);
-        [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
-    }];
-}
-
-- (void)p_sendAlarm
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение будет отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    
-    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
-    if (!uid) {
-        uid = @"";
-    }
-    
-    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
-                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
-                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
-                                             }
-                                 };
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        EALog(@"Set alarm done");
-        [TSMessage showNotificationWithTitle:@"Тревога отправлена." type:TSMessageNotificationTypeSuccess];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        EALog(@"Set alarm error: %@", error);
-        [TSMessage showNotificationWithTitle:@"Не удалось отправить тревогу." type:TSMessageNotificationTypeError];
-    }];
 }
 
 #pragma mark - Social

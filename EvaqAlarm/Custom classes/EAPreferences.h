@@ -23,6 +23,9 @@
 - (NSInteger)countOfParking;
 - (void)incerementParkingCount;
 
++ (void)setUid:(NSString*)uid;
++ (NSString*)uid;
+
 + (NSArray*)availablePlans;
 
 @end

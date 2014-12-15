@@ -8,6 +8,7 @@
 
 #import "EAPreferences.h"
 #import "EASubscriptionPlan.h"
+#import "EAConstants.h"
 
 static NSString *const kParkingCount = @"ParkingCount";
 
@@ -46,6 +47,18 @@ static NSString *const kParkingCount = @"ParkingCount";
     else if (count%10 == 0) { // 10, 20, 30, 40
         [self.delegate shouldPresentFeedbackView];
     }
+}
+
++ (void)setUid:(NSString*)uid
+{
+    [[NSUserDefaults standardUserDefaults] setObject:uid forKey:EAPushToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString*)uid
+{
+    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
+    return uid ? uid : @"";
 }
 
 + (NSArray*)availablePlans
