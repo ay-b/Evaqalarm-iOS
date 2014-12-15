@@ -8,6 +8,9 @@
 
 #import "EASubscribeViewController.h"
 #import "EAPlanTableViewCell.h"
+#import "EAConstants.h"
+#import "EAPreferences.h"
+#import "EASubscriptionPlan.h"
 
 #import <RMStore.h>
 #import <MKStoreKit/MKStoreManager.h>
@@ -22,7 +25,7 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *purchaseButton;
 
-- (IBAction)purchaseButtonPressed:(id)sender;
+- (IBAction)purchaseButtonPressed;
 
 @end
 
@@ -32,31 +35,19 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 {
     [super viewDidLoad];
     self.tableView.tableFooterView = [UIView new];
-    
-    self.plans = @[@{@"duration" : @"1 месяц",
-                     @"price" : @"50",
-                     @"uid" : @"me.speind.evaqalarm.subscription1"},
-                   @{@"duration" : @"6 месяцев",
-                     @"price" : @"250",
-                     @"uid" : @"me.speind.evaqalarm.subscription6"},
-                   @{@"duration" : @"12 месяцев",
-                     @"price" : @"450",
-                     @"uid" : @"me.speind.evaqalarm.subscription12"}];
-    
+    self.plans = [EAPreferences availablePlans];
 }
 
-- (IBAction)purchaseButtonPressed:(id)sender
+- (IBAction)purchaseButtonPressed
 {
-    [self p_purchaseBought];
-    
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSDictionary *plan = self.plans[indexPath.row];
-    NSString *uid = plan[@"uid"];
+    EASubscriptionPlan *plan = self.plans[indexPath.row];
     
-    [[RMStore defaultStore] addPayment:uid success:^(SKPaymentTransaction *transaction) {
-        NSLog(@"Product purchased");
+    [[RMStore defaultStore] addPayment:plan.uid success:^(SKPaymentTransaction *transaction) {
+        EALog(@"Product purchased");
+        [self p_purchaseBought];
     } failure:^(SKPaymentTransaction *transaction, NSError *error) {
-        NSLog(@"Something went wrong");
+        EALog(@"Something went wrong");
     }];
 }
 
@@ -84,10 +75,9 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EAPlanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIndentifier forIndexPath:indexPath];
-    
-    NSDictionary *plan = self.plans[indexPath.row];
-    cell.durationLabel.text = plan[@"duration"];
-    cell.priceLabel.text = plan[@"price"];
+ 
+    EASubscriptionPlan *plan = self.plans[indexPath.row];
+    [cell configureWithPlan:plan];
     
     return cell;
 }
@@ -99,9 +89,9 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.selected) {
-        [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [self p_updateView];
         return nil;
     }
@@ -113,6 +103,7 @@ static const NSTimeInterval kAnimationDuration = 0.3;
 {
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 0.01f;

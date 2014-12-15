@@ -23,4 +23,6 @@
 - (NSInteger)countOfParking;
 - (void)incerementParkingCount;
 
++ (NSArray*)availablePlans;
+
 @end

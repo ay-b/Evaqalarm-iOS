@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
 		BD1029E919FB7AC0005A18B9 /* NSString+Date.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1029E819FB7AC0005A18B9 /* NSString+Date.m */; };
+		BD2825CF1A3EEF7000123F25 /* EASubscriptionPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
 		BD2E4C5619FD66B800E00FD9 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C5319FD66B800E00FD9 /* share@2x.png */; };
@@ -37,7 +38,6 @@
 		BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919EBB19FB7587009B7E55 /* EAMainViewController.m */; };
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
-		BDC23B0C1A1B832A00849CBA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B0B1A1B832A00849CBA /* StoreKit.framework */; };
 		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
 		BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC23B101A1B944700849CBA /* button_cancel@2x.png */; };
 		BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B131A1B954200849CBA /* EAShareViewController.m */; };
@@ -61,6 +61,8 @@
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BD1029E719FB7AC0005A18B9 /* NSString+Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Date.h"; sourceTree = "<group>"; };
 		BD1029E819FB7AC0005A18B9 /* NSString+Date.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Date.m"; sourceTree = "<group>"; };
+		BD2825CD1A3EEF7000123F25 /* EASubscriptionPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASubscriptionPlan.h; sourceTree = "<group>"; };
+		BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASubscriptionPlan.m; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		BD2E4C5319FD66B800E00FD9 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
@@ -98,7 +100,6 @@
 		BD919EBB19FB7587009B7E55 /* EAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMainViewController.m; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		BDC23B0B1A1B832A00849CBA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
 		BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConfirmButton.m; sourceTree = "<group>"; };
 		BDC23B101A1B944700849CBA /* button_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cancel@2x.png"; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDC23B0C1A1B832A00849CBA /* StoreKit.framework in Frameworks */,
 				BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */,
 				BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */,
 				36585C526DCF561B07C857A7 /* libPods.a in Frameworks */,
@@ -152,9 +152,22 @@
 				BDC7CF351A1C9499004ECBCE /* EAPreferences.m */,
 				BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */,
 				BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */,
+				BD2825CD1A3EEF7000123F25 /* EASubscriptionPlan.h */,
+				BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */,
 			);
 			name = "Custom classes";
 			path = "EvaqAlarm/Custom classes";
+			sourceTree = "<group>";
+		};
+		BD2825CC1A3ED6FC00123F25 /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				BD2F7F951A13AA3E009A3053 /* EASubscribeViewController.h */,
+				BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */,
+				BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */,
+				BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */,
+			);
+			name = Subscribe;
 			sourceTree = "<group>";
 		};
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
@@ -213,19 +226,15 @@
 		BD919E9119FB7540009B7E55 /* EvaqAlarm */ = {
 			isa = PBXGroup;
 			children = (
-				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
-				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
-				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
-				BD2F7F951A13AA3E009A3053 /* EASubscribeViewController.h */,
-				BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */,
-				BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */,
-				BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */,
-				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
-				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
-				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
-				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919E9619FB7540009B7E55 /* AppDelegate.h */,
 				BD919E9719FB7540009B7E55 /* AppDelegate.m */,
+				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
+				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
+				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
+				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
+				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
+				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
+				BD2825CC1A3ED6FC00123F25 /* Subscribe */,
 				BD919E9219FB7540009B7E55 /* Supporting Files */,
 			);
 			path = EvaqAlarm;
@@ -234,6 +243,7 @@
 		BD919E9219FB7540009B7E55 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919E9319FB7540009B7E55 /* Info.plist */,
 				BD919E9419FB7540009B7E55 /* main.m */,
 			);
@@ -259,7 +269,6 @@
 		BD919EBD19FB758A009B7E55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BDC23B0B1A1B832A00849CBA /* StoreKit.framework */,
 				BDC23B091A1B826F00849CBA /* Security.framework */,
 				BD919EB819FB7573009B7E55 /* CoreLocation.framework */,
 				2261114A08CB4D1B418ECCCC /* libPods.a */,
@@ -333,6 +342,14 @@
 					BD919E8E19FB7540009B7E55 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 7KU9HT6JZ6;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					BD919EA719FB7541009B7E55 = {
 						CreatedOnToolsVersion = 6.1;
@@ -441,6 +458,7 @@
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
 				BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */,
 				BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */,
+				BD2825CF1A3EEF7000123F25 /* EASubscriptionPlan.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */,
@@ -523,7 +541,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "0aef6b84-ebe7-4ce5-9b29-339d37a40def";
@@ -561,7 +579,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "0aef6b84-ebe7-4ce5-9b29-339d37a40def";
 				SDKROOT = iphoneos;

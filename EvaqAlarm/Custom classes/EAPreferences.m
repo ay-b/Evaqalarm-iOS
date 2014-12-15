@@ -7,6 +7,7 @@
 //
 
 #import "EAPreferences.h"
+#import "EASubscriptionPlan.h"
 
 static NSString *const kParkingCount = @"ParkingCount";
 
@@ -45,6 +46,15 @@ static NSString *const kParkingCount = @"ParkingCount";
     else if (count%10 == 0) { // 10, 20, 30, 40
         [self.delegate shouldPresentFeedbackView];
     }
+}
+
++ (NSArray*)availablePlans
+{
+    EASubscriptionPlan *plan1 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription1" price:@"50" duration:@"1 месяц"];
+    EASubscriptionPlan *plan6 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription6" price:@"250" duration:@"6 месяцев"];
+    EASubscriptionPlan *plan12 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription12" price:@"450" duration:@"12 месяцев"];
+
+    return @[plan1, plan6, plan12];
 }
 
 @end

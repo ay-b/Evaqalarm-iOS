@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class EASubscriptionPlan;
+
 @interface EAPlanTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+- (void)configureWithPlan:(EASubscriptionPlan*)plan;
 
 @end

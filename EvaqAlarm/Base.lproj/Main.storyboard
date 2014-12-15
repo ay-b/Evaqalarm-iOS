@@ -184,7 +184,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>
                 <pongPressGestureRecognizer allowableMovement="100000" minimumPressDuration="0.19999999999999998" id="pYz-dM-MoY">
                     <connections>
-                        <action selector="starAnimation:" destination="dyJ-ZV-lCp" id="9Hd-zH-AJp"/>
+                        <action selector="startAnimation:" destination="dyJ-ZV-lCp" id="qsS-GF-ERf"/>
                         <outlet property="delegate" destination="dyJ-ZV-lCp" id="3aW-Nk-02h"/>
                     </connections>
                 </pongPressGestureRecognizer>
@@ -254,7 +254,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="purchaseButtonPressed:" destination="Y0s-mM-3jc" eventType="touchUpInside" id="qCZ-Ji-EIs"/>
+                                    <action selector="purchaseButtonPressed" destination="Y0s-mM-3jc" eventType="touchUpInside" id="tK2-hD-d0L"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b8J-rd-aWW">
