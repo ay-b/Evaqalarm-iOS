@@ -26,12 +26,16 @@ PODS:
   - HexColors (2.2.1)
   - MKStoreKit (4.99)
   - pop (1.0.7)
+  - REComposeViewController (2.3.2)
   - RMStore (0.7.1):
     - RMStore/Core (= 0.7.1)
   - RMStore/Core (0.7.1)
   - TSMessages (0.9.11):
     - HexColors
   - VK-ios-sdk (1.0.8.6)
+  - VKActivity (1.0.3):
+    - REComposeViewController
+    - VK-ios-sdk
 
 DEPENDENCIES:
   - AFNetworking (~> 2.4)
@@ -41,6 +45,7 @@ DEPENDENCIES:
   - RMStore (~> 0.6)
   - TSMessages
   - VK-ios-sdk (~> 1.0)
+  - VKActivity
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
@@ -49,8 +54,10 @@ SPEC CHECKSUMS:
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   MKStoreKit: b3974582d36f1410eb4d1174728f45909a367b86
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  REComposeViewController: ecdf1f4799a69c029258c56aca130276e7975f74
   RMStore: 034bacb5f8d8807866f80e53907db47b9cefd984
   TSMessages: e21ef5b1c7518cc590a4826c8b05b16b79b10c2c
   VK-ios-sdk: 2388a23081481384b1ad67d9e988d4dd9f8973d3
+  VKActivity: 537cfe81a2f6e156abd776ba738578433a8058d3
 
 COCOAPODS: 0.35.0

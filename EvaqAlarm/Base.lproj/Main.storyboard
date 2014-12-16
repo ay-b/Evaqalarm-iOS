@@ -25,7 +25,7 @@
         <!--Main View Controller-->
         <scene sceneID="7RZ-u1-qR3">
             <objects>
-                <viewController storyboardIdentifier="MainVC" id="dyJ-ZV-lCp" customClass="EAMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dyJ-ZV-lCp" customClass="EAMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aOL-7g-lTJ"/>
                         <viewControllerLayoutGuide type="bottom" id="g19-Rg-Aqg"/>

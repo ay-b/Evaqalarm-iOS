@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "EAConstants.h"
 #import "EAPreferences.h"
+#import "EAMainViewController.h"
 
 #import <vk-ios-sdk/VKSdk.h>
 #import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
@@ -23,6 +24,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
+    NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        NSNotification *notification = [NSNotification notificationWithName:EAReceiveAlarmNotification object:self userInfo:userInfo];
+
+        EAMainViewController *vc = (EAMainViewController*)self.window.rootViewController;
+        [vc p_receiveAlarm:notification];
+    }
     
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
@@ -42,9 +51,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    if (application.applicationIconBadgeNumber > 0) {
-        EALog(@"Was a notification");
-    }
     application.applicationIconBadgeNumber = 0;
 }
 
@@ -76,7 +82,10 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:userInfo];
+    NSMutableDictionary *info = [userInfo mutableCopy];
+    info[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:info];
 }
 
 #ifdef __IPHONE_8_0

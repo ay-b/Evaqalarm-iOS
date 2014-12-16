@@ -10,7 +10,6 @@
 #import "EAConstants.h"
 #import "EAPreferences.h"
 #import "EAShareViewController.h"
-#import "NSString+Date.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -18,7 +17,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
+#import <VKActivity/VKActivity.h>
 #import "Reachability.h"
+@import AudioToolbox;
 
 static const NSInteger kFacebookButton = 0;
 static const NSInteger kVkontakteButton = 1;
@@ -41,10 +42,13 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL isParking;
     BOOL isAlarmSent;
     BOOL isAnimationStarted;
+    BOOL isDisclaimerSkipped;
     NSTimer *alarmTimer;
     POPSpringAnimation *scaleAnimation;
     UIView *popupView;
     UIVisualEffectView *visualEffectView;
+    
+    SystemSoundID alarmSoundID;
     
     BOOL mainScreenShown;
 }
@@ -105,6 +109,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     [super viewDidLoad];
     self.preferences = [[EAPreferences alloc] initWithDelegate:self];
+    [VKSdk initializeWithDelegate:self andAppId:EAVKAppKey];
+    [VKSdk wakeUpSession];
     
     // prepare location manager
     self.locationManager = [[CLLocationManager alloc] init];
@@ -265,6 +271,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.logoImageView layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self p_postAnimation];
+        isDisclaimerSkipped = YES;
     }];
 }
 
@@ -353,14 +360,19 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
     self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = YES;
+    
+    AudioServicesDisposeSystemSoundID(alarmSoundID);
 }
 
 #pragma mark - Button handlers
 
 - (IBAction)shareButtonPressed
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Расскажи друзьям" delegate:self cancelButtonTitle:@"Отменить" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"VK", nil];
-    [actionSheet showInView:[self.view window]];
+    NSArray *items = @[EAShareMessage, [NSURL URLWithString:EAShareLink]];
+    NSArray *activities = @[[[VKActivity alloc] init]];
+    
+    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:activities];
+    [self presentViewController:activityViewController animated:YES completion:^{}];
 }
 
 - (IBAction)tap:(id)sender
@@ -455,8 +467,34 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     EALog(@"Push: %@", notification.userInfo);
     
-    self.alarmSenderUid = notification.userInfo[@"senderId"];
-    [self p_startPopAnimation];
+    BOOL playSound = [notification.userInfo[@"playSound"] boolValue];
+    if (playSound) {
+        [self p_playAlarmSound];
+    }
+        
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!isDisclaimerSkipped) {
+            [self p_initialAnimationHide];
+        }
+
+        self.alarmSenderUid = notification.userInfo[@"senderId"];
+        [self p_startPopAnimation];
+    });
+}
+
+- (void)p_playAlarmSound
+{
+    CFStringRef state;
+    UInt32 propertySize = sizeof(CFStringRef);
+    AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    AudioSessionGetProperty(kAudioSessionProperty_AudioRoute, &propertySize, &state);
+    BOOL shouldPlay = CFStringGetLength(state) > 0 ;
+    
+    if (shouldPlay) {
+        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alarm" ofType:@"wav"];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &alarmSoundID);
+        AudioServicesPlaySystemSound (alarmSoundID);
+    }
 }
 
 - (BOOL)p_isReachable

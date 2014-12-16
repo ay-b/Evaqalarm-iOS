@@ -43,11 +43,11 @@ static NSString *const kParkingCount = @"ParkingCount";
 - (void)p_shouldPresentView
 {
     NSInteger count = [self countOfParking];
-    if (count%5 == 0 && count%10 != 0) { // 5, 15, 25, 35
-        [self.delegate shouldPresentSharingView];
-    }
-    else if (count%10 == 0) { // 10, 20, 30, 40
+    if (count%10 == 0) { // 10, 20, 30, 40
         [self.delegate shouldPresentFeedbackView];
+    }
+    else if (count%5 == 0) { // 5, 15, 25, 35
+        [self.delegate shouldPresentSharingView];
     }
 }
 
