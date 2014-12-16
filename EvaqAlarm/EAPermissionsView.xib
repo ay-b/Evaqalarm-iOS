@@ -15,8 +15,12 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для работы приложения необходимо:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dV1-lh-Wge">
-                    <rect key="frame" x="20" y="20" width="560" height="25"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osb-z3-K3D">
+                    <rect key="frame" x="20" y="251" width="560" height="99"/>
+                    <string key="text">Для работы приложения необходимо включить:
+
+1. Пуш-уведомления.
+2. Доступ к геолокации.</string>
                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -24,10 +28,18 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="dV1-lh-Wge" secondAttribute="trailing" constant="20" symbolic="YES" id="7ns-3x-4TG"/>
-                <constraint firstItem="dV1-lh-Wge" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="V25-L0-udB"/>
-                <constraint firstItem="dV1-lh-Wge" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="aP1-Zz-38J"/>
+                <constraint firstAttribute="bottom" secondItem="Osb-z3-K3D" secondAttribute="bottom" id="CyP-1r-l74"/>
+                <constraint firstAttribute="trailing" secondItem="Osb-z3-K3D" secondAttribute="trailing" constant="20" symbolic="YES" id="QTV-St-UQ4"/>
+                <constraint firstAttribute="centerX" secondItem="Osb-z3-K3D" secondAttribute="centerX" id="YpH-zI-zSX"/>
+                <constraint firstItem="Osb-z3-K3D" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="ZZr-q1-UE8"/>
+                <constraint firstAttribute="centerY" secondItem="Osb-z3-K3D" secondAttribute="centerY" id="tpc-zP-nwQ"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="CyP-1r-l74"/>
+                    <exclude reference="YpH-zI-zSX"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

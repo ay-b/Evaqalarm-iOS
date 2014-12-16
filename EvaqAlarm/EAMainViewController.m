@@ -43,6 +43,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL isAnimationStarted;
     NSTimer *alarmTimer;
     POPSpringAnimation *scaleAnimation;
+    UIView *popupView;
+    UIVisualEffectView *visualEffectView;
     
     BOOL mainScreenShown;
 }
@@ -433,22 +435,20 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
             
     if (shoudShowView) {
-        [TSMessage showNotificationWithTitle:@"<лочить экран>" type:TSMessageNotificationTypeError];
-            }
-    else {
-        [TSMessage showNotificationWithTitle:@"<не лочить экран>" type:TSMessageNotificationTypeSuccess];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        visualEffectView.frame = self.view.frame;
+        [self.view addSubview:visualEffectView];
+        
+        popupView = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
+        popupView.frame = self.view.frame;
+        [self.view addSubview:popupView];
     }
-    
-//    UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//
-//    visualEffectView.frame = self.view.frame;
-//    [self.view addSubview:visualEffectView];
-//
-//    UIView *view = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
-//    view.frame = self.view.frame;
-//    [self.view addSubview:view];
+    else {
+        [popupView removeFromSuperview];
+        [visualEffectView removeFromSuperview];
+    }
+    self.view.userInteractionEnabled = !shoudShowView;
 }
 
 - (void)p_receiveAlarm:(NSNotification*)notification
