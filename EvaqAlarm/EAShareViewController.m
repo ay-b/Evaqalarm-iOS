@@ -10,8 +10,8 @@
 #import "EAConstants.h"
 #import "EAMainViewController.h"
 
-static NSString *const shareText = @"EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!";
-static NSString *const ratingText = @"EqvaqAlarm – отличное приложение, так ведь? Стоит поставить ему хорошую оценку, чтобы другие сразу видели это!";
+static NSString *const kShareText = @"EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!";
+static NSString *const kRatingText = @"EqvaqAlarm – отличное приложение, так ведь? Стоит поставить ему хорошую оценку, чтобы другие сразу видели это!";
 
 @interface EAShareViewController ()
 
@@ -27,7 +27,7 @@ static NSString *const ratingText = @"EqvaqAlarm – отличное прило
 - (void)viewDidLoad
 { 
     [super viewDidLoad];
-    self.textLabel.text = _sharing ? shareText : ratingText;
+    self.textLabel.text = _sharing ? kShareText : kRatingText;
 }
 
 - (IBAction)cancelButtonPressed
@@ -37,15 +37,16 @@ static NSString *const ratingText = @"EqvaqAlarm – отличное прило
 
 - (IBAction)confirmButtonPressed
 {
-    if (_sharing) {
-        UINavigationController *nav = (UINavigationController*)self.presentingViewController;
-        EAMainViewController *vc = [nav.viewControllers lastObject];
-        [vc shareButtonPressed];
-    }
-    else {
-        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:EAAppStoreURL]];
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    EAMainViewController *vc = (EAMainViewController*)self.presentingViewController;
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (_sharing) {
+            [vc shareButtonPressed];
+        }
+        else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:EAAppStoreURL]];
+        }
+    }];
 }
 
 @end

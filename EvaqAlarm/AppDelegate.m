@@ -25,19 +25,18 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-    NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (userInfo) {
-        NSNotification *notification = [NSNotification notificationWithName:EAReceiveAlarmNotification object:self userInfo:userInfo];
-
-        EAMainViewController *vc = (EAMainViewController*)self.window.rootViewController;
-        [vc p_receiveAlarm:notification];
-    }
-    
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
         [application registerUserNotificationSettings:settings];
     } else {
         [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    }
+    
+    NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        NSNotification *notification = [NSNotification notificationWithName:EAReceiveAlarmNotification object:self userInfo:userInfo];
+        EAMainViewController *vc = (EAMainViewController*)self.window.rootViewController;
+        [vc receiveAlarm:notification];
     }
     
     return YES;
@@ -82,17 +81,15 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    NSMutableDictionary *info = [userInfo mutableCopy];
-    info[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
+    NSMutableDictionary *extendedUserInfo = [userInfo mutableCopy];
+    extendedUserInfo[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:info];
+    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:extendedUserInfo];
 }
 
-#ifdef __IPHONE_8_0
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
     [application registerForRemoteNotifications];
 }
-#endif
 
 @end

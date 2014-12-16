@@ -372,6 +372,12 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     NSArray *activities = @[[[VKActivity alloc] init]];
     
     UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:activities];
+    
+    if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
+        UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
+        presentationController.sourceView = self.shareButton;
+    }
+    
     [self presentViewController:activityViewController animated:YES completion:^{}];
 }
 
@@ -463,7 +469,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.view.userInteractionEnabled = !shoudShowView;
 }
 
-- (void)p_receiveAlarm:(NSNotification*)notification
+- (void)receiveAlarm:(NSNotification*)notification
 {
     EALog(@"Push: %@", notification.userInfo);
     

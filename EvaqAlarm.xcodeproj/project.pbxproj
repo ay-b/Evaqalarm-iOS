@@ -19,8 +19,6 @@
 		BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F8E1A13A8F1009A3053 /* button@3x.png */; };
 		BD2F7F931A13A9A4009A3053 /* cell_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */; };
 		BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */; };
-		BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */; };
-		BD2F7F9A1A13ACC6009A3053 /* EAPlanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */; };
 		BD31D0481A4018B6009A14FD /* button_thumbs_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D0461A4018B6009A14FD /* button_thumbs_down@2x.png */; };
 		BD31D0491A4018B6009A14FD /* button_thumbs_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D0471A4018B6009A14FD /* button_thumbs_up@2x.png */; };
 		BD31D04C1A401ABD009A14FD /* button_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D04A1A401ABD009A14FD /* button_share@2x.png */; };
@@ -77,10 +75,6 @@
 		BD2F7F8E1A13A8F1009A3053 /* button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@3x.png"; sourceTree = "<group>"; };
 		BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_checked@2x.png"; sourceTree = "<group>"; };
 		BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_unchecked@2x.png"; sourceTree = "<group>"; };
-		BD2F7F951A13AA3E009A3053 /* EASubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASubscribeViewController.h; sourceTree = "<group>"; };
-		BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASubscribeViewController.m; sourceTree = "<group>"; };
-		BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPlanTableViewCell.h; sourceTree = "<group>"; };
-		BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPlanTableViewCell.m; sourceTree = "<group>"; };
 		BD31D0461A4018B6009A14FD /* button_thumbs_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_down@2x.png"; sourceTree = "<group>"; };
 		BD31D0471A4018B6009A14FD /* button_thumbs_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_up@2x.png"; sourceTree = "<group>"; };
 		BD31D04A1A401ABD009A14FD /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
@@ -167,17 +161,6 @@
 			path = "EvaqAlarm/Custom classes";
 			sourceTree = "<group>";
 		};
-		BD2825CC1A3ED6FC00123F25 /* Subscribe */ = {
-			isa = PBXGroup;
-			children = (
-				BD2F7F951A13AA3E009A3053 /* EASubscribeViewController.h */,
-				BD2F7F961A13AA3E009A3053 /* EASubscribeViewController.m */,
-				BD2F7F981A13ACC6009A3053 /* EAPlanTableViewCell.h */,
-				BD2F7F991A13ACC6009A3053 /* EAPlanTableViewCell.m */,
-			);
-			name = Subscribe;
-			sourceTree = "<group>";
-		};
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +239,6 @@
 				BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */,
 				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
 				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
-				BD2825CC1A3ED6FC00123F25 /* Subscribe */,
 				BD919E9219FB7540009B7E55 /* Supporting Files */,
 			);
 			path = EvaqAlarm;
@@ -488,9 +470,7 @@
 				BD2825CF1A3EEF7000123F25 /* EASubscriptionPlan.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
-				BD2F7F971A13AA3E009A3053 /* EASubscribeViewController.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
-				BD2F7F9A1A13ACC6009A3053 /* EAPlanTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

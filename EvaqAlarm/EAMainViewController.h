@@ -12,6 +12,6 @@
 
 - (IBAction)shareButtonPressed;
 
-- (void)p_receiveAlarm:(NSNotification*)notification;
+- (void)receiveAlarm:(NSNotification*)notification;
 
 @end
