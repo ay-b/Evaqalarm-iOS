@@ -30,4 +30,6 @@ NSString *const EAURLDomain = @"http://evaqalarm.speind.com/";
 NSString *const EAURLClearParking = @"http://evaqalarm.speind.com/clearParking";
 NSString *const EAURLSetParked = @"http://evaqalarm.speind.com/ios/setParked";
 NSString *const EAURLSetAlarm = @"http://evaqalarm.speind.com/ios/setAlarm";
+NSString *const EAURLPetition = @"http://evaqalarm.speind.com/petition";
+NSString *const EAURLPraise = @"http://evaqalarm.speind.com/praise";
 /* URLs */

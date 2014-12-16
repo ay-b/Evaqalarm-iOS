@@ -11,7 +11,6 @@
 #import "EAPreferences.h"
 #import "EAShareViewController.h"
 #import "NSString+Date.h"
-#import "EAAccessDeniedViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -35,7 +34,6 @@ static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kTimeInterval = 0.2;
 static const NSInteger kSharButtonSize = 44;
 
-
 static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 @interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate>
@@ -52,13 +50,19 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 @property CLLocation *parkingLocation;
 @property NSDate *parkingDate;
 @property NSArray *alertButtonComponents;
+@property NSString *alarmSenderUid;
 
 @property (nonatomic) EAPreferences *preferences;
 
 #pragma mark - UI
 
+- (IBAction)praiseAlarmButtonPressed;
+- (IBAction)petitionAlarmButtonPressed;
+@property (weak, nonatomic) IBOutlet UIButton *praiseAlarmButton;
+@property (weak, nonatomic) IBOutlet UIButton *petitionAlarmButton;
+
+
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
-- (IBAction)praiseAlarmSender;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleOffsetConstraint;
@@ -206,6 +210,21 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }];
 }
 
+- (void)praiseAlarmSender:(BOOL)praise
+{
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": self.alarmSenderUid}};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:praise ? EAURLPraise : EAURLPetition parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        EALog(@"%@ done", praise ? @"Praise" : @"Petition");
+        
+        [TSMessage showNotificationWithTitle:@"Ваша оценка отправлена." type:TSMessageNotificationTypeSuccess];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        EALog(@"%@ error: %@", praise ? @"Praise" : @"Petition", error);
+        [TSMessage showNotificationWithTitle:@"Не удалось отправить оценку." type:TSMessageNotificationTypeError];
+    }];
+}
+
 #pragma mark - Animations
 #pragma mark Initial
 
@@ -324,8 +343,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)p_startPopAnimation
 {
     self.alarmButton.enabled = NO;
-    self.hintLabel.text = @"Оцените полезность сигнала тревоги";
+    self.hintLabel.text = kParkingRatingString;
     self.logoImageView.image = [UIImage imageNamed:@"button_alarm"];
+    self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = NO;
 
     if (!scaleAnimation) {
         scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
@@ -343,6 +363,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.alarmButton.enabled = YES;
     self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
+    self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = YES;
 }
 
 #pragma mark - Button handlers
@@ -407,9 +428,16 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
 }
 
-- (IBAction)praiseAlarmSender
+- (IBAction)praiseAlarmButtonPressed
 {
     [self p_stopPopAnimation];
+    [self praiseAlarmSender:YES];
+}
+
+- (IBAction)petitionAlarmButtonPressed
+{
+    [self p_stopPopAnimation];
+    [self praiseAlarmSender:NO];
 }
 
 #pragma mark - Private API
@@ -419,10 +447,10 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
             
     if (shoudShowView) {
-        [TSMessage showNotificationWithTitle:@":(" type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:@"<лочить экран>" type:TSMessageNotificationTypeError];
             }
     else {
-        [TSMessage showNotificationWithTitle:@":)" type:TSMessageNotificationTypeSuccess];
+        [TSMessage showNotificationWithTitle:@"<не лочить экран>" type:TSMessageNotificationTypeSuccess];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
@@ -439,7 +467,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_receiveAlarm:(NSNotification*)notification
 {
-    EALog(@"Push. Alarm sender: %@", notification.userInfo[@"senderId"]);
+    EALog(@"Push: %@", notification.userInfo);
+    
+    self.alarmSenderUid = notification.userInfo[@"senderId"];
     [self p_startPopAnimation];
 }
 

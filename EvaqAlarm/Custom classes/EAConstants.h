@@ -14,6 +14,7 @@
 
 static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+static NSString *const kParkingRatingString = @"Оцените полезность сигнала тревоги.";
 
 extern NSString *const EAAppStoreURL;
 
@@ -36,6 +37,8 @@ extern NSString *const EAURLDomain;
 extern NSString *const EAURLSetParked;
 extern NSString *const EAURLClearParking;
 extern NSString *const EAURLSetAlarm;
+extern NSString *const EAURLPetition;
+extern NSString *const EAURLPraise;
 /* URLs */
 
 // Debug Logging
