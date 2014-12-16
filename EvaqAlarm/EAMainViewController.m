@@ -102,8 +102,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self.hintLabel sizeToFit];
+    self.preferences = [[EAPreferences alloc] initWithDelegate:self];
     
     // prepare location manager
     self.locationManager = [[CLLocationManager alloc] init];
@@ -128,36 +127,19 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [super viewWillDisappear:animated];
 }
 
-- (EAPreferences *)preferences
-{
-    if (!_preferences) {
-        _preferences = [[EAPreferences alloc] initWithDelegate:self];
-    }
-    return _preferences;
-}
-
 #pragma mark - Server API
 
 - (void)p_setParked
 {
-    //self.parkingLocation = self.locationManager.location;
-    NSString *uid = [EAPreferences uid];
-    
-    if (!self.parkingLocation) {
-        NSString *msg = [NSString stringWithFormat:@"ID: %@; location: (%lf; %lf); time: %@", uid, self.parkingLocation.coordinate.latitude, self.parkingLocation.coordinate.longitude, [NSString stringWithDate:self.parkingDate]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sent" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
-    
-    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid],
                                              @"lat" : @(self.parkingLocation.coordinate.latitude),
                                              @"lon" : @(self.parkingLocation.coordinate.longitude)
                                              }
                                  };
-    
+    self.alarmButton.enabled = NO;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.alarmButton.enabled = YES;
         EALog(@"Set parking done");
         
         [self.preferences incerementParkingCount];
@@ -165,6 +147,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [[NSUserDefaults standardUserDefaults] synchronize];
         [TSMessage showNotificationWithTitle:@"Парковка успешно активирована." type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.alarmButton.enabled = YES;
+        [self invertParkingState];
         EALog(@"Set parked error: %@", error);
         [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
     }];
@@ -174,17 +158,27 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid]}};
     
+    self.alarmButton.enabled = NO;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.alarmButton.enabled = YES;
         EALog(@"Clear parking done");
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:EAParkedNow];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [TSMessage showNotificationWithTitle:@"Парковка успешно деактивирована." type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.alarmButton.enabled = YES;
+        [self invertParkingState];
         EALog(@"Clear parking error: %@", error);
         [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
     }];
+}
+
+- (void)invertParkingState
+{
+    isParking = !isParking;
+    self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
 }
 
 - (void)p_sendAlarm
@@ -192,9 +186,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение будет отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
-    NSString *uid = [EAPreferences uid];
-    
-    NSDictionary *parameters = @{@"auto" : @{@"deviceId": uid,
+    NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid],
                                              @"lat" : @(self.parkingLocation.coordinate.latitude),
                                              @"lon" : @(self.parkingLocation.coordinate.longitude)
                                              }
@@ -251,8 +243,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     
     // disclaimer animation
     self.disclaimerLabel.alpha = 0;
-    //self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
-    //[self.disclaimerLabel layoutIfNeeded];
     [UIView animateWithDuration:kMainScreenTimeInterval animations:^{
         self.titleOffsetConstraint.constant = 60;
         [self.disclaimerLabel layoutIfNeeded];
@@ -269,10 +259,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         
         // bigger button
         self.logoSizeConstraint.constant = 200;
-        
         self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
-        //self.logoImageView.image = [UIImage imageNamed:@"button_default"];
-        
         [self.logoImageView layoutIfNeeded];
     } completion:^(BOOL finished) {
         [self p_postAnimation];
@@ -380,14 +367,13 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         return;
     }
     
+#warning rm the property?
     BOOL willParking = !isParking;
-    if ([self p_isReachable]) {
-        if (willParking) {
-            [self p_setParked];
-        }
-        else {
-            [self p_clearParking];
-        }
+    if (willParking) {
+        [self p_setParked];
+    }
+    else {
+        [self p_clearParking];
     }
     
     isParking = willParking;
