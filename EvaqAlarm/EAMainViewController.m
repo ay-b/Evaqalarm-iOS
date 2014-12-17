@@ -123,7 +123,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
     [self p_checkPermissions];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
     isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
     
     [self p_initialAnimationShow];
@@ -500,6 +500,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alarm" ofType:@"wav"];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &alarmSoundID);
         AudioServicesPlaySystemSound (alarmSoundID);
+    }
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
 }
 
