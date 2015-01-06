@@ -451,16 +451,19 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)p_checkPermissions
 {
     BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
-            
+
+    
     if (shoudShowView) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        visualEffectView.frame = self.view.frame;
-        [self.view addSubview:visualEffectView];
-        
-        popupView = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
-        popupView.frame = self.view.frame;
-        [self.view addSubview:popupView];
+        if (![popupView superview]) {
+            UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+            visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+            visualEffectView.frame = self.view.frame;
+            [self.view addSubview:visualEffectView];
+            
+            popupView = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
+            popupView.frame = self.view.frame;
+            [self.view addSubview:popupView];
+        }
     }
     else {
         [popupView removeFromSuperview];

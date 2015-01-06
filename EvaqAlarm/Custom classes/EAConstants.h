@@ -41,8 +41,7 @@ extern NSString *const EAURLPetition;
 extern NSString *const EAURLPraise;
 /* URLs */
 
-// Debug Logging
-#if 1
+#ifdef DEBUG
 #define EALog(x, ...) NSLog(x, ## __VA_ARGS__);
 #else
 #define EALog(x, ...)
