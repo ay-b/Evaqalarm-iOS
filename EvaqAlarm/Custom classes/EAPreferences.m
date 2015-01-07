@@ -74,12 +74,17 @@ static NSString *const kParkingCount = @"ParkingCount";
 
 + (BOOL)fullAccessEnabled
 {
-    return [self p_isPushEnabled] && [self p_isLocationEnabled];
+    return [self p_isPushEnabled] && [self p_isLocationEnabled] && [self p_isLocationPermissions];
 }
 
 + (BOOL)p_isLocationEnabled
 {
     return [CLLocationManager locationServicesEnabled];
+}
+
++ (BOOL)p_isLocationPermissions
+{
+    return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways;
 }
 
 + (BOOL)p_isPushEnabled

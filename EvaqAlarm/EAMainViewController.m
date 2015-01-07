@@ -116,9 +116,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
     [self p_checkPermissions];
@@ -450,8 +447,11 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_checkPermissions
 {
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    
     BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
-
     
     if (shoudShowView) {
         if (![popupView superview]) {
@@ -639,6 +639,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     EALog(@"Auth status: %i", status);
+    [self p_checkPermissions];
 }
 
 #pragma mark - UIActionSheet delegate
