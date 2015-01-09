@@ -29,5 +29,7 @@
 + (NSArray*)availablePlans;
 
 + (BOOL)fullAccessEnabled;
++ (BOOL)isLocationEnabled;
++ (BOOL)isPushEnabled;
 
 @end

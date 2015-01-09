@@ -23,8 +23,20 @@ PODS:
   - Bolts (1.1.3)
   - Facebook-iOS-SDK (3.21.1):
     - Bolts (~> 1.0)
+  - FMDB (2.2):
+    - FMDB/standard (= 2.2)
+  - FMDB/common (2.2)
+  - FMDB/standard (2.2):
+    - FMDB/common
   - HexColors (2.2.1)
+  - KSCrash/Recording (0.0.3)
+  - KSCrash/Reporting/Filters/AppleFmt (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Base (0.0.3):
+    - KSCrash/Recording
   - pop (1.0.7)
+  - protobuf-c (0.15)
   - REComposeViewController (2.3.2)
   - TSMessages (0.9.11):
     - HexColors
@@ -32,6 +44,11 @@ PODS:
   - VKActivity (1.0.3):
     - REComposeViewController
     - VK-ios-sdk
+  - YandexMobileMetrica (1.6.2):
+    - FMDB (= 2.2.0)
+    - KSCrash/Recording (~> 0.0.3)
+    - KSCrash/Reporting/Filters/AppleFmt (~> 0.0.3)
+    - protobuf-c (= 0.15)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.4)
@@ -40,16 +57,21 @@ DEPENDENCIES:
   - TSMessages
   - VK-ios-sdk (~> 1.0)
   - VKActivity
+  - YandexMobileMetrica
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   Facebook-iOS-SDK: 18c26e86ab25c17854a2ee2a8f60562099c6600f
+  FMDB: f6f4511ad1e9ace38e9b6f4d83c2cddaabf98ea6
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
+  KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  protobuf-c: 0177b8dbc4afc4ec5d01e868b3e25a7400b98ca0
   REComposeViewController: ecdf1f4799a69c029258c56aca130276e7975f74
   TSMessages: e21ef5b1c7518cc590a4826c8b05b16b79b10c2c
   VK-ios-sdk: 2388a23081481384b1ad67d9e988d4dd9f8973d3
   VKActivity: 537cfe81a2f6e156abd776ba738578433a8058d3
+  YandexMobileMetrica: 54642fd869c15fbdecc4c81131ed08fe98c1fddb
 
 COCOAPODS: 0.35.0

@@ -12,8 +12,8 @@ NSString *const EAShareMessage = @"Друзья, поможем друг дру�
 NSString *const EAShareLink = @"http://evaqalarm.speind.me";
 
 /* System */
-#warning set url to appstore
-NSString *const EAAppStoreURL = @"http://evaqalarm.speind.com/";
+NSString *const EAAppStoreURL = @"https://itunes.apple.com/us/app/evaqalarm-save-your-car-from/id940143334?mt=8";
+NSString *const EAYandexMetricApiKey = @"30258";
 
 NSString *const EAPushToken = @"PushToken";
 NSString *const EAParkedNow = @"ParkedNow";

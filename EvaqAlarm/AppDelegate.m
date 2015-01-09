@@ -14,12 +14,20 @@
 #import <vk-ios-sdk/VKSdk.h>
 #import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <YandexMobileMetrica/YandexMobileMetrica.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
++ (void)initialize
+{
+    if ([self class] == [AppDelegate class]) {
+        [YMMYandexMetrica startWithAPIKey:EAYandexMetricApiKey];
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

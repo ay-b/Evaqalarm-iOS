@@ -19,6 +19,7 @@
 #import <TSMessages/TSMessage.h>
 #import <VKActivity/VKActivity.h>
 #import "Reachability.h"
+#import <YandexMobileMetrica/YandexMobileMetrica.h>
 @import AudioToolbox;
 
 static const NSInteger kFacebookButton = 0;
@@ -146,6 +147,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.alarmButton.enabled = YES;
         EALog(@"Set parking done");
+        [YMMYandexMetrica reportEvent:@"Parking success" onFailure:nil];
         
         [self.preferences incerementParkingCount];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:EAParkedNow];
@@ -154,6 +156,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.alarmButton.enabled = YES;
         [self invertParkingState];
+        [YMMYandexMetrica reportEvent:@"Server error on send parking" onFailure:nil];
+        
         EALog(@"Set parked error: %@", error);
         [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
     }];
@@ -168,6 +172,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.alarmButton.enabled = YES;
         EALog(@"Clear parking done");
+        [YMMYandexMetrica reportEvent:@"Parking cancelled" onFailure:nil];
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:EAParkedNow];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -175,7 +180,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.alarmButton.enabled = YES;
         [self invertParkingState];
+        
         EALog(@"Clear parking error: %@", error);
+        [YMMYandexMetrica reportEvent:@"Server error on parking cancell" onFailure:nil];
         [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
     }];
 }
@@ -200,9 +207,11 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         EALog(@"Set alarm done");
+        [YMMYandexMetrica reportEvent:@"Alarm success" onFailure:nil];
         [TSMessage showNotificationWithTitle:@"Тревога отправлена." type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         EALog(@"Set alarm error: %@", error);
+        [YMMYandexMetrica reportEvent:@"Server error on send alarm" onFailure:nil];
         [TSMessage showNotificationWithTitle:@"Не удалось отправить тревогу." type:TSMessageNotificationTypeError];
     }];
 }
@@ -365,6 +374,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (IBAction)shareButtonPressed
 {
+    [YMMYandexMetrica reportEvent:@"Share button clicked" onFailure:nil];
+    
     NSArray *items = @[EAShareMessage, [NSURL URLWithString:EAShareLink]];
     NSArray *activities = @[[[VKActivity alloc] init]];
     
@@ -422,6 +433,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender
 {
     if (!mainScreenShown  && [sender.view isEqual:self.view]) {
+        [YMMYandexMetrica reportEvent:@"Skip splash clicked" onFailure:nil];
+        
         [self p_initialAnimationHide];
         mainScreenShown = YES;
     }
@@ -454,6 +467,13 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
     
     if (shoudShowView) {
+        if (![EAPreferences isPushEnabled]) {
+            [YMMYandexMetrica reportEvent:@"Push notifications disabled" onFailure:nil];
+        }
+        if (![EAPreferences isLocationEnabled]) {
+            [YMMYandexMetrica reportEvent:@"GPS disabled" onFailure:nil];
+        }
+        
         if (![popupView superview]) {
             UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
             visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];

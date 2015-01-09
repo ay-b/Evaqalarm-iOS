@@ -74,20 +74,15 @@ static NSString *const kParkingCount = @"ParkingCount";
 
 + (BOOL)fullAccessEnabled
 {
-    return [self p_isPushEnabled] && [self p_isLocationEnabled] && [self p_isLocationPermissions];
+    return [self isPushEnabled] && [self isLocationEnabled];
 }
 
-+ (BOOL)p_isLocationEnabled
++ (BOOL)isLocationEnabled
 {
-    return [CLLocationManager locationServicesEnabled];
+    return [CLLocationManager locationServicesEnabled] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways);
 }
 
-+ (BOOL)p_isLocationPermissions
-{
-    return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways;
-}
-
-+ (BOOL)p_isPushEnabled
++ (BOOL)isPushEnabled
 {
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
         return [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];

@@ -16,12 +16,13 @@ static NSString *const kParkingEnabledString = @"Нажмите кнопку д�
 static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingRatingString = @"Оцените полезность сигнала тревоги.";
 
-extern NSString *const EAAppStoreURL;
-
 extern NSString *const EAReceiveAlarmNotification;
 extern NSString *const EACheckPermissionsNotification;
 
 /* System */
+extern NSString *const EAAppStoreURL;
+extern NSString *const EAYandexMetricApiKey;
+
 extern NSString *const EAPushToken;
 extern NSString *const EAParkedNow;
 
