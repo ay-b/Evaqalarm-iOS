@@ -7,7 +7,6 @@
 //
 
 #import "EAPreferences.h"
-#import "EASubscriptionPlan.h"
 #import "EAConstants.h"
 @import UIKit;
 @import CoreLocation;
@@ -61,15 +60,6 @@ static NSString *const kParkingCount = @"ParkingCount";
 {
     NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:EAPushToken];
     return uid ? uid : @"";
-}
-
-+ (NSArray*)availablePlans
-{
-    EASubscriptionPlan *plan1 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription1" price:@"50" duration:@"1 месяц"];
-    EASubscriptionPlan *plan6 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription6" price:@"250" duration:@"6 месяцев"];
-    EASubscriptionPlan *plan12 = [EASubscriptionPlan planWithUid:@"me.speind.evaqalarm.subscription12" price:@"450" duration:@"12 месяцев"];
-
-    return @[plan1, plan6, plan12];
 }
 
 + (BOOL)fullAccessEnabled

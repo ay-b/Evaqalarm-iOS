@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
-		BD2825CF1A3EEF7000123F25 /* EASubscriptionPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */; };
 		BD2825D11A3EF95800123F25 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */; };
 		BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */; };
 		BD2825DA1A40182200123F25 /* button_thumbs_up@3x in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D81A40182200123F25 /* button_thumbs_up@3x */; };
@@ -62,8 +61,6 @@
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BD2825CD1A3EEF7000123F25 /* EASubscriptionPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EASubscriptionPlan.h; sourceTree = "<group>"; };
-		BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EASubscriptionPlan.m; sourceTree = "<group>"; };
 		BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAPermissionsView.xib; sourceTree = "<group>"; };
 		BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_down@3x.png"; sourceTree = "<group>"; };
 		BD2825D81A40182200123F25 /* button_thumbs_up@3x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "button_thumbs_up@3x"; sourceTree = "<group>"; };
@@ -154,8 +151,6 @@
 				BDC7CF351A1C9499004ECBCE /* EAPreferences.m */,
 				BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */,
 				BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */,
-				BD2825CD1A3EEF7000123F25 /* EASubscriptionPlan.h */,
-				BD2825CE1A3EEF7000123F25 /* EASubscriptionPlan.m */,
 			);
 			name = "Custom classes";
 			path = "EvaqAlarm/Custom classes";
@@ -467,7 +462,6 @@
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
 				BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */,
 				BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */,
-				BD2825CF1A3EEF7000123F25 /* EASubscriptionPlan.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,

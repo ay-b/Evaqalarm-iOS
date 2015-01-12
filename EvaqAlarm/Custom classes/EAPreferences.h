@@ -26,8 +26,6 @@
 + (void)setUid:(NSString*)uid;
 + (NSString*)uid;
 
-+ (NSArray*)availablePlans;
-
 + (BOOL)fullAccessEnabled;
 + (BOOL)isLocationEnabled;
 + (BOOL)isPushEnabled;
