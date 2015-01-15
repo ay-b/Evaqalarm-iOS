@@ -12,6 +12,8 @@
 #define kRedColor [UIColor colorWithRed:255/255.0 green:59/255.0 blue:48/255.0 alpha:1]
 #define kGrayColor [UIColor colorWithRed:220/255.0 green:221/255.0 blue:221/255.0 alpha:1]
 
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
 static NSString *const kParkingRatingString = @"Оцените полезность сигнала тревоги.";

@@ -34,7 +34,7 @@ static NSString *const kPopAnimation = @"PopAnimation";
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kTimeInterval = 0.2;
-static const NSInteger kSharButtonSize = 44;
+static const NSInteger kShareButtonSize = 44;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
 
@@ -46,8 +46,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     BOOL isDisclaimerSkipped;
     NSTimer *alarmTimer;
     POPSpringAnimation *scaleAnimation;
-    UIView *popupView;
-    UIVisualEffectView *visualEffectView;
+    UIVisualEffectView *permissionsVisualEffectView;
+    UIView *permissionsView;
     
     SystemSoundID alarmSoundID;
     
@@ -291,7 +291,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     
     // rotate share button
     [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.shareButtonWidthConstraint.constant = kSharButtonSize;
+        self.shareButtonWidthConstraint.constant = kShareButtonSize;
         [self.shareButton layoutIfNeeded];
     } completion:nil];
     
@@ -464,9 +464,9 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shoudShowView = ![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
     
-    if (shoudShowView) {
+    if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
             [YMMYandexMetrica reportEvent:@"Push notifications disabled" onFailure:nil];
         }
@@ -474,22 +474,28 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
             [YMMYandexMetrica reportEvent:@"GPS disabled" onFailure:nil];
         }
         
-        if (![popupView superview]) {
-            UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-            visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-            visualEffectView.frame = self.view.frame;
-            [self.view addSubview:visualEffectView];
+        if (![permissionsView superview]) {
+            permissionsView = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
+            permissionsView.frame = self.view.frame;
             
-            popupView = [[NSBundle mainBundle] loadNibNamed:@"EAPermissionsView" owner:self options:nil][0];
-            popupView.frame = self.view.frame;
-            [self.view addSubview:popupView];
+            if (IS_OS_8_OR_LATER) {
+                permissionsView.backgroundColor = [UIColor clearColor];
+                
+                UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                permissionsVisualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+                permissionsVisualEffectView.frame = self.view.frame;
+                [self.view addSubview:permissionsVisualEffectView];
+            }
+            [self.view addSubview:permissionsView];
         }
     }
     else {
-        [popupView removeFromSuperview];
-        [visualEffectView removeFromSuperview];
+        [permissionsView removeFromSuperview];
+        if (IS_OS_8_OR_LATER) {
+            [permissionsVisualEffectView removeFromSuperview];
+        }
     }
-    self.view.userInteractionEnabled = !shoudShowView;
+    self.view.userInteractionEnabled = !shouldShowView;
 }
 
 - (void)receiveAlarm:(NSNotification*)notification
