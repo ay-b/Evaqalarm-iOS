@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
-		BD2825D11A3EF95800123F25 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */; };
 		BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */; };
 		BD2825DA1A40182200123F25 /* button_thumbs_up@3x in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D81A40182200123F25 /* button_thumbs_up@3x */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
@@ -37,6 +36,8 @@
 		BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD919EA119FB7541009B7E55 /* LaunchScreen.xib */; };
 		BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD919EB819FB7573009B7E55 /* CoreLocation.framework */; };
 		BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919EBB19FB7587009B7E55 /* EAMainViewController.m */; };
+		BD958A061A67EBF100AF2445 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD958A081A67EBF100AF2445 /* Localizable.strings */; };
+		BD958A1E1A681A6B00AF2445 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */; };
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
 		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
@@ -61,7 +62,6 @@
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAPermissionsView.xib; sourceTree = "<group>"; };
 		BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_down@3x.png"; sourceTree = "<group>"; };
 		BD2825D81A40182200123F25 /* button_thumbs_up@3x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "button_thumbs_up@3x"; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
@@ -97,6 +97,11 @@
 		BD919EB819FB7573009B7E55 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD919EBA19FB7587009B7E55 /* EAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMainViewController.h; sourceTree = "<group>"; };
 		BD919EBB19FB7587009B7E55 /* EAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMainViewController.m; sourceTree = "<group>"; };
+		BD958A041A67EBEB00AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		BD958A051A67EBEB00AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BD958A071A67EBF100AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD958A091A67EBF700AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAPermissionsView.xib; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
@@ -231,7 +236,7 @@
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
-				BD2825D01A3EF95800123F25 /* EAPermissionsView.xib */,
+				BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */,
 				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
 				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
 				BD919E9219FB7540009B7E55 /* Supporting Files */,
@@ -245,6 +250,7 @@
 				BD919E9F19FB7541009B7E55 /* Images.xcassets */,
 				BD919E9319FB7540009B7E55 /* Info.plist */,
 				BD919E9419FB7540009B7E55 /* main.m */,
+				BD958A081A67EBF100AF2445 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = BD919E8619FB7540009B7E55;
 			productRefGroup = BD919E9019FB7540009B7E55 /* Products */;
@@ -383,10 +390,11 @@
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
 				BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */,
+				BD958A1E1A681A6B00AF2445 /* EAPermissionsView.xib in Resources */,
 				BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
+				BD958A061A67EBF100AF2445 /* Localizable.strings in Resources */,
 				BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */,
-				BD2825D11A3EF95800123F25 /* EAPermissionsView.xib in Resources */,
 				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
 				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,
 				BD31D0521A401AE7009A14FD /* OpenSans-Regular.ttf in Resources */,
@@ -490,6 +498,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BD919E9D19FB7541009B7E55 /* Base */,
+				BD958A041A67EBEB00AF2445 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -498,8 +507,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				BD919EA219FB7541009B7E55 /* Base */,
+				BD958A051A67EBEB00AF2445 /* ru */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		BD958A081A67EBF100AF2445 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD958A071A67EBF100AF2445 /* Base */,
+				BD958A091A67EBF700AF2445 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

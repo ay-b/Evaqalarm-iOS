@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  EvaqAlarm
+
+  Created by Sergey Butenko on 1/15/15.
+  Copyright (c) 2015 Speaking Mind. All rights reserved.
+*/
+
+"Parked mode on" = "Parked mode on";
+
+/* - Alert - */
+
+/* Alert */
+"Thank you" = "Спасибо";
+"Alert will send" = "Your alert is spreading out now.";
+
+/* - Share View - */
+
+"Invite to share" = "Evaqalarm works well when it’s popular – spread the word!";
+"Invite to rate" = "EvaqAlarm is a very usefull app and it worth giving it five stars, isn’t it?";
+
+/* - Bottom -  */
+
+"Rate alarm" = "Please, rate the alarm";
+"Instruction: tap to on" = "Tap the button to toggle status, hold it to send alarm signal";
+"Instruction: tap to off" = "Tap the button to toggle status, hold it to send alarm signal";
+"Shared text" = "People should help each other in avoiding tow-trucks. Get the app, use it, spread it!";

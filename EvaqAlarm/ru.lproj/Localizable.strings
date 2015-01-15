@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  EvaqAlarm
+
+  Created by Sergey Butenko on 1/15/15.
+  Copyright (c) 2015 Speaking Mind. All rights reserved.
+*/
+
+
+/* - Top bar notifications - */
+
+"Parked mode on" = "Парковка успешно активирована";
+"Can’t activate parked mode" = "Не удалось активировать парковку";
+"Parking mode off" = "Парковка успешно деактивирована";
+"Can’t deactivate parked mode" = "Не удалось деактивировать парковку";
+"Alarm signal sent" = "Тревога отправлена";
+"Can’t send alarm signal" = "Не удалось отправить тревогу";
+"Thank you" = "Ваша оценка отправлена";
+"Error sending rating" = "Не удалось отправить оценку";
+"Can’t send your post, please, try later" = "Не удалось опубликовать пост. Попробуйте позже";
+"Post was successfully submitted. Thank you" = "Пост успешно опубликован";
+
+/* - Alert - */
+
+/* Alert */
+"Thank you" = "Спасибо";
+"Alert will send" = "Ваше предупреждение будет отправлено.";
+
+/* - Share View - */
+
+"Invite to share" = "EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!";
+"Invite to rate" = "EvaqAlarm – отличное приложение, так ведь? Стоит поставить ему хорошую оценку, чтобы другие сразу видели это!";
+
+/* - Bottom -  */
+
+"Rate alarm" = "Оцените полезность сигнала тревоги.";
+"Instruction: tap to on" = "Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+"Instruction: tap to off" = "Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
+"Shared text" = "Друзья, поможем друг другу в борьбе с произволом эвакуаторов! Ставим программу, пользуемся, распространяем дальше.";

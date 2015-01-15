@@ -10,9 +10,6 @@
 #import "EAConstants.h"
 #import "EAMainViewController.h"
 
-static NSString *const kShareText = @"EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!";
-static NSString *const kRatingText = @"EqvaqAlarm – отличное приложение, так ведь? Стоит поставить ему хорошую оценку, чтобы другие сразу видели это!";
-
 @interface EAShareViewController ()
 
 - (IBAction)cancelButtonPressed;
@@ -25,9 +22,9 @@ static NSString *const kRatingText = @"EqvaqAlarm – отличное прил�
 @implementation EAShareViewController
 
 - (void)viewDidLoad
-{ 
+{
     [super viewDidLoad];
-    self.textLabel.text = _sharing ? kShareText : kRatingText;
+    self.textLabel.text = _sharing ? NSLocalizedString(@"Invite to share", nil) : NSLocalizedString(@"Invite to rate", nil);
 }
 
 - (IBAction)cancelButtonPressed
