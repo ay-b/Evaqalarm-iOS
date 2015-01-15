@@ -11,7 +11,6 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -108,9 +107,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXK-d5-SMl" userLabel="Disclaimer">
-                                <rect key="frame" x="20" y="250" width="560" height="82"/>
-                                <string key="text">Данное приложение сделано не для того, чтобы спасти вас от уплаты законно выписанных штрафов, а для того чтобы сберечь время и нервы на получении автомобиля со штраф-стоянки. 
-Помните, что паркуясь в неположенном месте, вы не только рискуете собственными деньгами и временем, но и доставляете множество неудобств другим участникам дорожного движения, создавая помеху на дороге своим транспортным средством.</string>
+                                <rect key="frame" x="20" y="250" width="560" height="50"/>
+                                <string key="text">This app wasn’t made to make you able to avoid any penalties, it was made to save your time and money catching the tow-truck before it ran out with your car.
+Remember, that parking at a wrong place may pose other drivers and pedestrians in danger.</string>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -188,7 +187,6 @@
                         <outlet property="titleLabel" destination="cDi-Wa-xN1" id="H5z-E9-hCv"/>
                         <outlet property="titleOffsetConstraint" destination="9QK-Of-bpj" id="EMc-Cg-1Dn"/>
                         <segue destination="AyA-TV-sW8" kind="presentation" identifier="toSharing" id="Rml-20-nqc"/>
-                        <segue destination="T31-il-n7o" kind="presentation" identifier="toAccessDenied" animates="NO" id="oCL-aH-67i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>
@@ -217,37 +215,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="252" y="172"/>
-        </scene>
-        <!--Access Denied View Controller-->
-        <scene sceneID="Paf-vl-4P9">
-            <objects>
-                <viewController storyboardIdentifier="AccessDeniedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T31-il-n7o" customClass="EAAccessDeniedViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nf2-aH-mPR"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qoy-F1-oBb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Yte-yB-saw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для работы приложения необходимо:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDv-Y1-9yC">
-                                <rect key="frame" x="20" y="20" width="560" height="25"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="bDv-Y1-9yC" firstAttribute="leading" secondItem="Yte-yB-saw" secondAttribute="leading" constant="20" symbolic="YES" id="9RB-dg-FS4"/>
-                            <constraint firstAttribute="trailing" secondItem="bDv-Y1-9yC" secondAttribute="trailing" constant="20" symbolic="YES" id="IUZ-aZ-OKU"/>
-                            <constraint firstItem="bDv-Y1-9yC" firstAttribute="top" secondItem="Yte-yB-saw" secondAttribute="top" constant="20" symbolic="YES" id="bWZ-PT-Eaz"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DUV-Bt-42w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="252" y="927"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="zmS-XN-68f">
@@ -280,7 +247,7 @@
                                     <constraint firstAttribute="width" constant="100" id="XqP-8N-k7Q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
-                                <state key="normal" title="Да!" backgroundImage="button.png">
+                                <state key="normal" title="Yes!" backgroundImage="button.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -315,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yjK-ph-OnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="927"/>
+            <point key="canvasLocation" x="964" y="172"/>
         </scene>
     </scenes>
     <resources>

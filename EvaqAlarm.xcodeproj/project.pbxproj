@@ -37,7 +37,7 @@
 		BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD919EB819FB7573009B7E55 /* CoreLocation.framework */; };
 		BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919EBB19FB7587009B7E55 /* EAMainViewController.m */; };
 		BD958A061A67EBF100AF2445 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD958A081A67EBF100AF2445 /* Localizable.strings */; };
-		BD958A1E1A681A6B00AF2445 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */; };
+		BD958A1F1A682CD600AF2445 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD958A211A682CD600AF2445 /* EAPermissionsView.xib */; };
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
 		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
@@ -101,7 +101,8 @@
 		BD958A051A67EBEB00AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BD958A071A67EBF100AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD958A091A67EBF700AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EAPermissionsView.xib; sourceTree = "<group>"; };
+		BD958A201A682CD600AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
+		BD958A231A682CDA00AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/EAPermissionsView.strings; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
@@ -236,7 +237,7 @@
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
-				BD958A1D1A681A6B00AF2445 /* EAPermissionsView.xib */,
+				BD958A211A682CD600AF2445 /* EAPermissionsView.xib */,
 				BDC23B121A1B954200849CBA /* EAShareViewController.h */,
 				BDC23B131A1B954200849CBA /* EAShareViewController.m */,
 				BD919E9219FB7540009B7E55 /* Supporting Files */,
@@ -390,7 +391,7 @@
 			files = (
 				BD9AC97D19FB96280088150F /* alarm.wav in Resources */,
 				BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */,
-				BD958A1E1A681A6B00AF2445 /* EAPermissionsView.xib in Resources */,
+				BD958A1F1A682CD600AF2445 /* EAPermissionsView.xib in Resources */,
 				BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
 				BD958A061A67EBF100AF2445 /* Localizable.strings in Resources */,
@@ -519,6 +520,15 @@
 				BD958A091A67EBF700AF2445 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BD958A211A682CD600AF2445 /* EAPermissionsView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD958A201A682CD600AF2445 /* Base */,
+				BD958A231A682CDA00AF2445 /* ru */,
+			);
+			name = EAPermissionsView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

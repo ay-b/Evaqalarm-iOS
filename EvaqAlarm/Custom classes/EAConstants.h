@@ -14,10 +14,6 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-static NSString *const kParkingEnabledString = @"Нажмите кнопку для деактивации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
-static NSString *const kParkingDisabledString = @"Нажмите кнопку для активации парковки.\n•\nУдерживайте кнопку для активации тревоги.";
-static NSString *const kParkingRatingString = @"Оцените полезность сигнала тревоги.";
-
 extern NSString *const EAReceiveAlarmNotification;
 extern NSString *const EACheckPermissionsNotification;
 
@@ -31,7 +27,6 @@ extern NSString *const EAParkedNow;
 extern NSString *const EAVKAppKey;
 extern NSString *const EAFBAppId;
 
-extern NSString *const EAShareMessage;
 extern NSString *const EAShareLink;
 /* System */
 
@@ -49,3 +44,5 @@ extern NSString *const EAURLPraise;
 #else
 #define EALog(x, ...)
 #endif
+
+#define LOC(key) NSLocalizedString((key), @"")

@@ -10,15 +10,15 @@
 /* - Top bar notifications - */
 
 "Parked mode on" = "Парковка успешно активирована";
-"Can’t activate parked mode" = "Не удалось активировать парковку";
+"Can't activate parked mode" = "Не удалось активировать парковку";
 "Parking mode off" = "Парковка успешно деактивирована";
-"Can’t deactivate parked mode" = "Не удалось деактивировать парковку";
+"Can't deactivate parked mode" = "Не удалось деактивировать парковку";
 "Alarm signal sent" = "Тревога отправлена";
-"Can’t send alarm signal" = "Не удалось отправить тревогу";
-"Thank you" = "Ваша оценка отправлена";
+"Can't send alarm signal" = "Не удалось отправить тревогу";
+"Rate sent" = "Ваша оценка отправлена";
 "Error sending rating" = "Не удалось отправить оценку";
-"Can’t send your post, please, try later" = "Не удалось опубликовать пост. Попробуйте позже";
-"Post was successfully submitted. Thank you" = "Пост успешно опубликован";
+"Can't send post" = "Не удалось опубликовать пост. Попробуйте позже";
+"Post submitted" = "Пост успешно опубликован";
 
 /* - Alert - */
 

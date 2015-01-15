@@ -1,0 +1,3 @@
+
+/* Class = "IBUILabel"; text = "You must allow push notification and access to geolocation, otherwise the app can’t work."; ObjectID = "Osb-z3-K3D"; */
+"Osb-z3-K3D.text" = "Для работы приложения необходимо включить:\n\n1. Пуш-уведомления.\n2. Доступ к геолокации.";

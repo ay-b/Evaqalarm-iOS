@@ -8,8 +8,7 @@
 
 #import "EAConstants.h"
 
-NSString *const EAShareMessage = @"Друзья, поможем друг другу в борьбе с произволом эвакуаторов! Ставим программу, пользуемся, распространяем дальше.";
-NSString *const EAShareLink = @"http://evaqalarm.speind.me";
+NSString *const EAShareLink = @"http://evaqalarm.ru";
 
 /* System */
 NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";

@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.textLabel.text = _sharing ? NSLocalizedString(@"Invite to share", nil) : NSLocalizedString(@"Invite to rate", nil);
+    self.textLabel.text = LOC(_sharing ? @"Invite to share" : @"Invite to rate");
 }
 
 - (IBAction)cancelButtonPressed

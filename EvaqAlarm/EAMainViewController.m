@@ -123,6 +123,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
     isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
+    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
     
     [self p_initialAnimationShow];
 }
@@ -152,14 +153,15 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.preferences incerementParkingCount];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:EAParkedNow];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [TSMessage showNotificationWithTitle:@"Парковка успешно активирована." type:TSMessageNotificationTypeSuccess];
+        
+        [TSMessage showNotificationWithTitle:LOC(@"Parked mode on") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.alarmButton.enabled = YES;
         [self invertParkingState];
         [YMMYandexMetrica reportEvent:@"Server error on send parking" onFailure:nil];
         
         EALog(@"Set parked error: %@", error);
-        [TSMessage showNotificationWithTitle:@"Не удалось активировать парковку." type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:LOC(@"Can't activate parked mode") type:TSMessageNotificationTypeError];
     }];
 }
 
@@ -176,14 +178,14 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:EAParkedNow];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [TSMessage showNotificationWithTitle:@"Парковка успешно деактивирована." type:TSMessageNotificationTypeSuccess];
+        [TSMessage showNotificationWithTitle:LOC(@"Parking mode off") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.alarmButton.enabled = YES;
         [self invertParkingState];
         
         EALog(@"Clear parking error: %@", error);
         [YMMYandexMetrica reportEvent:@"Server error on parking cancell" onFailure:nil];
-        [TSMessage showNotificationWithTitle:@"Не удалось деактивировать парковку." type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:LOC(@"Can't deactivate parked mode") type:TSMessageNotificationTypeError];
     }];
 }
 
@@ -195,7 +197,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_sendAlarm
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Спасибо" message:@"Ваше предупреждение будет отправлено." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:LOC(@"Thank you") message:LOC(@"Alert will send") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
     NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid],
@@ -208,11 +210,11 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [manager POST:EAURLSetAlarm parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         EALog(@"Set alarm done");
         [YMMYandexMetrica reportEvent:@"Alarm success" onFailure:nil];
-        [TSMessage showNotificationWithTitle:@"Тревога отправлена." type:TSMessageNotificationTypeSuccess];
+        [TSMessage showNotificationWithTitle:LOC(@"Alarm signal sent") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         EALog(@"Set alarm error: %@", error);
         [YMMYandexMetrica reportEvent:@"Server error on send alarm" onFailure:nil];
-        [TSMessage showNotificationWithTitle:@"Не удалось отправить тревогу." type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:LOC(@"Can't send alarm signal") type:TSMessageNotificationTypeError];
     }];
 }
 
@@ -224,10 +226,10 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     [manager POST:praise ? EAURLPraise : EAURLPetition parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         EALog(@"%@ done", praise ? @"Praise" : @"Petition");
         
-        [TSMessage showNotificationWithTitle:@"Ваша оценка отправлена." type:TSMessageNotificationTypeSuccess];
+        [TSMessage showNotificationWithTitle:LOC(@"Rate sent") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         EALog(@"%@ error: %@", praise ? @"Praise" : @"Petition", error);
-        [TSMessage showNotificationWithTitle:@"Не удалось отправить оценку." type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:LOC(@"Error sending rating") type:TSMessageNotificationTypeError];
     }];
 }
 
@@ -345,7 +347,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)p_startPopAnimation
 {
     self.alarmButton.enabled = NO;
-    self.hintLabel.text = kParkingRatingString;
+    self.hintLabel.text = LOC(@"Rate alarm");
     self.logoImageView.image = [UIImage imageNamed:@"button_alarm"];
     self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = NO;
 
@@ -363,7 +365,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     scaleAnimation.repeatForever = NO;
 
     self.alarmButton.enabled = YES;
-    self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
+    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
     self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = YES;
     
@@ -376,7 +378,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 {
     [YMMYandexMetrica reportEvent:@"Share button clicked" onFailure:nil];
     
-    NSArray *items = @[EAShareMessage, [NSURL URLWithString:EAShareLink]];
+    NSArray *items = @[LOC(@"Shared text"), [NSURL URLWithString:EAShareLink]];
     NSArray *activities = @[[[VKActivity alloc] init]];
     
     UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:activities];
@@ -395,19 +397,16 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         return;
     }
     
-#warning rm the property?
-    BOOL willParking = !isParking;
-    if (willParking) {
+    isParking = !isParking;
+    if (isParking) {
         [self p_setParked];
     }
     else {
         [self p_clearParking];
     }
     
-    isParking = willParking;
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
-    
-    self.hintLabel.text = isParking ? kParkingEnabledString : kParkingDisabledString;
+    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
 }
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
@@ -465,6 +464,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
     
     BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
+//    BOOL shouldShowView = NO;
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
@@ -592,10 +592,10 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 - (void)p_showAlertWithError:(NSError*)error
 {
     if (error) {
-        [TSMessage showNotificationWithTitle:@"Не удалось опубликовать пост. Попробуйте позже." type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationWithTitle:LOC(@"Can't send post") type:TSMessageNotificationTypeError];
     }
     else {
-        [TSMessage showNotificationWithTitle:@"Пост успешно опубликован." type:TSMessageNotificationTypeSuccess];
+        [TSMessage showNotificationWithTitle:LOC(@"Post submitted") type:TSMessageNotificationTypeSuccess];
     }
 }
 
@@ -617,7 +617,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
                              @"picture": @"",
                              @"name" : @"",
                              @"caption" : @"",
-                             @"message" : EAShareMessage
+                             @"message" : LOC(@"Shared text")
                              };
     
     [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -639,7 +639,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 
 - (void)p_publishToVK
 {
-    NSDictionary *parameters = @{@"message" : EAShareMessage, @"attachments:" : EAShareLink};
+    NSDictionary *parameters = @{@"message" : LOC(@"Shared text"), @"attachments:" : EAShareLink};
     VKRequest *request = [[VKApi wall] post:parameters];
     [request executeWithResultBlock:^(VKResponse *response) {
         EALog(@"Share to vk done");
