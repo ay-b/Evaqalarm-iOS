@@ -464,7 +464,6 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     }
     
     BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
-//    BOOL shouldShowView = NO;
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {

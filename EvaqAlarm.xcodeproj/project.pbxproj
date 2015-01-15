@@ -102,7 +102,6 @@
 		BD958A071A67EBF100AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD958A091A67EBF700AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD958A201A682CD600AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
-		BD958A231A682CDA00AF2445 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/EAPermissionsView.strings; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 		BDC7CF341A1C9499004ECBCE /* EAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPreferences.h; sourceTree = "<group>"; };
 		BDC7CF351A1C9499004ECBCE /* EAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPreferences.m; sourceTree = "<group>"; };
 		BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BDF180FF1A683C8A00EC7F21 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
 		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
 		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -526,7 +526,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BD958A201A682CD600AF2445 /* Base */,
-				BD958A231A682CDA00AF2445 /* ru */,
+				BDF180FF1A683C8A00EC7F21 /* ru */,
 			);
 			name = EAPermissionsView.xib;
 			sourceTree = "<group>";
@@ -621,6 +621,7 @@
 			baseConfigurationReference = 60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
@@ -636,6 +637,7 @@
 			baseConfigurationReference = 1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
