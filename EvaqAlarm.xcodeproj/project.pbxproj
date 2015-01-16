@@ -22,13 +22,15 @@
 		BD31D04C1A401ABD009A14FD /* button_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D04A1A401ABD009A14FD /* button_share@2x.png */; };
 		BD31D04D1A401ABD009A14FD /* button_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D04B1A401ABD009A14FD /* button_share@3x.png */; };
 		BD31D0511A401AE7009A14FD /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD31D04F1A401AE7009A14FD /* OpenSans-Light.ttf */; };
-		BD31D0521A401AE7009A14FD /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD31D0501A401AE7009A14FD /* OpenSans-Regular.ttf */; };
 		BD4C8F891A1F8057008044CB /* button_alarm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F831A1F8057008044CB /* button_alarm@2x.png */; };
 		BD4C8F8A1A1F8057008044CB /* button_alarm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F841A1F8057008044CB /* button_alarm@3x.png */; };
 		BD4C8F8D1A1F8057008044CB /* button_parked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F871A1F8057008044CB /* button_parked@2x.png */; };
 		BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F881A1F8057008044CB /* button_parked@3x.png */; };
 		BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F8F1A1F8106008044CB /* button_default@2x.png */; };
 		BD4C8F921A1F8106008044CB /* button_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F901A1F8106008044CB /* button_default@3x.png */; };
+		BD885B2B1A69283400C28961 /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B261A69283400C28961 /* EAConfirmButton.m */; };
+		BD885B2C1A69283400C28961 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B281A69283400C28961 /* EAConstants.m */; };
+		BD885B2D1A69283400C28961 /* EAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B2A1A69283400C28961 /* EAPreferences.m */; };
 		BD919E9519FB7540009B7E55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9419FB7540009B7E55 /* main.m */; };
 		BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD919E9719FB7540009B7E55 /* AppDelegate.m */; };
 		BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9C19FB7541009B7E55 /* Main.storyboard */; };
@@ -40,12 +42,9 @@
 		BD958A1F1A682CD600AF2445 /* EAPermissionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD958A211A682CD600AF2445 /* EAPermissionsView.xib */; };
 		BD9AC97D19FB96280088150F /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = BD9AC97C19FB96280088150F /* alarm.wav */; };
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
-		BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */; };
 		BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC23B101A1B944700849CBA /* button_cancel@2x.png */; };
 		BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B131A1B954200849CBA /* EAShareViewController.m */; };
-		BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC7CF351A1C9499004ECBCE /* EAPreferences.m */; };
 		BDDE788F1A40937D00E81BCC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */; };
-		BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF9D84E19FB813B00D5D359 /* EAConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,13 +76,18 @@
 		BD31D04A1A401ABD009A14FD /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
 		BD31D04B1A401ABD009A14FD /* button_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@3x.png"; sourceTree = "<group>"; };
 		BD31D04F1A401AE7009A14FD /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		BD31D0501A401AE7009A14FD /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		BD4C8F831A1F8057008044CB /* button_alarm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm@2x.png"; sourceTree = "<group>"; };
 		BD4C8F841A1F8057008044CB /* button_alarm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm@3x.png"; sourceTree = "<group>"; };
 		BD4C8F871A1F8057008044CB /* button_parked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_parked@2x.png"; sourceTree = "<group>"; };
 		BD4C8F881A1F8057008044CB /* button_parked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_parked@3x.png"; sourceTree = "<group>"; };
 		BD4C8F8F1A1F8106008044CB /* button_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_default@2x.png"; sourceTree = "<group>"; };
 		BD4C8F901A1F8106008044CB /* button_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_default@3x.png"; sourceTree = "<group>"; };
+		BD885B251A69283400C28961 /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
+		BD885B261A69283400C28961 /* EAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConfirmButton.m; sourceTree = "<group>"; };
+		BD885B271A69283400C28961 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
+		BD885B281A69283400C28961 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
+		BD885B291A69283400C28961 /* EAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPreferences.h; sourceTree = "<group>"; };
+		BD885B2A1A69283400C28961 /* EAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPreferences.m; sourceTree = "<group>"; };
 		BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvaqAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD919E9319FB7540009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919E9419FB7540009B7E55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,17 +108,11 @@
 		BD958A201A682CD600AF2445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
 		BD9AC97C19FB96280088150F /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		BDC23B091A1B826F00849CBA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConfirmButton.h; sourceTree = "<group>"; };
-		BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConfirmButton.m; sourceTree = "<group>"; };
 		BDC23B101A1B944700849CBA /* button_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cancel@2x.png"; sourceTree = "<group>"; };
 		BDC23B121A1B954200849CBA /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
 		BDC23B131A1B954200849CBA /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
-		BDC7CF341A1C9499004ECBCE /* EAPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPreferences.h; sourceTree = "<group>"; };
-		BDC7CF351A1C9499004ECBCE /* EAPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPreferences.m; sourceTree = "<group>"; };
 		BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BDF180FF1A683C8A00EC7F21 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
-		BDF9D84D19FB813B00D5D359 /* EAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAConstants.h; sourceTree = "<group>"; };
-		BDF9D84E19FB813B00D5D359 /* EAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,20 +144,6 @@
 				1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		BD1029E619FB7AA8005A18B9 /* Custom classes */ = {
-			isa = PBXGroup;
-			children = (
-				BDF9D84D19FB813B00D5D359 /* EAConstants.h */,
-				BDF9D84E19FB813B00D5D359 /* EAConstants.m */,
-				BDC7CF341A1C9499004ECBCE /* EAPreferences.h */,
-				BDC7CF351A1C9499004ECBCE /* EAPreferences.m */,
-				BDC23B0D1A1B8FD600849CBA /* EAConfirmButton.h */,
-				BDC23B0E1A1B8FD600849CBA /* EAConfirmButton.m */,
-			);
-			name = "Custom classes";
-			path = "EvaqAlarm/Custom classes";
 			sourceTree = "<group>";
 		};
 		BD2E4C4B19FD663500E00FD9 /* Images */ = {
@@ -201,16 +185,29 @@
 			isa = PBXGroup;
 			children = (
 				BD31D04F1A401AE7009A14FD /* OpenSans-Light.ttf */,
-				BD31D0501A401AE7009A14FD /* OpenSans-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BD885B241A69283400C28961 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD885B251A69283400C28961 /* EAConfirmButton.h */,
+				BD885B261A69283400C28961 /* EAConfirmButton.m */,
+				BD885B271A69283400C28961 /* EAConstants.h */,
+				BD885B281A69283400C28961 /* EAConstants.m */,
+				BD885B291A69283400C28961 /* EAPreferences.h */,
+				BD885B2A1A69283400C28961 /* EAPreferences.m */,
+			);
+			name = Models;
+			path = EvaqAlarm/Models;
 			sourceTree = "<group>";
 		};
 		BD919E8619FB7540009B7E55 = {
 			isa = PBXGroup;
 			children = (
+				BD885B241A69283400C28961 /* Models */,
 				BD9AC97B19FB96280088150F /* Resources */,
-				BD1029E619FB7AA8005A18B9 /* Custom classes */,
 				BD919E9119FB7540009B7E55 /* EvaqAlarm */,
 				BD919EAB19FB7541009B7E55 /* EvaqAlarmTests */,
 				BD919EBD19FB758A009B7E55 /* Frameworks */,
@@ -398,7 +395,6 @@
 				BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */,
 				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
 				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,
-				BD31D0521A401AE7009A14FD /* OpenSans-Regular.ttf in Resources */,
 				BD4C8F891A1F8057008044CB /* button_alarm@2x.png in Resources */,
 				BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */,
 				BD4C8F8D1A1F8057008044CB /* button_parked@2x.png in Resources */,
@@ -466,14 +462,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD885B2B1A69283400C28961 /* EAConfirmButton.m in Sources */,
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
-				BDF9D84F19FB813B00D5D359 /* EAConstants.m in Sources */,
+				BD885B2D1A69283400C28961 /* EAPreferences.m in Sources */,
 				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
-				BDC7CF361A1C9499004ECBCE /* EAPreferences.m in Sources */,
-				BDC23B0F1A1B8FD600849CBA /* EAConfirmButton.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
+				BD885B2C1A69283400C28961 /* EAConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,7 +624,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "93c1e7c5-34af-4c2a-ace0-e6820786a8ae";
+				PROVISIONING_PROFILE = "c68136b4-a4ad-4244-be76-88bdfb01d309";
 			};
 			name = Debug;
 		};
@@ -644,7 +640,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "93c1e7c5-34af-4c2a-ace0-e6820786a8ae";
+				PROVISIONING_PROFILE = "c68136b4-a4ad-4244-be76-88bdfb01d309";
 			};
 			name = Release;
 		};

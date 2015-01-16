@@ -9,9 +9,9 @@
 #import "EAConstants.h"
 
 NSString *const EAShareLink = @"http://evaqalarm.ru";
+NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";
 
 /* System */
-NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";
 NSString *const EAYandexMetricApiKey = @"30258";
 
 NSString *const EAPushToken = @"PushToken";
