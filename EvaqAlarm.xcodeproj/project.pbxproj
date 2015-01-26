@@ -9,14 +9,11 @@
 /* Begin PBXBuildFile section */
 		36585C526DCF561B07C857A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2261114A08CB4D1B418ECCCC /* libPods.a */; };
 		BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */; };
-		BD2825DA1A40182200123F25 /* button_thumbs_up@3x in Resources */ = {isa = PBXBuildFile; fileRef = BD2825D81A40182200123F25 /* button_thumbs_up@3x */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
 		BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2E4C5A19FD901800E00FD9 /* Reachability.m */; };
 		BD2F7F8F1A13A8F1009A3053 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F8D1A13A8F1009A3053 /* button@2x.png */; };
 		BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F8E1A13A8F1009A3053 /* button@3x.png */; };
-		BD2F7F931A13A9A4009A3053 /* cell_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */; };
-		BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */; };
 		BD31D0481A4018B6009A14FD /* button_thumbs_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D0461A4018B6009A14FD /* button_thumbs_down@2x.png */; };
 		BD31D0491A4018B6009A14FD /* button_thumbs_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D0471A4018B6009A14FD /* button_thumbs_up@2x.png */; };
 		BD31D04C1A401ABD009A14FD /* button_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD31D04A1A401ABD009A14FD /* button_share@2x.png */; };
@@ -28,6 +25,7 @@
 		BD4C8F8E1A1F8057008044CB /* button_parked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F881A1F8057008044CB /* button_parked@3x.png */; };
 		BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F8F1A1F8106008044CB /* button_default@2x.png */; };
 		BD4C8F921A1F8106008044CB /* button_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD4C8F901A1F8106008044CB /* button_default@3x.png */; };
+		BD6050061A6AB8680099BB12 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD919E9319FB7540009B7E55 /* Info.plist */; };
 		BD885B2B1A69283400C28961 /* EAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B261A69283400C28961 /* EAConfirmButton.m */; };
 		BD885B2C1A69283400C28961 /* EAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B281A69283400C28961 /* EAConstants.m */; };
 		BD885B2D1A69283400C28961 /* EAPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BD885B2A1A69283400C28961 /* EAPreferences.m */; };
@@ -44,33 +42,21 @@
 		BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDC23B091A1B826F00849CBA /* Security.framework */; };
 		BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC23B101A1B944700849CBA /* button_cancel@2x.png */; };
 		BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC23B131A1B954200849CBA /* EAShareViewController.m */; };
+		BDD1C0891A76772E003692DF /* button_thumbs_up@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDD1C0881A76772E003692DF /* button_thumbs_up@3x.png */; };
 		BDDE788F1A40937D00E81BCC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BD919EA919FB7541009B7E55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BD919E8719FB7540009B7E55 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BD919E8E19FB7540009B7E55;
-			remoteInfo = EvaqAlarm;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BD66FFD7B92344F721073B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_down@3x.png"; sourceTree = "<group>"; };
-		BD2825D81A40182200123F25 /* button_thumbs_up@3x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "button_thumbs_up@3x"; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		BD2E4C5919FD901800E00FD9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BD2E4C5A19FD901800E00FD9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BD2F7F8D1A13A8F1009A3053 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
 		BD2F7F8E1A13A8F1009A3053 /* button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@3x.png"; sourceTree = "<group>"; };
-		BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_checked@2x.png"; sourceTree = "<group>"; };
-		BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_unchecked@2x.png"; sourceTree = "<group>"; };
 		BD31D0461A4018B6009A14FD /* button_thumbs_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_down@2x.png"; sourceTree = "<group>"; };
 		BD31D0471A4018B6009A14FD /* button_thumbs_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_up@2x.png"; sourceTree = "<group>"; };
 		BD31D04A1A401ABD009A14FD /* button_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share@2x.png"; sourceTree = "<group>"; };
@@ -96,8 +82,6 @@
 		BD919E9D19FB7541009B7E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD919E9F19FB7541009B7E55 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD919EA219FB7541009B7E55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		BD919EA819FB7541009B7E55 /* EvaqAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EvaqAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD919EAD19FB7541009B7E55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD919EB819FB7573009B7E55 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BD919EBA19FB7587009B7E55 /* EAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMainViewController.h; sourceTree = "<group>"; };
 		BD919EBB19FB7587009B7E55 /* EAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMainViewController.m; sourceTree = "<group>"; };
@@ -111,6 +95,7 @@
 		BDC23B101A1B944700849CBA /* button_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_cancel@2x.png"; sourceTree = "<group>"; };
 		BDC23B121A1B954200849CBA /* EAShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAShareViewController.h; sourceTree = "<group>"; };
 		BDC23B131A1B954200849CBA /* EAShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAShareViewController.m; sourceTree = "<group>"; };
+		BDD1C0881A76772E003692DF /* button_thumbs_up@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_thumbs_up@3x.png"; sourceTree = "<group>"; };
 		BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BDF180FF1A683C8A00EC7F21 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/EAPermissionsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,13 +109,6 @@
 				BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */,
 				BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */,
 				36585C526DCF561B07C857A7 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BD919EA519FB7541009B7E55 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,11 +137,9 @@
 				BD31D0461A4018B6009A14FD /* button_thumbs_down@2x.png */,
 				BD2825D71A40182200123F25 /* button_thumbs_down@3x.png */,
 				BD31D0471A4018B6009A14FD /* button_thumbs_up@2x.png */,
-				BD2825D81A40182200123F25 /* button_thumbs_up@3x */,
+				BDD1C0881A76772E003692DF /* button_thumbs_up@3x.png */,
 				BD2F7F8D1A13A8F1009A3053 /* button@2x.png */,
 				BD2F7F8E1A13A8F1009A3053 /* button@3x.png */,
-				BD2F7F911A13A9A4009A3053 /* cell_checked@2x.png */,
-				BD2F7F921A13A9A4009A3053 /* cell_unchecked@2x.png */,
 				BD2E4C4D19FD663500E00FD9 /* logo@2x.png */,
 				BD2E4C4E19FD663500E00FD9 /* logo@3x.png */,
 				BD31D04A1A401ABD009A14FD /* button_share@2x.png */,
@@ -209,7 +185,6 @@
 				BD885B241A69283400C28961 /* Models */,
 				BD9AC97B19FB96280088150F /* Resources */,
 				BD919E9119FB7540009B7E55 /* EvaqAlarm */,
-				BD919EAB19FB7541009B7E55 /* EvaqAlarmTests */,
 				BD919EBD19FB758A009B7E55 /* Frameworks */,
 				BD919E9019FB7540009B7E55 /* Products */,
 				B0A72EB4D6C23A0077A926B6 /* Pods */,
@@ -220,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */,
-				BD919EA819FB7541009B7E55 /* EvaqAlarmTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,22 +223,6 @@
 				BD919E9319FB7540009B7E55 /* Info.plist */,
 				BD919E9419FB7540009B7E55 /* main.m */,
 				BD958A081A67EBF100AF2445 /* Localizable.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BD919EAB19FB7541009B7E55 /* EvaqAlarmTests */ = {
-			isa = PBXGroup;
-			children = (
-				BD919EAC19FB7541009B7E55 /* Supporting Files */,
-			);
-			path = EvaqAlarmTests;
-			sourceTree = "<group>";
-		};
-		BD919EAC19FB7541009B7E55 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BD919EAD19FB7541009B7E55 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -314,24 +272,6 @@
 			productReference = BD919E8F19FB7540009B7E55 /* EvaqAlarm.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BD919EA719FB7541009B7E55 /* EvaqAlarmTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BD919EB519FB7541009B7E55 /* Build configuration list for PBXNativeTarget "EvaqAlarmTests" */;
-			buildPhases = (
-				BD919EA419FB7541009B7E55 /* Sources */,
-				BD919EA519FB7541009B7E55 /* Frameworks */,
-				BD919EA619FB7541009B7E55 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BD919EAA19FB7541009B7E55 /* PBXTargetDependency */,
-			);
-			name = EvaqAlarmTests;
-			productName = EvaqAlarmTests;
-			productReference = BD919EA819FB7541009B7E55 /* EvaqAlarmTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -354,11 +294,6 @@
 							};
 						};
 					};
-					BD919EA719FB7541009B7E55 = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 7KU9HT6JZ6;
-						TestTargetID = BD919E8E19FB7540009B7E55;
-					};
 				};
 			};
 			buildConfigurationList = BD919E8A19FB7540009B7E55 /* Build configuration list for PBXProject "EvaqAlarm" */;
@@ -376,7 +311,6 @@
 			projectRoot = "";
 			targets = (
 				BD919E8E19FB7540009B7E55 /* EvaqAlarm */,
-				BD919EA719FB7541009B7E55 /* EvaqAlarmTests */,
 			);
 		};
 /* End PBXProject section */
@@ -392,8 +326,8 @@
 				BD2825D91A40182200123F25 /* button_thumbs_down@3x.png in Resources */,
 				BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */,
 				BD958A061A67EBF100AF2445 /* Localizable.strings in Resources */,
+				BDD1C0891A76772E003692DF /* button_thumbs_up@3x.png in Resources */,
 				BDC23B111A1B944700849CBA /* button_cancel@2x.png in Resources */,
-				BD2F7F941A13A9A4009A3053 /* cell_unchecked@2x.png in Resources */,
 				BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */,
 				BD4C8F891A1F8057008044CB /* button_alarm@2x.png in Resources */,
 				BD4C8F911A1F8106008044CB /* button_default@2x.png in Resources */,
@@ -401,24 +335,16 @@
 				BD31D0491A4018B6009A14FD /* button_thumbs_up@2x.png in Resources */,
 				BD919E9E19FB7541009B7E55 /* Main.storyboard in Resources */,
 				BD31D0511A401AE7009A14FD /* OpenSans-Light.ttf in Resources */,
-				BD2F7F931A13A9A4009A3053 /* cell_checked@2x.png in Resources */,
-				BD2825DA1A40182200123F25 /* button_thumbs_up@3x in Resources */,
 				BD4C8F921A1F8106008044CB /* button_default@3x.png in Resources */,
 				BD31D0481A4018B6009A14FD /* button_thumbs_down@2x.png in Resources */,
 				BD31D04C1A401ABD009A14FD /* button_share@2x.png in Resources */,
+				BD6050061A6AB8680099BB12 /* Info.plist in Resources */,
 				BD4C8F8A1A1F8057008044CB /* button_alarm@3x.png in Resources */,
 				BD919EA319FB7541009B7E55 /* LaunchScreen.xib in Resources */,
 				BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */,
 				BD919EA019FB7541009B7E55 /* Images.xcassets in Resources */,
 				BD2F7F8F1A13A8F1009A3053 /* button@2x.png in Resources */,
 				BD31D04D1A401ABD009A14FD /* button_share@3x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BD919EA619FB7541009B7E55 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,22 +399,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BD919EA419FB7541009B7E55 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BD919EAA19FB7541009B7E55 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BD919E8E19FB7540009B7E55 /* EvaqAlarm */;
-			targetProxy = BD919EA919FB7541009B7E55 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BD919E9C19FB7541009B7E55 /* Main.storyboard */ = {
@@ -597,6 +508,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -644,46 +556,6 @@
 			};
 			name = Release;
 		};
-		BD919EB619FB7541009B7E55 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EvaqAlarmTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvaqAlarm.app/EvaqAlarm";
-			};
-			name = Debug;
-		};
-		BD919EB719FB7541009B7E55 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = EvaqAlarmTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvaqAlarm.app/EvaqAlarm";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -701,15 +573,6 @@
 			buildConfigurations = (
 				BD919EB319FB7541009B7E55 /* Debug */,
 				BD919EB419FB7541009B7E55 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BD919EB519FB7541009B7E55 /* Build configuration list for PBXNativeTarget "EvaqAlarmTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BD919EB619FB7541009B7E55 /* Debug */,
-				BD919EB719FB7541009B7E55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

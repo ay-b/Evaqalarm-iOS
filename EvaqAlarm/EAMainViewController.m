@@ -382,13 +382,12 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     NSArray *activities = @[[[VKActivity alloc] init]];
     
     UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:activities];
-    
     if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
         UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
         presentationController.sourceView = self.shareButton;
     }
     
-    [self presentViewController:activityViewController animated:YES completion:^{}];
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 - (IBAction)tap:(id)sender
@@ -596,6 +595,8 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     else {
         [TSMessage showNotificationWithTitle:LOC(@"Post submitted") type:TSMessageNotificationTypeSuccess];
     }
+    
+    
 }
 
 #pragma mark FB
