@@ -32,6 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
@@ -87,17 +88,18 @@
     EALog(@"Failed to get push token: %@", error);
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    NSMutableDictionary *extendedUserInfo = [userInfo mutableCopy];
-    extendedUserInfo[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:extendedUserInfo];
-}
-
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
     [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    NSMutableDictionary *extendedUserInfo = [userInfo mutableCopy];
+    extendedUserInfo[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:extendedUserInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 @end

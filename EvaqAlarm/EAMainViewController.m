@@ -21,6 +21,7 @@
 #import "Reachability.h"
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
 @import AudioToolbox;
+@import MapKit;
 
 static const NSInteger kFacebookButton = 0;
 static const NSInteger kVkontakteButton = 1;
@@ -37,8 +38,9 @@ static const NSTimeInterval kTimeInterval = 0.2;
 static const NSInteger kShareButtonSize = 44;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
+static NSString *const kSenderId = @"senderId";
 
-@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate>
+@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate>
 {
     BOOL isParking;
     BOOL isAlarmSent;
@@ -48,6 +50,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     POPSpringAnimation *scaleAnimation;
     UIVisualEffectView *permissionsVisualEffectView;
     UIView *permissionsView;
+    CLLocationCoordinate2D currentCoordinates;
     
     SystemSoundID alarmSoundID;
     
@@ -68,6 +71,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
 @property (weak, nonatomic) IBOutlet UIButton *praiseAlarmButton;
 @property (weak, nonatomic) IBOutlet UIButton *petitionAlarmButton;
 
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
 
@@ -302,6 +306,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         self.hintOffsetConstraint.constant = 60;
         [self.hintLabel layoutIfNeeded];
         self.hintLabel.alpha = 1;
+        self.mapView.alpha = 1;
     } completion:^(BOOL finished) {
         self.alarmButton.enabled = YES;
     }];
@@ -462,7 +467,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = NO; //![EAPreferences fullAccessEnabled];
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
@@ -510,7 +515,7 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
             [self p_initialAnimationHide];
         }
 
-        self.alarmSenderUid = notification.userInfo[@"senderId"];
+        self.alarmSenderUid = notification.userInfo[kSenderId];
         [self p_startPopAnimation];
     });
 }
@@ -710,6 +715,32 @@ static NSString *const kShareVCStoryboardID = @"ShareVC";
     vc.sharing = NO;
     [self presentViewController:vc animated:YES completion:nil];
 }
+
+#pragma mark - MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    //currentCoordinates = [mapView convertPoint:self.alarmButton.center toCoordinateFromView:self.alarmButton];
+    currentCoordinates = [mapView centerCoordinate];
+    
+    [mapView removeAnnotations:mapView.annotations];
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:currentCoordinates];
+    [mapView addAnnotation:annotation];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKCoordinateRegion mapRegion;
+    mapRegion.center = mapView.userLocation.coordinate;
+    mapRegion.span = MKCoordinateSpanMake(0.03, 0.03);
+    [mapView setRegion:mapRegion animated: YES];
+}
+
+//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+//{
+//    
+//}
 
 @end
 
