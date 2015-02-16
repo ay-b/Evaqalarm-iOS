@@ -51,7 +51,7 @@
                                             <outletCollection property="gestureRecognizers" destination="pYz-dM-MoY" appends="YES" id="gAD-NH-u9R"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-WU-Ntw">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-WU-Ntw">
                                         <rect key="frame" x="50" y="50" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="eZY-jD-eBn"/>
@@ -85,7 +85,7 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                 <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZX-Vm-zXY">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZX-Vm-zXY" userLabel="Button Like">
                                 <rect key="frame" x="250" y="340" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="LtT-w9-dTS"/>
@@ -99,7 +99,7 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                     <action selector="praiseAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="qwP-g3-wPy"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-vi-rof">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-vi-rof" userLabel="Button Dislike">
                                 <rect key="frame" x="306" y="340" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="aVb-55-hPg"/>
@@ -113,7 +113,7 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                     <action selector="petitionAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="et2-EU-lCo"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOE-5E-Vhq">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOE-5E-Vhq" userLabel="Action View (bottom)">
                                 <rect key="frame" x="0.0" y="480" width="600" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhC-GU-0de" userLabel="Instruction">
@@ -124,39 +124,39 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                         <color key="textColor" red="0.29019607843137252" green="0.33333333333333331" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWx-uC-MTb">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWx-uC-MTb" userLabel="Share Button">
                                         <rect key="frame" x="184" y="12" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="YWx-uC-MTb" secondAttribute="height" multiplier="1:1" id="9tV-Br-BuJ"/>
                                             <constraint firstAttribute="width" constant="44" id="t5u-Oh-Es6"/>
                                         </constraints>
-                                        <state key="normal" image="button_share.png">
+                                        <state key="normal" image="button_share_default.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="igs-VE-fcy"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFk-dd-BvY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFk-dd-BvY" userLabel="Camera Button">
                                         <rect key="frame" x="278" y="12" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="8vo-2a-7Tt"/>
                                             <constraint firstAttribute="width" secondItem="LFk-dd-BvY" secondAttribute="height" multiplier="1:1" id="l2l-t8-HmP"/>
                                         </constraints>
-                                        <state key="normal" image="button_camera.png">
+                                        <state key="normal" image="button_camera_default.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="QoX-Bi-Rfu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L11-vw-3fp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L11-vw-3fp" userLabel="QR Button">
                                         <rect key="frame" x="372" y="12" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hec-Ao-1Ln"/>
                                             <constraint firstAttribute="width" secondItem="L11-vw-3fp" secondAttribute="height" multiplier="1:1" id="mrd-UI-h96"/>
                                         </constraints>
-                                        <state key="normal" image="button_qr.png">
+                                        <state key="normal" image="button_qr_default.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -164,7 +164,7 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="LFk-dd-BvY" firstAttribute="centerY" secondItem="YWx-uC-MTb" secondAttribute="centerY" id="7dW-xG-A2c"/>
                                     <constraint firstItem="NhC-GU-0de" firstAttribute="leading" secondItem="uOE-5E-Vhq" secondAttribute="leading" constant="60" id="EX1-zd-lCG"/>
@@ -210,8 +210,10 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Tqo-su-ie3"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionView" destination="uOE-5E-Vhq" id="d74-ZJ-VCX"/>
                         <outlet property="alarmButton" destination="t0Q-hD-vSb" id="rou-zx-Xow"/>
                         <outlet property="alarmButtonContainer" destination="C09-6v-k8r" id="dPb-nd-mIh"/>
+                        <outlet property="cameraButton" destination="LFk-dd-BvY" id="RtT-rN-8zy"/>
                         <outlet property="disclaimerLabel" destination="wXK-d5-SMl" id="sCO-Xq-csd"/>
                         <outlet property="hintLabel" destination="NhC-GU-0de" id="Kbt-WU-6pT"/>
                         <outlet property="logoImageView" destination="2IT-WU-Ntw" id="IEd-Gb-8cx"/>
@@ -219,6 +221,8 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                         <outlet property="mapView" destination="FcP-zv-byG" id="fzJ-71-zz4"/>
                         <outlet property="petitionAlarmButton" destination="Lke-vi-rof" id="QTR-LF-sta"/>
                         <outlet property="praiseAlarmButton" destination="IZX-Vm-zXY" id="xyb-SG-cBL"/>
+                        <outlet property="qrButton" destination="L11-vw-3fp" id="gPc-j4-xN9"/>
+                        <outlet property="shareButton" destination="YWx-uC-MTb" id="7ag-nS-GcH"/>
                         <outlet property="titleLabel" destination="cDi-Wa-xN1" id="H5z-E9-hCv"/>
                         <outlet property="titleOffsetConstraint" destination="9QK-Of-bpj" id="EMc-Cg-1Dn"/>
                         <segue destination="AyA-TV-sW8" kind="presentation" identifier="toSharing" id="Rml-20-nqc"/>
@@ -379,10 +383,10 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
     </scenes>
     <resources>
         <image name="button.png" width="60" height="40"/>
-        <image name="button_camera.png" width="40" height="40"/>
+        <image name="button_camera_default.png" width="40" height="40"/>
         <image name="button_cancel.png" width="44" height="44"/>
-        <image name="button_qr.png" width="40" height="40"/>
-        <image name="button_share.png" width="40" height="40"/>
+        <image name="button_qr_default.png" width="40" height="40"/>
+        <image name="button_share_default.png" width="40" height="40"/>
         <image name="button_thumbs_down.png" width="44" height="44"/>
         <image name="button_thumbs_up.png" width="44" height="44"/>
         <image name="logo.png" width="100" height="100"/>

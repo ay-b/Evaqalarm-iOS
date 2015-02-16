@@ -23,6 +23,13 @@
 @import AudioToolbox;
 @import MapKit;
 
+typedef NS_ENUM(NSUInteger, EAStatus) {
+    EAStatusNotParked,
+    EAStatusParked,
+    EAStatusAlarmReceived,
+    EAStatusAlarmSkip
+};
+
 static const NSInteger kFacebookButton = 0;
 static const NSInteger kVkontakteButton = 1;
 
@@ -35,7 +42,7 @@ static NSString *const kPopAnimation = @"PopAnimation";
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kTimeInterval = 0.2;
-static const NSInteger kShareButtonSize = 44;
+static const NSInteger kMapZoom = 0.05;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
 static NSString *const kSenderId = @"senderId";
@@ -73,6 +80,7 @@ static NSString *const kSenderId = @"senderId";
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
+
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -88,10 +96,11 @@ static NSString *const kSenderId = @"senderId";
 @property (weak, nonatomic) IBOutlet UIView *alarmButtonContainer;
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
 
-#pragma mark Share
-
+#pragma mark Action View
+@property (weak, nonatomic) IBOutlet UIView *actionView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *qrButton;
 
 #pragma mark Hint
 
@@ -150,6 +159,8 @@ static NSString *const kSenderId = @"senderId";
     self.alarmButton.enabled = NO;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self p_statusChanged:EAStatusParked];
+        
         self.alarmButton.enabled = YES;
         EALog(@"Set parking done");
         [YMMYandexMetrica reportEvent:@"Parking success" onFailure:nil];
@@ -162,6 +173,7 @@ static NSString *const kSenderId = @"senderId";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.alarmButton.enabled = YES;
         [self invertParkingState];
+        [self p_statusChanged:EAStatusNotParked];
         [YMMYandexMetrica reportEvent:@"Server error on send parking" onFailure:nil];
         
         EALog(@"Set parked error: %@", error);
@@ -176,6 +188,8 @@ static NSString *const kSenderId = @"senderId";
     self.alarmButton.enabled = NO;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLClearParking parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self p_statusChanged:EAStatusNotParked];
+        
         self.alarmButton.enabled = YES;
         EALog(@"Clear parking done");
         [YMMYandexMetrica reportEvent:@"Parking cancelled" onFailure:nil];
@@ -184,6 +198,8 @@ static NSString *const kSenderId = @"senderId";
         [[NSUserDefaults standardUserDefaults] synchronize];
         [TSMessage showNotificationWithTitle:LOC(@"Parking mode off") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self p_statusChanged:EAStatusParked];
+        
         self.alarmButton.enabled = YES;
         [self invertParkingState];
         
@@ -235,6 +251,7 @@ static NSString *const kSenderId = @"senderId";
         EALog(@"%@ error: %@", praise ? @"Praise" : @"Petition", error);
         [TSMessage showNotificationWithTitle:LOC(@"Error sending rating") type:TSMessageNotificationTypeError];
     }];
+    [self p_statusChanged:EAStatusAlarmSkip];
 }
 
 #pragma mark - Animations
@@ -242,15 +259,6 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)p_initialAnimationShow
 {
-    // hide hint
-    self.hintLabel.alpha = 0;
-    self.hintOffsetConstraint.constant = - self.hintLabel.frame.size.height;
-    [self.hintLabel layoutIfNeeded];
-    
-    // hide share button
-    self.shareButtonWidthConstraint.constant = 0;
-    [self.shareButton layoutIfNeeded];
-    
     // title animation
     self.titleLabel.alpha = 0;
     self.titleOffsetConstraint.constant = - self.titleLabel.frame.size.height;
@@ -258,7 +266,7 @@ static NSString *const kSenderId = @"senderId";
     [UIView animateWithDuration:kMainScreenTimeInterval animations:^{
         self.titleOffsetConstraint.constant = 60;
         [self.titleLabel layoutIfNeeded];
-        self.titleLabel.alpha = 1;
+        self.hintLabel.alpha = 1;
     } completion:nil];
     
     // disclaimer animation
@@ -281,6 +289,7 @@ static NSString *const kSenderId = @"senderId";
         self.logoSizeConstraint.constant = 200;
         self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
         [self.logoImageView layoutIfNeeded];
+        self.logoImageView.alpha = 0.5;
     } completion:^(BOOL finished) {
         [self p_postAnimation];
         isDisclaimerSkipped = YES;
@@ -289,24 +298,25 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)p_postAnimation
 {
-    // share button animation
-    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
-    rotationAnimation.duration = kMainScreenTimeInterval;
-    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
-    
-    // rotate share button
-    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.shareButtonWidthConstraint.constant = kShareButtonSize;
-        [self.shareButton layoutIfNeeded];
-    } completion:nil];
+//    // share button animation
+//    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+//    rotationAnimation.duration = kMainScreenTimeInterval;
+//    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
+//    
+//    // rotate share button
+//    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        self.shareButtonWidthConstraint.constant = kShareButtonSize;
+//        [self.shareButton layoutIfNeeded];
+//    } completion:nil];
     
     // appearing hint label
     [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.hintOffsetConstraint.constant = 60;
-        [self.hintLabel layoutIfNeeded];
-        self.hintLabel.alpha = 1;
+//        self.hintOffsetConstraint.constant = 60;
+//        [self.hintLabel layoutIfNeeded];
+        self.actionView.alpha = 1;
         self.mapView.alpha = 1;
+        [self p_statusChanged:isParking ? EAStatusParked : EAStatusNotParked];
     } completion:^(BOOL finished) {
         self.alarmButton.enabled = YES;
     }];
@@ -330,7 +340,8 @@ static NSString *const kSenderId = @"senderId";
     
     NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
     for (CAShapeLayer* circle in circles) {
-        [self.view.layer addSublayer:circle];
+        //[self.view.layer addSublayer:circle];
+        [self.alarmButtonContainer.layer addSublayer:circle];
         [circle addAnimation:drawAnimation forKey:kAnimationName];
     }
 }
@@ -340,7 +351,7 @@ static NSString *const kSenderId = @"senderId";
     isAnimationStarted = NO;
     EALog(@"Cancel animation");
     
-    NSArray *layers = [self.view.layer.sublayers copy];
+    NSArray *layers = [self.alarmButtonContainer.layer.sublayers copy];
     for (CALayer *layer in layers) {
         if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
             [layer removeAllAnimations];
@@ -504,6 +515,7 @@ static NSString *const kSenderId = @"senderId";
 - (void)receiveAlarm:(NSNotification*)notification
 {
     EALog(@"Push: %@", notification.userInfo);
+    [self p_statusChanged:EAStatusAlarmReceived];
     
     BOOL playSound = [notification.userInfo[@"playSound"] boolValue];
     if (playSound) {
@@ -543,6 +555,41 @@ static NSString *const kSenderId = @"senderId";
     return [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
 }
 
+//-(UIStatusBarStyle)preferredStatusBarStyle{
+//    return isParking ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+//}
+
+- (void)p_statusChanged:(EAStatus)status
+{
+    UIColor *bgColor;
+    
+    switch (status) {
+        case EAStatusNotParked:
+            bgColor = [UIColor whiteColor];
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+            break;
+        case EAStatusParked:
+            bgColor = kGreenColor;
+            break;
+        case EAStatusAlarmReceived:
+            [self p_startPopAnimation];
+            bgColor = kRedColor;
+            break;
+        case EAStatusAlarmSkip:
+            [self p_stopPopAnimation];
+            bgColor = kGreenColor;
+            break;
+    }
+    self.view.backgroundColor = bgColor;
+    
+    // change style for changed bg color
+    [[UIApplication sharedApplication] setStatusBarStyle:status != EAStatusNotParked ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
+    [self.shareButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_share_highlighted" : @"button_share_default"] forState:UIControlStateNormal];
+    [self.cameraButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_camera_highlighted" : @"button_camera_default"] forState:UIControlStateNormal];
+    [self.qrButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_qr_highlighted" : @"button_qr_default"] forState:UIControlStateNormal];
+    self.hintLabel.textColor = status != EAStatusNotParked ? [UIColor whiteColor] : kDarkGrayColor;
+}
+
 #pragma mark - Design elements
 
 - (CAShapeLayer*)p_circle1WithColor:(UIColor*)color
@@ -552,7 +599,7 @@ static NSString *const kSenderId = @"senderId";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 14.5);
+    circle.position = CGPointMake(CGRectGetMidX(self.alarmButtonContainer.bounds)-radius, CGRectGetMidY(self.alarmButtonContainer.bounds)-radius);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -567,7 +614,7 @@ static NSString *const kSenderId = @"senderId";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 19 + 15);
+    circle.position = CGPointMake(CGRectGetMidX(self.alarmButtonContainer.bounds)-radius, CGRectGetMidY(self.alarmButtonContainer.bounds)-radius);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -582,7 +629,7 @@ static NSString *const kSenderId = @"senderId";
     
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius) cornerRadius:radius].CGPath;
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius, kTopOffset + kStatusHeight + 64 + 15);
+    circle.position = CGPointMake(CGRectGetMidX(self.alarmButtonContainer.bounds)-radius, CGRectGetMidY(self.alarmButtonContainer.bounds)-radius);
     circle.fillColor = [UIColor clearColor].CGColor;
     circle.strokeColor = color.CGColor;
     circle.lineWidth = lineWidth;
@@ -733,7 +780,7 @@ static NSString *const kSenderId = @"senderId";
 {
     MKCoordinateRegion mapRegion;
     mapRegion.center = mapView.userLocation.coordinate;
-    mapRegion.span = MKCoordinateSpanMake(0.03, 0.03);
+    mapRegion.span = MKCoordinateSpanMake(kMapZoom, kMapZoom);
     [mapView setRegion:mapRegion animated: YES];
 }
 
