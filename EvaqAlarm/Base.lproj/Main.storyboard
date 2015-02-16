@@ -123,7 +123,7 @@ You can slide the map.</string>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="QoX-Bi-Rfu"/>
+                                                    <action selector="cameraButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="y9h-K7-j1Z"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L11-vw-3fp" userLabel="QR Button">
@@ -136,7 +136,7 @@ You can slide the map.</string>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="eOs-xQ-qED"/>
+                                                    <action selector="qrButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="dzi-2v-YE5"/>
                                                 </connections>
                                             </button>
                                         </subviews>

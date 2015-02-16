@@ -41,7 +41,7 @@ static const NSInteger kMapZoom = 0.05;
 static NSString *const kShareVCStoryboardID = @"ShareVC";
 static NSString *const kSenderId = @"senderId";
 
-@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate>
+@interface EAMainViewController () <CLLocationManagerDelegate, UIActionSheetDelegate, VKSdkDelegate, EAPreferencesDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     BOOL isParking;
     BOOL isAlarmSent;
@@ -94,6 +94,10 @@ static NSString *const kSenderId = @"senderId";
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *qrButton;
 @property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+
+- (IBAction)shareButtonPressed;
+- (IBAction)cameraButtonPressed;
+- (IBAction)qrButtonPressed;
 
 - (IBAction)praiseAlarmButtonPressed;
 - (IBAction)petitionAlarmButtonPressed;
@@ -375,6 +379,33 @@ static NSString *const kSenderId = @"senderId";
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
+- (IBAction)cameraButtonPressed
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (IBAction)qrButtonPressed
+{
+    
+}
+
+- (IBAction)praiseAlarmButtonPressed
+{
+    [self p_stopPopAnimation];
+    [self praiseAlarmSender:YES];
+}
+
+- (IBAction)petitionAlarmButtonPressed
+{
+    [self p_stopPopAnimation];
+    [self praiseAlarmSender:NO];
+}
+
+#pragma mark - Gestures handlers
+
 - (IBAction)tap:(id)sender
 {
     if (isAnimationStarted) {
@@ -424,18 +455,6 @@ static NSString *const kSenderId = @"senderId";
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]];
-}
-
-- (IBAction)praiseAlarmButtonPressed
-{
-    [self p_stopPopAnimation];
-    [self praiseAlarmSender:YES];
-}
-
-- (IBAction)petitionAlarmButtonPressed
-{
-    [self p_stopPopAnimation];
-    [self praiseAlarmSender:NO];
 }
 
 #pragma mark - Private API
@@ -738,6 +757,14 @@ static NSString *const kSenderId = @"senderId";
     mapRegion.center = mapView.userLocation.coordinate;
     mapRegion.span = MKCoordinateSpanMake(kMapZoom, kMapZoom);
     [mapView setRegion:mapRegion animated: YES];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    // process
 }
 
 @end
