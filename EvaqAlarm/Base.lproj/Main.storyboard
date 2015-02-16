@@ -12,6 +12,7 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -28,13 +29,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-zv-byG">
-                                <rect key="frame" x="0.0" y="20" width="600" height="460"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="470"/>
                                 <connections>
                                     <outlet property="delegate" destination="dyJ-ZV-lCp" id="7Oq-Bk-Hwr"/>
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C09-6v-k8r" userLabel="MAIN BUTTON container">
-                                <rect key="frame" x="200" y="150" width="200" height="200"/>
+                                <rect key="frame" x="200" y="155" width="200" height="200"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-hD-vSb" userLabel="MAIN BUTTON">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -78,127 +79,158 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXK-d5-SMl" userLabel="Disclaimer">
-                                <rect key="frame" x="20" y="320" width="560" height="50"/>
+                                <rect key="frame" x="20" y="325" width="560" height="50"/>
                                 <string key="text">This app wasn’t made to make you able to avoid any penalties, it was made to save your time and money catching the tow-truck before it ran out with your car.
 Remember, that parking at a wrong place may pose other drivers and pedestrians in danger.</string>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.2901960784" green="0.33333333329999998" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZX-Vm-zXY" userLabel="Button Like">
-                                <rect key="frame" x="250" y="340" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="LtT-w9-dTS"/>
-                                    <constraint firstAttribute="width" secondItem="IZX-Vm-zXY" secondAttribute="height" multiplier="1:1" id="nrs-Pg-zZP"/>
-                                </constraints>
-                                <state key="normal" image="button_thumbs_up.png">
-                                    <color key="titleColor" red="0.2470588235" green="0.72549019609999998" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="praiseAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="qwP-g3-wPy"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-vi-rof" userLabel="Button Dislike">
-                                <rect key="frame" x="306" y="340" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="aVb-55-hPg"/>
-                                    <constraint firstAttribute="width" secondItem="Lke-vi-rof" secondAttribute="height" multiplier="1:1" id="s5P-O3-qaM"/>
-                                </constraints>
-                                <state key="normal" image="button_thumbs_down.png">
-                                    <color key="titleColor" red="0.2470588235" green="0.72549019609999998" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="petitionAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="et2-EU-lCo"/>
-                                </connections>
-                            </button>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOE-5E-Vhq" userLabel="Action View (bottom)">
-                                <rect key="frame" x="0.0" y="480" width="600" height="120"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAg-UA-f5Z" userLabel="Action View (bottom)">
+                                <rect key="frame" x="0.0" y="490" width="600" height="110"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhC-GU-0de" userLabel="Instruction">
-                                        <rect key="frame" x="60" y="71" width="480" height="33"/>
-                                        <string key="text">Круг: нажать - парковка, держать - тревога
-Карту можно двигать</string>
-                                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
-                                        <color key="textColor" red="0.29019607843137252" green="0.33333333333333331" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWx-uC-MTb" userLabel="Share Button">
-                                        <rect key="frame" x="184" y="12" width="44" height="44"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOE-5E-Vhq" userLabel="Parking actions">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhC-GU-0de" userLabel="Instruction">
+                                                <rect key="frame" x="60" y="61" width="480" height="33"/>
+                                                <string key="text">Ring: tap to toggle status, hold for alarm.
+You can slide the map.</string>
+                                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.33333333333333331" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWx-uC-MTb" userLabel="Share Button">
+                                                <rect key="frame" x="184" y="10" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="YWx-uC-MTb" secondAttribute="height" multiplier="1:1" id="9tV-Br-BuJ"/>
+                                                    <constraint firstAttribute="width" constant="44" id="t5u-Oh-Es6"/>
+                                                </constraints>
+                                                <state key="normal" image="button_share_default.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="igs-VE-fcy"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFk-dd-BvY" userLabel="Camera Button">
+                                                <rect key="frame" x="278" y="10" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="8vo-2a-7Tt"/>
+                                                    <constraint firstAttribute="width" secondItem="LFk-dd-BvY" secondAttribute="height" multiplier="1:1" id="l2l-t8-HmP"/>
+                                                </constraints>
+                                                <state key="normal" image="button_camera_default.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="QoX-Bi-Rfu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L11-vw-3fp" userLabel="QR Button">
+                                                <rect key="frame" x="372" y="10" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="hec-Ao-1Ln"/>
+                                                    <constraint firstAttribute="width" secondItem="L11-vw-3fp" secondAttribute="height" multiplier="1:1" id="mrd-UI-h96"/>
+                                                </constraints>
+                                                <state key="normal" image="button_qr_default.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="eOs-xQ-qED"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="YWx-uC-MTb" secondAttribute="height" multiplier="1:1" id="9tV-Br-BuJ"/>
-                                            <constraint firstAttribute="width" constant="44" id="t5u-Oh-Es6"/>
+                                            <constraint firstItem="LFk-dd-BvY" firstAttribute="centerY" secondItem="YWx-uC-MTb" secondAttribute="centerY" id="7dW-xG-A2c"/>
+                                            <constraint firstItem="NhC-GU-0de" firstAttribute="leading" secondItem="uOE-5E-Vhq" secondAttribute="leading" constant="60" id="EX1-zd-lCG"/>
+                                            <constraint firstItem="L11-vw-3fp" firstAttribute="leading" secondItem="LFk-dd-BvY" secondAttribute="trailing" constant="50" id="Fmr-c7-Qjd"/>
+                                            <constraint firstAttribute="bottom" secondItem="NhC-GU-0de" secondAttribute="bottom" constant="16" id="MfD-GS-TzL"/>
+                                            <constraint firstItem="LFk-dd-BvY" firstAttribute="leading" secondItem="YWx-uC-MTb" secondAttribute="trailing" constant="50" id="eCJ-Zb-emC"/>
+                                            <constraint firstItem="LFk-dd-BvY" firstAttribute="top" secondItem="uOE-5E-Vhq" secondAttribute="top" constant="10" id="fmD-Oa-3Nt"/>
+                                            <constraint firstAttribute="centerX" secondItem="LFk-dd-BvY" secondAttribute="centerX" id="ixU-0f-Kv0"/>
+                                            <constraint firstAttribute="trailing" secondItem="NhC-GU-0de" secondAttribute="trailing" constant="60" id="ogg-se-SWm"/>
+                                            <constraint firstAttribute="height" constant="110" id="pyf-bg-0sG"/>
+                                            <constraint firstItem="L11-vw-3fp" firstAttribute="centerY" secondItem="LFk-dd-BvY" secondAttribute="centerY" id="uRg-vX-cPJ"/>
                                         </constraints>
-                                        <state key="normal" image="button_share_default.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="igs-VE-fcy"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFk-dd-BvY" userLabel="Camera Button">
-                                        <rect key="frame" x="278" y="12" width="44" height="44"/>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndf-Xc-k79" userLabel="Alarm actions">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, rate the alarm." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq2-bm-zWb">
+                                                <rect key="frame" x="240" y="8" width="120" height="17"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-qg-NjH" userLabel="Like Button">
+                                                <rect key="frame" x="198" y="45" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="0Ud-qg-NjH" secondAttribute="height" multiplier="1:1" id="DWF-U2-DHk"/>
+                                                    <constraint firstAttribute="width" constant="44" id="ZiY-r3-B1O"/>
+                                                </constraints>
+                                                <state key="normal" image="button_alarm_like.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="praiseAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="MOC-W0-dqP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPB-hG-Q8R" userLabel="Dislike Button">
+                                                <rect key="frame" x="358" y="45" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="JPB-hG-Q8R" secondAttribute="height" multiplier="1:1" id="Lmb-2v-RBh"/>
+                                                    <constraint firstAttribute="width" constant="44" id="WEE-W7-bdJ"/>
+                                                </constraints>
+                                                <state key="normal" image="button_alarm_dislike.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="petitionAlarmButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="x9b-Fk-ddX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="8vo-2a-7Tt"/>
-                                            <constraint firstAttribute="width" secondItem="LFk-dd-BvY" secondAttribute="height" multiplier="1:1" id="l2l-t8-HmP"/>
+                                            <constraint firstItem="0Ud-qg-NjH" firstAttribute="centerX" secondItem="Oq2-bm-zWb" secondAttribute="centerX" constant="-80" id="5gV-ZY-UcO"/>
+                                            <constraint firstItem="JPB-hG-Q8R" firstAttribute="centerX" secondItem="Oq2-bm-zWb" secondAttribute="centerX" constant="80" id="6V4-la-ZQU"/>
+                                            <constraint firstItem="0Ud-qg-NjH" firstAttribute="top" secondItem="Oq2-bm-zWb" secondAttribute="bottom" constant="20" id="MAc-be-IwM"/>
+                                            <constraint firstItem="JPB-hG-Q8R" firstAttribute="centerY" secondItem="0Ud-qg-NjH" secondAttribute="centerY" id="T4k-i9-oCf"/>
+                                            <constraint firstItem="JPB-hG-Q8R" firstAttribute="width" secondItem="JPB-hG-Q8R" secondAttribute="height" multiplier="1:1" id="cvq-t6-byY"/>
+                                            <constraint firstItem="Oq2-bm-zWb" firstAttribute="top" secondItem="Ndf-Xc-k79" secondAttribute="top" constant="8" id="fUX-kR-Y6H"/>
+                                            <constraint firstAttribute="centerX" secondItem="Oq2-bm-zWb" secondAttribute="centerX" id="z8F-5W-u8A"/>
                                         </constraints>
-                                        <state key="normal" image="button_camera_default.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="QoX-Bi-Rfu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L11-vw-3fp" userLabel="QR Button">
-                                        <rect key="frame" x="372" y="12" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="hec-Ao-1Ln"/>
-                                            <constraint firstAttribute="width" secondItem="L11-vw-3fp" secondAttribute="height" multiplier="1:1" id="mrd-UI-h96"/>
-                                        </constraints>
-                                        <state key="normal" image="button_qr_default.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="shareButtonPressed" destination="dyJ-ZV-lCp" eventType="touchUpInside" id="eOs-xQ-qED"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="LFk-dd-BvY" firstAttribute="centerY" secondItem="YWx-uC-MTb" secondAttribute="centerY" id="7dW-xG-A2c"/>
-                                    <constraint firstItem="NhC-GU-0de" firstAttribute="leading" secondItem="uOE-5E-Vhq" secondAttribute="leading" constant="60" id="EX1-zd-lCG"/>
-                                    <constraint firstItem="L11-vw-3fp" firstAttribute="leading" secondItem="LFk-dd-BvY" secondAttribute="trailing" constant="50" id="Fmr-c7-Qjd"/>
-                                    <constraint firstAttribute="bottom" secondItem="NhC-GU-0de" secondAttribute="bottom" constant="16" id="MfD-GS-TzL"/>
-                                    <constraint firstItem="LFk-dd-BvY" firstAttribute="leading" secondItem="YWx-uC-MTb" secondAttribute="trailing" constant="50" id="eCJ-Zb-emC"/>
-                                    <constraint firstItem="LFk-dd-BvY" firstAttribute="top" secondItem="uOE-5E-Vhq" secondAttribute="top" constant="12" id="fmD-Oa-3Nt"/>
-                                    <constraint firstAttribute="centerX" secondItem="LFk-dd-BvY" secondAttribute="centerX" id="ixU-0f-Kv0"/>
-                                    <constraint firstAttribute="trailing" secondItem="NhC-GU-0de" secondAttribute="trailing" constant="60" id="ogg-se-SWm"/>
-                                    <constraint firstAttribute="height" constant="120" id="pyf-bg-0sG"/>
-                                    <constraint firstItem="L11-vw-3fp" firstAttribute="centerY" secondItem="LFk-dd-BvY" secondAttribute="centerY" id="uRg-vX-cPJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ndf-Xc-k79" secondAttribute="trailing" id="Jpy-BL-9LC"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ndf-Xc-k79" secondAttribute="bottom" id="Ke1-81-IhB"/>
+                                    <constraint firstItem="uOE-5E-Vhq" firstAttribute="top" secondItem="JAg-UA-f5Z" secondAttribute="top" id="R8G-Lk-SWU"/>
+                                    <constraint firstItem="Ndf-Xc-k79" firstAttribute="leading" secondItem="JAg-UA-f5Z" secondAttribute="leading" id="RC8-Qw-cGu"/>
+                                    <constraint firstAttribute="bottom" secondItem="uOE-5E-Vhq" secondAttribute="bottom" id="UhO-OS-aiY"/>
+                                    <constraint firstAttribute="trailing" secondItem="uOE-5E-Vhq" secondAttribute="trailing" id="e34-c6-pkj"/>
+                                    <constraint firstItem="Ndf-Xc-k79" firstAttribute="top" secondItem="JAg-UA-f5Z" secondAttribute="top" id="gaI-eL-7vy"/>
+                                    <constraint firstItem="uOE-5E-Vhq" firstAttribute="leading" secondItem="JAg-UA-f5Z" secondAttribute="leading" id="pmd-0y-ITy"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="2IT-WU-Ntw" firstAttribute="trailing" secondItem="Lke-vi-rof" secondAttribute="trailing" id="0Ya-K7-Q9n"/>
                             <constraint firstItem="wXK-d5-SMl" firstAttribute="top" secondItem="t0Q-hD-vSb" secondAttribute="bottom" constant="-30" id="2hS-kp-NsK"/>
                             <constraint firstItem="cDi-Wa-xN1" firstAttribute="top" secondItem="aOL-7g-lTJ" secondAttribute="bottom" constant="40" id="9QK-Of-bpj"/>
+                            <constraint firstItem="JAg-UA-f5Z" firstAttribute="top" secondItem="FcP-zv-byG" secondAttribute="bottom" id="KOJ-md-q4g"/>
+                            <constraint firstAttribute="trailing" secondItem="JAg-UA-f5Z" secondAttribute="trailing" id="MKH-cK-eYH"/>
                             <constraint firstItem="FcP-zv-byG" firstAttribute="leading" secondItem="RB7-UV-ps8" secondAttribute="leading" id="UWe-ai-Lil"/>
-                            <constraint firstAttribute="trailing" secondItem="uOE-5E-Vhq" secondAttribute="trailing" id="UhY-wP-TiU"/>
-                            <constraint firstItem="g19-Rg-Aqg" firstAttribute="top" secondItem="uOE-5E-Vhq" secondAttribute="bottom" id="VsK-m2-feg"/>
-                            <constraint firstItem="IZX-Vm-zXY" firstAttribute="top" secondItem="2IT-WU-Ntw" secondAttribute="bottom" constant="40" id="Wt6-jj-Kc1"/>
                             <constraint firstItem="FcP-zv-byG" firstAttribute="centerX" secondItem="C09-6v-k8r" secondAttribute="centerX" id="acm-5R-CO0"/>
                             <constraint firstItem="FcP-zv-byG" firstAttribute="top" secondItem="aOL-7g-lTJ" secondAttribute="bottom" id="cYu-Tf-FLI"/>
                             <constraint firstItem="FcP-zv-byG" firstAttribute="centerY" secondItem="C09-6v-k8r" secondAttribute="centerY" id="eJb-OE-s1y"/>
-                            <constraint firstItem="2IT-WU-Ntw" firstAttribute="leading" secondItem="IZX-Vm-zXY" secondAttribute="leading" id="fjI-05-RKi"/>
-                            <constraint firstItem="Lke-vi-rof" firstAttribute="top" secondItem="2IT-WU-Ntw" secondAttribute="bottom" constant="40" id="gEV-er-X6W"/>
                             <constraint firstItem="wXK-d5-SMl" firstAttribute="leading" secondItem="RB7-UV-ps8" secondAttribute="leading" constant="20" id="ipT-84-YaZ"/>
-                            <constraint firstItem="uOE-5E-Vhq" firstAttribute="top" secondItem="FcP-zv-byG" secondAttribute="bottom" id="uDh-5W-3ho"/>
-                            <constraint firstItem="uOE-5E-Vhq" firstAttribute="leading" secondItem="RB7-UV-ps8" secondAttribute="leading" id="w0x-Ee-EfT"/>
+                            <constraint firstItem="JAg-UA-f5Z" firstAttribute="leading" secondItem="RB7-UV-ps8" secondAttribute="leading" id="vEo-0x-Jok"/>
                             <constraint firstAttribute="centerX" secondItem="cDi-Wa-xN1" secondAttribute="centerX" id="x27-Zs-IBH"/>
                             <constraint firstAttribute="trailing" secondItem="FcP-zv-byG" secondAttribute="trailing" id="x6z-6Q-AwP"/>
+                            <constraint firstItem="g19-Rg-Aqg" firstAttribute="top" secondItem="JAg-UA-f5Z" secondAttribute="bottom" id="y29-d7-RBI"/>
                             <constraint firstItem="cDi-Wa-xN1" firstAttribute="centerX" secondItem="wXK-d5-SMl" secondAttribute="centerX" id="zMz-Ci-ZZd"/>
                             <constraint firstAttribute="trailing" secondItem="wXK-d5-SMl" secondAttribute="trailing" constant="20" id="zcr-DM-RFn"/>
                         </constraints>
@@ -210,17 +242,17 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Tqo-su-ie3"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="actionView" destination="uOE-5E-Vhq" id="d74-ZJ-VCX"/>
+                        <outlet property="actionView" destination="JAg-UA-f5Z" id="h7C-9u-Dyd"/>
+                        <outlet property="alarmActionsView" destination="Ndf-Xc-k79" id="sDa-HL-lKb"/>
                         <outlet property="alarmButton" destination="t0Q-hD-vSb" id="rou-zx-Xow"/>
                         <outlet property="alarmButtonContainer" destination="C09-6v-k8r" id="dPb-nd-mIh"/>
                         <outlet property="cameraButton" destination="LFk-dd-BvY" id="RtT-rN-8zy"/>
                         <outlet property="disclaimerLabel" destination="wXK-d5-SMl" id="sCO-Xq-csd"/>
-                        <outlet property="hintLabel" destination="NhC-GU-0de" id="Kbt-WU-6pT"/>
+                        <outlet property="hintLabel" destination="NhC-GU-0de" id="7bU-QH-Cc1"/>
                         <outlet property="logoImageView" destination="2IT-WU-Ntw" id="IEd-Gb-8cx"/>
                         <outlet property="logoSizeConstraint" destination="eZY-jD-eBn" id="hhP-RT-JN4"/>
                         <outlet property="mapView" destination="FcP-zv-byG" id="fzJ-71-zz4"/>
-                        <outlet property="petitionAlarmButton" destination="Lke-vi-rof" id="QTR-LF-sta"/>
-                        <outlet property="praiseAlarmButton" destination="IZX-Vm-zXY" id="xyb-SG-cBL"/>
+                        <outlet property="parkingActionsView" destination="uOE-5E-Vhq" id="h8B-7K-Fvw"/>
                         <outlet property="qrButton" destination="L11-vw-3fp" id="gPc-j4-xN9"/>
                         <outlet property="shareButton" destination="YWx-uC-MTb" id="7ag-nS-GcH"/>
                         <outlet property="titleLabel" destination="cDi-Wa-xN1" id="H5z-E9-hCv"/>
@@ -383,12 +415,12 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
     </scenes>
     <resources>
         <image name="button.png" width="60" height="40"/>
+        <image name="button_alarm_dislike.png" width="40" height="40"/>
+        <image name="button_alarm_like.png" width="40" height="40"/>
         <image name="button_camera_default.png" width="40" height="40"/>
         <image name="button_cancel.png" width="44" height="44"/>
         <image name="button_qr_default.png" width="40" height="40"/>
         <image name="button_share_default.png" width="40" height="40"/>
-        <image name="button_thumbs_down.png" width="44" height="44"/>
-        <image name="button_thumbs_up.png" width="44" height="44"/>
         <image name="logo.png" width="100" height="100"/>
     </resources>
 </document>

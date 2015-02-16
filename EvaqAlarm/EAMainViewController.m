@@ -30,18 +30,12 @@ typedef NS_ENUM(NSUInteger, EAStatus) {
     EAStatusAlarmSkip
 };
 
-static const NSInteger kFacebookButton = 0;
-static const NSInteger kVkontakteButton = 1;
-
 static const NSTimeInterval kAlertAnimationDuration = 1.8;
-
-static const NSInteger kStatusHeight = 20;
-static const NSInteger kTopOffset = 45 + 6; // radius = 12, so we should offset r/2
 static NSString *const kAnimationName = @"RadialAnimation";
 static NSString *const kPopAnimation = @"PopAnimation";
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
-static const NSTimeInterval kTimeInterval = 0.2;
+static const NSTimeInterval kHideDisclaimerTimeInterval = 0.2;
 static const NSInteger kMapZoom = 0.05;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
@@ -73,13 +67,7 @@ static NSString *const kSenderId = @"senderId";
 
 #pragma mark - UI
 
-- (IBAction)praiseAlarmButtonPressed;
-- (IBAction)petitionAlarmButtonPressed;
-@property (weak, nonatomic) IBOutlet UIButton *praiseAlarmButton;
-@property (weak, nonatomic) IBOutlet UIButton *petitionAlarmButton;
-
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
 
 - (IBAction)tapOnView:(UITapGestureRecognizer *)sender;
 
@@ -97,15 +85,18 @@ static NSString *const kSenderId = @"senderId";
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
 
 #pragma mark Action View
+
 @property (weak, nonatomic) IBOutlet UIView *actionView;
+@property (weak, nonatomic) IBOutlet UIView *parkingActionsView;
+@property (weak, nonatomic) IBOutlet UIView *alarmActionsView;
+
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *qrButton;
-
-#pragma mark Hint
-
 @property (weak, nonatomic) IBOutlet UILabel *hintLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hintOffsetConstraint;
+
+- (IBAction)praiseAlarmButtonPressed;
+- (IBAction)petitionAlarmButtonPressed;
 
 @end
 
@@ -136,7 +127,6 @@ static NSString *const kSenderId = @"senderId";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAlarm:) name:EAReceiveAlarmNotification object:nil];
     isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
-    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
     
     [self p_initialAnimationShow];
 }
@@ -266,7 +256,6 @@ static NSString *const kSenderId = @"senderId";
     [UIView animateWithDuration:kMainScreenTimeInterval animations:^{
         self.titleOffsetConstraint.constant = 60;
         [self.titleLabel layoutIfNeeded];
-        self.hintLabel.alpha = 1;
     } completion:nil];
     
     // disclaimer animation
@@ -280,7 +269,7 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)p_initialAnimationHide
 {
-    [UIView animateWithDuration:kTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:kHideDisclaimerTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         // hide title
         self.titleLabel.alpha = 0;
         self.disclaimerLabel.alpha = 0;
@@ -298,22 +287,7 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)p_postAnimation
 {
-//    // share button animation
-//    CABasicAnimation* rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-//    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
-//    rotationAnimation.duration = kMainScreenTimeInterval;
-//    [self.shareButton.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
-//    
-//    // rotate share button
-//    [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//        self.shareButtonWidthConstraint.constant = kShareButtonSize;
-//        [self.shareButton layoutIfNeeded];
-//    } completion:nil];
-    
-    // appearing hint label
     [UIView animateWithDuration:kMainScreenTimeInterval delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//        self.hintOffsetConstraint.constant = 60;
-//        [self.hintLabel layoutIfNeeded];
         self.actionView.alpha = 1;
         self.mapView.alpha = 1;
         [self p_statusChanged:isParking ? EAStatusParked : EAStatusNotParked];
@@ -340,7 +314,6 @@ static NSString *const kSenderId = @"senderId";
     
     NSArray *circles = @[[self p_circle1WithColor:kRedColor], [self p_circle2WithColor:kRedColor], [self p_circle3WithColor:kRedColor]];
     for (CAShapeLayer* circle in circles) {
-        //[self.view.layer addSublayer:circle];
         [self.alarmButtonContainer.layer addSublayer:circle];
         [circle addAnimation:drawAnimation forKey:kAnimationName];
     }
@@ -363,9 +336,7 @@ static NSString *const kSenderId = @"senderId";
 - (void)p_startPopAnimation
 {
     self.alarmButton.enabled = NO;
-    self.hintLabel.text = LOC(@"Rate alarm");
     self.logoImageView.image = [UIImage imageNamed:@"button_alarm"];
-    self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = NO;
 
     if (!scaleAnimation) {
         scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
@@ -381,9 +352,7 @@ static NSString *const kSenderId = @"senderId";
     scaleAnimation.repeatForever = NO;
 
     self.alarmButton.enabled = YES;
-    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
-    self.petitionAlarmButton.hidden = self.praiseAlarmButton.hidden = YES;
     
     AudioServicesDisposeSystemSoundID(alarmSoundID);
 }
@@ -421,7 +390,6 @@ static NSString *const kSenderId = @"senderId";
     }
     
     self.logoImageView.image = [UIImage imageNamed:isParking ? @"button_parked" : @"button_default"];
-    self.hintLabel.text = LOC(isParking ? @"Instruction: tap to off" : @"Instruction: tap to on");
 }
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
@@ -555,10 +523,6 @@ static NSString *const kSenderId = @"senderId";
     return [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
 }
 
-//-(UIStatusBarStyle)preferredStatusBarStyle{
-//    return isParking ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
-//}
-
 - (void)p_statusChanged:(EAStatus)status
 {
     UIColor *bgColor;
@@ -573,21 +537,28 @@ static NSString *const kSenderId = @"senderId";
             break;
         case EAStatusAlarmReceived:
             [self p_startPopAnimation];
+            self.parkingActionsView.hidden = YES;
+            self.alarmActionsView.hidden = NO;
+
             bgColor = kRedColor;
             break;
         case EAStatusAlarmSkip:
             [self p_stopPopAnimation];
+            self.parkingActionsView.hidden = NO;
+            self.alarmActionsView.hidden = YES;
+
             bgColor = kGreenColor;
             break;
     }
     self.view.backgroundColor = bgColor;
-    
+
     // change style for changed bg color
-    [[UIApplication sharedApplication] setStatusBarStyle:status != EAStatusNotParked ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
-    [self.shareButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_share_highlighted" : @"button_share_default"] forState:UIControlStateNormal];
-    [self.cameraButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_camera_highlighted" : @"button_camera_default"] forState:UIControlStateNormal];
-    [self.qrButton setImage:[UIImage imageNamed:status != EAStatusNotParked ? @"button_qr_highlighted" : @"button_qr_default"] forState:UIControlStateNormal];
-    self.hintLabel.textColor = status != EAStatusNotParked ? [UIColor whiteColor] : kDarkGrayColor;
+    BOOL isCustomBG = status != EAStatusNotParked;
+    [[UIApplication sharedApplication] setStatusBarStyle:isCustomBG ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
+    [self.shareButton setImage:[UIImage imageNamed:isCustomBG ? @"button_share_highlighted" : @"button_share_default"] forState:UIControlStateNormal];
+    [self.cameraButton setImage:[UIImage imageNamed:isCustomBG ? @"button_camera_highlighted" : @"button_camera_default"] forState:UIControlStateNormal];
+    [self.qrButton setImage:[UIImage imageNamed:isCustomBG ? @"button_qr_highlighted" : @"button_qr_default"] forState:UIControlStateNormal];
+    self.hintLabel.textColor = isCustomBG ? [UIColor whiteColor] : kDarkGrayColor;
 }
 
 #pragma mark - Design elements
@@ -647,8 +618,6 @@ static NSString *const kSenderId = @"senderId";
     else {
         [TSMessage showNotificationWithTitle:LOC(@"Post submitted") type:TSMessageNotificationTypeSuccess];
     }
-    
-    
 }
 
 #pragma mark FB
@@ -720,18 +689,6 @@ static NSString *const kSenderId = @"senderId";
     [self p_checkPermissions];
 }
 
-#pragma mark - UIActionSheet delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == kFacebookButton) {
-        [self p_shareToFB];
-    }
-    else if (buttonIndex == kVkontakteButton) {
-        [self p_shareToVK];
-    }
-}
-
 #pragma mark - VK sdk delegate
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {}
@@ -765,11 +722,10 @@ static NSString *const kSenderId = @"senderId";
 
 #pragma mark - MKMapViewDelegate
 
+#warning debug only
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    //currentCoordinates = [mapView convertPoint:self.alarmButton.center toCoordinateFromView:self.alarmButton];
     currentCoordinates = [mapView centerCoordinate];
-    
     [mapView removeAnnotations:mapView.annotations];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     [annotation setCoordinate:currentCoordinates];
@@ -783,11 +739,6 @@ static NSString *const kSenderId = @"senderId";
     mapRegion.span = MKCoordinateSpanMake(kMapZoom, kMapZoom);
     [mapView setRegion:mapRegion animated: YES];
 }
-
-//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
-//{
-//    
-//}
 
 @end
 
