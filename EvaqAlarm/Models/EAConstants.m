@@ -19,6 +19,7 @@ NSString *const EAParkedNow = @"ParkedNow";
 
 NSString *const EAReceiveAlarmNotification = @"ReceiveAlarmNotification";
 NSString *const EACheckPermissionsNotification = @"CheckPermissionsNotification";
+NSString *const EARequestPermissionsNotification = @"RequestPermissionsNotification";
 
 NSString *const EAVKAppKey = @"4605102";
 NSString *const EAFBAppId = @"716180975136987";

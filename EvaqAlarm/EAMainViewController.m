@@ -10,6 +10,7 @@
 #import "EAConstants.h"
 #import "EAPreferences.h"
 #import "EAShareViewController.h"
+#import "EARequestPermissionsViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
@@ -117,14 +118,13 @@ static NSString *const kSenderId = @"senderId";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.preferences = [[EAPreferences alloc] initWithDelegate:self];
     [VKSdk initializeWithDelegate:self andAppId:EAVKAppKey];
     [VKSdk wakeUpSession];
     
-    // prepare location manager
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_registerLocationManager) name:EARequestPermissionsNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
     [self p_checkPermissions];
@@ -133,6 +133,21 @@ static NSString *const kSenderId = @"senderId";
     isParking = [[NSUserDefaults standardUserDefaults] boolForKey:EAParkedNow];
     
     [self p_initialAnimationShow];
+}
+
+- (void)p_registerLocationManager
+{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    if (![EAPreferences isPermissionsRequested]) {
+        EARequestPermissionsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PermissionsVC"];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

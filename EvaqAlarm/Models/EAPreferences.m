@@ -12,6 +12,7 @@
 @import CoreLocation;
 
 static NSString *const kParkingCount = @"ParkingCount";
+static NSString *const kPermissionsRequested = @"PermissionsRequested";
 
 @implementation EAPreferences
 
@@ -80,6 +81,17 @@ static NSString *const kParkingCount = @"ParkingCount";
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
     return !(types == UIRemoteNotificationTypeNone);
+}
+
++ (void)permissionsRequested
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPermissionsRequested];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)isPermissionsRequested
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kPermissionsRequested];
 }
 
 @end

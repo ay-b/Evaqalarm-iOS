@@ -25,7 +25,9 @@
 + (void)initialize
 {
     if ([self class] == [AppDelegate class]) {
+    #ifndef DEBUG
         [YMMYandexMetrica startWithAPIKey:EAYandexMetricApiKey];
+    #endif
     }
 }
 
@@ -34,19 +36,14 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
-    }
-    
     NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
         NSNotification *notification = [NSNotification notificationWithName:EAReceiveAlarmNotification object:self userInfo:userInfo];
         EAMainViewController *vc = (EAMainViewController*)self.window.rootViewController;
         [vc receiveAlarm:notification];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_requestRegisterNotifications) name:EARequestPermissionsNotification object:nil];
     
     return YES;
 }
@@ -74,6 +71,18 @@
 }
 
 #pragma mark - Push notifications
+
+- (void)p_requestRegisterNotifications
+{
+    UIApplication *application = [UIApplication sharedApplication];
+    
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    }
+}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {

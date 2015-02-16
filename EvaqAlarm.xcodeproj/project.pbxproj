@@ -16,6 +16,7 @@
 		BD1AD5791A91FDB8005ED64D /* button_share_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD5731A91FDB8005ED64D /* button_share_highlighted@2x.png */; };
 		BD1AD57C1A920BA3005ED64D /* button_alarm_dislike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57A1A920BA3005ED64D /* button_alarm_dislike@2x.png */; };
 		BD1AD57D1A920BA3005ED64D /* button_alarm_like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57B1A920BA3005ED64D /* button_alarm_like@2x.png */; };
+		BD1AD5831A92253A005ED64D /* EARequestPermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
 		BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2E4C5A19FD901800E00FD9 /* Reachability.m */; };
@@ -63,7 +64,9 @@
 		BD1AD5731A91FDB8005ED64D /* button_share_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_share_highlighted@2x.png"; sourceTree = "<group>"; };
 		BD1AD57A1A920BA3005ED64D /* button_alarm_dislike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm_dislike@2x.png"; sourceTree = "<group>"; };
 		BD1AD57B1A920BA3005ED64D /* button_alarm_like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_alarm_like@2x.png"; sourceTree = "<group>"; };
-		BD1AD5801A92167F005ED64D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		BD1AD5811A92253A005ED64D /* EARequestPermissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EARequestPermissionsViewController.h; sourceTree = "<group>"; };
+		BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EARequestPermissionsViewController.m; sourceTree = "<group>"; };
+		BD1AD5851A922810005ED64D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		BD2E4C5919FD901800E00FD9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				BD919E9719FB7540009B7E55 /* AppDelegate.m */,
 				BD919E9C19FB7541009B7E55 /* Main.storyboard */,
 				BD919EA119FB7541009B7E55 /* LaunchScreen.xib */,
+				BD1AD5811A92253A005ED64D /* EARequestPermissionsViewController.h */,
+				BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */,
 				BD919EBA19FB7587009B7E55 /* EAMainViewController.h */,
 				BD919EBB19FB7587009B7E55 /* EAMainViewController.m */,
 				BD958A211A682CD600AF2445 /* EAPermissionsView.xib */,
@@ -420,6 +425,7 @@
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
 				BD92DF661A7D06DE00FE39CA /* EAButtonViewController.m in Sources */,
 				BD885B2C1A69283400C28961 /* EAConstants.m in Sources */,
+				BD1AD5831A92253A005ED64D /* EARequestPermissionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +436,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BD919E9D19FB7541009B7E55 /* Base */,
-				BD1AD5801A92167F005ED64D /* ru */,
+				BD1AD5851A922810005ED64D /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

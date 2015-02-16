@@ -30,4 +30,7 @@
 + (BOOL)isLocationEnabled;
 + (BOOL)isPushEnabled;
 
++ (void)permissionsRequested;
++ (BOOL)isPermissionsRequested;
+
 @end

@@ -13,6 +13,8 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
+            <string>OpenSans-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -307,32 +309,10 @@ You can slide the map.</string>
                                     <constraint firstAttribute="width" secondItem="UFZ-Vf-uyi" secondAttribute="height" multiplier="1:1" id="XZb-oI-Zey"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfD-9y-k05">
-                                <rect key="frame" x="200" y="408" width="33" height="30"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="start" destination="Vhq-W5-Ibm" eventType="touchUpInside" id="Xdc-F0-SJ8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCv-bs-3J4">
-                                <rect key="frame" x="367" y="408" width="33" height="30"/>
-                                <state key="normal" title="Stop">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="stop" destination="Vhq-W5-Ibm" eventType="touchUpInside" id="VOi-g4-q8q"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yfD-9y-k05" firstAttribute="leading" secondItem="UFZ-Vf-uyi" secondAttribute="leading" id="4ep-03-qjp"/>
                             <constraint firstAttribute="centerX" secondItem="UFZ-Vf-uyi" secondAttribute="centerX" id="4sf-cz-UhY"/>
-                            <constraint firstItem="yfD-9y-k05" firstAttribute="top" secondItem="UFZ-Vf-uyi" secondAttribute="bottom" constant="8" id="4uv-od-o1F"/>
-                            <constraint firstItem="yfD-9y-k05" firstAttribute="bottom" secondItem="uCv-bs-3J4" secondAttribute="bottom" id="Ak1-hs-MDB"/>
-                            <constraint firstItem="UFZ-Vf-uyi" firstAttribute="trailing" secondItem="uCv-bs-3J4" secondAttribute="trailing" id="ZPj-mU-KDy"/>
                             <constraint firstAttribute="centerY" secondItem="UFZ-Vf-uyi" secondAttribute="centerY" id="pIz-fq-l3E"/>
                         </constraints>
                     </view>
@@ -342,7 +322,7 @@ You can slide the map.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0F6-Zm-OqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="252" y="834"/>
+            <point key="canvasLocation" x="-390" y="852"/>
         </scene>
         <!--Share View Controller-->
         <scene sceneID="zmS-XN-68f">
@@ -387,9 +367,6 @@ You can slide the map.</string>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="40" y="140" width="320" height="63"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -411,6 +388,57 @@ You can slide the map.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yjK-ph-OnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964" y="172"/>
+        </scene>
+        <!--Request Permissions View Controller-->
+        <scene sceneID="VcY-Uh-nSw">
+            <objects>
+                <viewController storyboardIdentifier="PermissionsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hcv-92-Vdx" customClass="EARequestPermissionsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rKd-P6-F4H"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ia1-HF-3iM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TtS-Sm-Zf6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-Rh-wHd" customClass="EAConfirmButton">
+                                <rect key="frame" x="250" y="496" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="r2G-8P-AkT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                <state key="normal" title="OK" backgroundImage="button.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonPressed" destination="Hcv-92-Vdx" eventType="touchUpInside" id="owq-JN-qe0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yol-Oa-UZ7">
+                                <rect key="frame" x="40" y="140" width="520" height="74"/>
+                                <string key="text">Permissions for geolocation and push-notifications are required for this app to function properly. Please, allow, otherwise nothing will work.</string>
+                                <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="yol-Oa-UZ7" secondAttribute="centerX" id="RE4-fT-JSQ"/>
+                            <constraint firstItem="yol-Oa-UZ7" firstAttribute="top" secondItem="rKd-P6-F4H" secondAttribute="bottom" constant="120" id="ZSN-8P-Qfg"/>
+                            <constraint firstItem="Ia1-HF-3iM" firstAttribute="top" secondItem="RxL-Rh-wHd" secondAttribute="bottom" constant="64" id="ca7-xQ-Anz"/>
+                            <constraint firstAttribute="centerX" secondItem="RxL-Rh-wHd" secondAttribute="centerX" id="hWR-ME-8zq"/>
+                            <constraint firstItem="yol-Oa-UZ7" firstAttribute="leading" secondItem="TtS-Sm-Zf6" secondAttribute="leading" constant="40" id="lwR-97-eLG"/>
+                            <constraint firstAttribute="trailing" secondItem="yol-Oa-UZ7" secondAttribute="trailing" constant="40" id="vP2-JK-JVa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmButton" destination="RxL-Rh-wHd" id="avm-dQ-qwd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vgy-gz-h6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="252" y="846"/>
         </scene>
     </scenes>
     <resources>

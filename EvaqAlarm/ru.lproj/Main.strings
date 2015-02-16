@@ -11,8 +11,14 @@
 /* Class = "IBUILabel"; text = "Please, rate the alarm."; ObjectID = "Oq2-bm-zWb"; */
 "Oq2-bm-zWb.text" = "Оцените полезность сигнала тревоги.";
 
+/* Class = "IBUIButton"; normalTitle = "OK"; ObjectID = "RxL-Rh-wHd"; */
+"RxL-Rh-wHd.normalTitle" = "OK";
+
 /* Class = "IBUILabel"; text = "EvaqAlarm"; ObjectID = "cDi-Wa-xN1"; */
 "cDi-Wa-xN1.text" = "EvaqAlarm";
 
 /* Class = "IBUILabel"; text = "This app wasn’t made to make you able to avoid any penalties, it was made to save your time and money catching the tow-truck before it ran out with your car.\nRemember, that parking at a wrong place may pose other drivers and pedestrians in danger."; ObjectID = "wXK-d5-SMl"; */
 "wXK-d5-SMl.text" = "Данное приложение сделано не для того, чтобы спасти вас от уплаты законно выписанных штрафов, а для того чтобы сберечь время и нервы на получении автомобиля со штраф-стоянки. \nПомните, что паркуясь в неположенном месте, вы не только рискуете собственными деньгами и временем, но и доставляете множество неудобств другим участникам дорожного движения, создавая помеху на дороге своим транспортным средством.";
+
+/* Class = "IBUILabel"; text = "Permissions for geolocation and push-notifications are required for this app to function properly. Please, allow, otherwise nothing will work."; ObjectID = "yol-Oa-UZ7"; */
+"yol-Oa-UZ7.text" = "Данной программе необходим доступ к геолокации, чтобы сервер знал, где стоит автомобиль, а так же к Push-уведомлениям, чтобы сервер мог передать вам сигнал тревоги. Пожалуйста, разрешите доступ, иначе программа не будет работать.";

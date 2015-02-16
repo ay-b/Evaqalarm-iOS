@@ -17,6 +17,7 @@
 
 extern NSString *const EAReceiveAlarmNotification;
 extern NSString *const EACheckPermissionsNotification;
+extern NSString *const EARequestPermissionsNotification;
 
 /* System */
 extern NSString *const EAAppStoreURL;
