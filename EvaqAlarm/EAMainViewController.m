@@ -37,7 +37,9 @@ static NSString *const kPopAnimation = @"PopAnimation";
 
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kHideDisclaimerTimeInterval = 0.2;
-static const NSInteger kMapZoom = 0.05;
+
+static const double kMapZoom = 0.01;
+static const NSTimeInterval kRegionDidChangeTimeInterval = 5;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
 static NSString *const kSenderId = @"senderId";
@@ -49,10 +51,10 @@ static NSString *const kSenderId = @"senderId";
     BOOL isAnimationStarted;
     BOOL isDisclaimerSkipped;
     NSTimer *alarmTimer;
+    NSTimer *regionDidChangeTimer;
     POPSpringAnimation *scaleAnimation;
     UIVisualEffectView *permissionsVisualEffectView;
     UIView *permissionsView;
-    CLLocationCoordinate2D currentCoordinates;
     
     SystemSoundID alarmSoundID;
     
@@ -60,8 +62,6 @@ static NSString *const kSenderId = @"senderId";
 }
 @property CLLocationManager *locationManager;
 @property CLLocation *parkingLocation;
-@property NSDate *parkingDate;
-@property NSArray *alertButtonComponents;
 @property NSString *alarmSenderUid;
 
 @property (nonatomic) EAPreferences *preferences;
@@ -167,8 +167,8 @@ static NSString *const kSenderId = @"senderId";
 - (void)p_setParked
 {
     NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid],
-                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
-                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                             @"lat" : @([self currentCoordinates].latitude),
+                                             @"lon" : @([self currentCoordinates].longitude)
                                              }
                                  };
     
@@ -237,8 +237,8 @@ static NSString *const kSenderId = @"senderId";
     [alert show];
     
     NSDictionary *parameters = @{@"auto" : @{@"deviceId": [EAPreferences uid],
-                                             @"lat" : @(self.parkingLocation.coordinate.latitude),
-                                             @"lon" : @(self.parkingLocation.coordinate.longitude)
+                                             @"lat" : @([self currentCoordinates].latitude),
+                                             @"lon" : @([self currentCoordinates].longitude)
                                              }
                                  };
     
@@ -487,7 +487,7 @@ static NSString *const kSenderId = @"senderId";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shouldShowView = NO; //![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
@@ -717,6 +717,7 @@ static NSString *const kSenderId = @"senderId";
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.parkingLocation = [locations lastObject];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -763,22 +764,35 @@ static NSString *const kSenderId = @"senderId";
 
 #pragma mark - MKMapViewDelegate
 
-#warning debug only
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+- (CLLocationCoordinate2D)currentCoordinates
 {
-    currentCoordinates = [mapView centerCoordinate];
-    [mapView removeAnnotations:mapView.annotations];
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    [annotation setCoordinate:currentCoordinates];
-    [mapView addAnnotation:annotation];
+    return self.mapView.centerCoordinate;
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+    [regionDidChangeTimer invalidate];
+    regionDidChangeTimer = [NSTimer scheduledTimerWithTimeInterval:kRegionDidChangeTimeInterval target:self selector:@selector(p_zoomToUserLocation) userInfo:nil repeats:NO];
+}
+
+- (void)p_zoomToUserLocation
 {
     MKCoordinateRegion mapRegion;
-    mapRegion.center = mapView.userLocation.coordinate;
+    //mapRegion.center = self.mapView.userLocation.coordinate;
+    mapRegion.center = self.parkingLocation.coordinate;
     mapRegion.span = MKCoordinateSpanMake(kMapZoom, kMapZoom);
-    [mapView setRegion:mapRegion animated: YES];
+    mapRegion = [self.mapView regionThatFits:mapRegion];
+    [self.mapView setRegion:mapRegion animated:YES];
+}
+
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView
+{
+    //[self p_zoomToUserLocation];
+}
+
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+    [self p_zoomToUserLocation];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
