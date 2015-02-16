@@ -43,7 +43,12 @@
         [vc receiveAlarm:notification];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_requestRegisterNotifications) name:EARequestPermissionsNotification object:nil];
+    if ([EAPreferences isPermissionsRequested]) {
+        [self p_requestRegisterNotifications];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_requestRegisterNotifications) name:EARequestPermissionsNotification object:nil];
+    }
     
     return YES;
 }

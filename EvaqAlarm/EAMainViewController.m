@@ -123,8 +123,13 @@ static NSString *const kSenderId = @"senderId";
     [VKSdk initializeWithDelegate:self andAppId:EAVKAppKey];
     [VKSdk wakeUpSession];
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_registerLocationManager) name:EARequestPermissionsNotification object:nil];
+    if ([EAPreferences isPermissionsRequested]) {
+        [self p_registerLocationManager];
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_registerLocationManager) name:EARequestPermissionsNotification object:nil];
+    }
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
     [self p_checkPermissions];
@@ -140,13 +145,14 @@ static NSString *const kSenderId = @"senderId";
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)viewDidLayoutSubviews
 {
     if (![EAPreferences isPermissionsRequested]) {
         EARequestPermissionsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PermissionsVC"];
-        [self presentViewController:vc animated:YES completion:nil];
+        [self presentViewController:vc animated:NO completion:nil];
     }
 }
 
@@ -165,6 +171,7 @@ static NSString *const kSenderId = @"senderId";
                                              @"lon" : @(self.parkingLocation.coordinate.longitude)
                                              }
                                  };
+    
     self.alarmButton.enabled = NO;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:EAURLSetParked parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -185,7 +192,7 @@ static NSString *const kSenderId = @"senderId";
         [self p_statusChanged:EAStatusNotParked];
         [YMMYandexMetrica reportEvent:@"Server error on send parking" onFailure:nil];
         
-        EALog(@"Set parked error: %@", error);
+        EALog(@"Set parked error <%@>, %@", error, operation.responseObject);
         [TSMessage showNotificationWithTitle:LOC(@"Can't activate parked mode") type:TSMessageNotificationTypeError];
     }];
 }
