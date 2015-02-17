@@ -19,8 +19,8 @@
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
 #import <VKActivity/VKActivity.h>
-#import "Reachability.h"
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
+#import <taifunoLibrary/TFTaifuno.h>
 @import AudioToolbox;
 @import MapKit;
 
@@ -113,6 +113,7 @@ static NSString *const kSenderId = @"senderId";
 {
     [super viewWillAppear:animated];
     [self.locationManager startUpdatingLocation];
+    [[UIApplication sharedApplication] setStatusBarStyle:isParking ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault];
 }
 
 - (void)viewDidLoad
@@ -129,7 +130,6 @@ static NSString *const kSenderId = @"senderId";
     else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_registerLocationManager) name:EARequestPermissionsNotification object:nil];
     }
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_checkPermissions) name:EACheckPermissionsNotification object:nil];
     [self p_checkPermissions];
@@ -140,12 +140,11 @@ static NSString *const kSenderId = @"senderId";
     [self p_initialAnimationShow];
 }
 
-- (void)p_registerLocationManager
+- (void)viewWillDisappear:(BOOL)animated
 {
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager startUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidLayoutSubviews
@@ -154,12 +153,6 @@ static NSString *const kSenderId = @"senderId";
         EARequestPermissionsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PermissionsVC"];
         [self presentViewController:vc animated:NO completion:nil];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self.locationManager stopUpdatingLocation];
-    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Server API
@@ -326,7 +319,6 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)p_startAnimation
 {
-    EALog(@"start animation");
     isAnimationStarted = YES;
     isAlarmSent = NO;
     
@@ -348,8 +340,7 @@ static NSString *const kSenderId = @"senderId";
 - (void)p_stopAnimation
 {
     isAnimationStarted = NO;
-    EALog(@"Cancel animation");
-    
+
     NSArray *layers = [self.alarmButtonContainer.layer.sublayers copy];
     for (CALayer *layer in layers) {
         if ([layer isKindOfClass:[CAShapeLayer class]] && [layer animationForKey:kAnimationName]) {
@@ -411,7 +402,7 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)qrButtonPressed
 {
-    
+    [[TFTaifuno sharedInstance] startChatOnViewController:self WithCallback:^(){} ];
 }
 
 - (IBAction)praiseAlarmButtonPressed
@@ -481,13 +472,21 @@ static NSString *const kSenderId = @"senderId";
 
 #pragma mark - Private API
 
+- (void)p_registerLocationManager
+{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+}
+
 - (void)p_checkPermissions
 {
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = NO; //![EAPreferences fullAccessEnabled];
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
@@ -559,11 +558,6 @@ static NSString *const kSenderId = @"senderId";
     }
 }
 
-- (BOOL)p_isReachable
-{
-    return [[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable;
-}
-
 - (void)p_statusChanged:(EAStatus)status
 {
     UIColor *bgColor;
@@ -571,7 +565,6 @@ static NSString *const kSenderId = @"senderId";
     switch (status) {
         case EAStatusNotParked:
             bgColor = [UIColor whiteColor];
-            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
             break;
         case EAStatusParked:
             bgColor = kGreenColor;

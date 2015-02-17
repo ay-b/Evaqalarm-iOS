@@ -15,13 +15,14 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
+/* System */
 extern NSString *const EAReceiveAlarmNotification;
 extern NSString *const EACheckPermissionsNotification;
 extern NSString *const EARequestPermissionsNotification;
 
-/* System */
 extern NSString *const EAAppStoreURL;
 extern NSString *const EAYandexMetricApiKey;
+extern NSString *const EATaifunoApiKey;
 
 extern NSString *const EAPushToken;
 extern NSString *const EAParkedNow;

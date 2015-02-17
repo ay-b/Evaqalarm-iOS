@@ -8,21 +8,22 @@
 
 #import "EAConstants.h"
 
-NSString *const EAShareLink = @"http://evaqalarm.ru";
-NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";
-
 /* System */
-NSString *const EAYandexMetricApiKey = @"30258";
-
-NSString *const EAPushToken = @"PushToken";
-NSString *const EAParkedNow = @"ParkedNow";
-
 NSString *const EAReceiveAlarmNotification = @"ReceiveAlarmNotification";
 NSString *const EACheckPermissionsNotification = @"CheckPermissionsNotification";
 NSString *const EARequestPermissionsNotification = @"RequestPermissionsNotification";
 
+NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";
+NSString *const EAYandexMetricApiKey = @"30258";
+NSString *const EATaifunoApiKey = @"5ac7b63dd5b9407e8b894e44bac523d4";
+
+NSString *const EAPushToken = @"PushToken";
+NSString *const EAParkedNow = @"ParkedNow";
+
 NSString *const EAVKAppKey = @"4605102";
 NSString *const EAFBAppId = @"716180975136987";
+
+NSString *const EAShareLink = @"http://evaqalarm.ru";
 /* System */
 
 /* URLs */

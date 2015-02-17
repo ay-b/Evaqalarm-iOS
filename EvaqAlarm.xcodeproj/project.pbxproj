@@ -17,9 +17,11 @@
 		BD1AD57C1A920BA3005ED64D /* button_alarm_dislike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57A1A920BA3005ED64D /* button_alarm_dislike@2x.png */; };
 		BD1AD57D1A920BA3005ED64D /* button_alarm_like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57B1A920BA3005ED64D /* button_alarm_like@2x.png */; };
 		BD1AD5831A92253A005ED64D /* EARequestPermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */; };
+		BD1AD5871A9338B1005ED64D /* taifunoLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; };
+		BD1AD5881A933A9A005ED64D /* taifunoLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; };
+		BD1AD5891A933A9A005ED64D /* taifunoLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
-		BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2E4C5A19FD901800E00FD9 /* Reachability.m */; };
 		BD2F17661A7AECB40066A61D /* EAAlarmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F17651A7AECB40066A61D /* EAAlarmButton.m */; };
 		BD2F7F8F1A13A8F1009A3053 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F8D1A13A8F1009A3053 /* button@2x.png */; };
 		BD2F7F901A13A8F1009A3053 /* button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2F7F8E1A13A8F1009A3053 /* button@3x.png */; };
@@ -52,6 +54,20 @@
 		BDDE788F1A40937D00E81BCC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BD1AD58A1A933A9A005ED64D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BD1AD5891A933A9A005ED64D /* taifunoLibrary.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1785B439769D41D8F5CF7D83 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2261114A08CB4D1B418ECCCC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,10 +83,10 @@
 		BD1AD5811A92253A005ED64D /* EARequestPermissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EARequestPermissionsViewController.h; sourceTree = "<group>"; };
 		BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EARequestPermissionsViewController.m; sourceTree = "<group>"; };
 		BD1AD5851A922810005ED64D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = taifunoLibrary.framework; sourceTree = "<group>"; };
+		BD1AD58F1A93457F005ED64D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
-		BD2E4C5919FD901800E00FD9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		BD2E4C5A19FD901800E00FD9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BD2F17641A7AECB40066A61D /* EAAlarmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAAlarmButton.h; sourceTree = "<group>"; };
 		BD2F17651A7AECB40066A61D /* EAAlarmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAAlarmButton.m; sourceTree = "<group>"; };
 		BD2F7F8D1A13A8F1009A3053 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
@@ -121,6 +137,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDBD6E1E1A7BDCCE00FE12EF /* MapKit.framework in Frameworks */,
+				BD1AD5871A9338B1005ED64D /* taifunoLibrary.framework in Frameworks */,
+				BD1AD5881A933A9A005ED64D /* taifunoLibrary.framework in Frameworks */,
 				BDDE788F1A40937D00E81BCC /* AudioToolbox.framework in Frameworks */,
 				BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */,
 				BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */,
@@ -164,15 +182,6 @@
 				BD2E4C4E19FD663500E00FD9 /* logo@3x.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		BD2E4C5819FD901800E00FD9 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				BD2E4C5919FD901800E00FD9 /* Reachability.h */,
-				BD2E4C5A19FD901800E00FD9 /* Reachability.m */,
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		BD31D04E1A401AE7009A14FD /* Fonts */ = {
@@ -254,6 +263,7 @@
 		BD919EBD19FB758A009B7E55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD1AD58F1A93457F005ED64D /* QuartzCore.framework */,
 				BDBD6E1D1A7BDCCE00FE12EF /* MapKit.framework */,
 				BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */,
 				BDC23B091A1B826F00849CBA /* Security.framework */,
@@ -266,8 +276,8 @@
 		BD9AC97B19FB96280088150F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */,
 				BD31D04E1A401AE7009A14FD /* Fonts */,
-				BD2E4C5819FD901800E00FD9 /* Reachability */,
 				BD2E4C4B19FD663500E00FD9 /* Images */,
 				BD9AC97C19FB96280088150F /* alarm.wav */,
 			);
@@ -287,6 +297,7 @@
 				BD919E8C19FB7540009B7E55 /* Frameworks */,
 				BD919E8D19FB7540009B7E55 /* Resources */,
 				692729F984AF8D81C0527C8B /* Copy Pods Resources */,
+				BD1AD58A1A933A9A005ED64D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -419,7 +430,6 @@
 				BD919EBC19FB7587009B7E55 /* EAMainViewController.m in Sources */,
 				BD885B2D1A69283400C28961 /* EAPreferences.m in Sources */,
 				BD2F17661A7AECB40066A61D /* EAAlarmButton.m in Sources */,
-				BD2E4C5B19FD901800E00FD9 /* Reachability.m in Sources */,
 				BDC23B141A1B954200849CBA /* EAShareViewController.m in Sources */,
 				BD919E9819FB7540009B7E55 /* AppDelegate.m in Sources */,
 				BD919E9519FB7540009B7E55 /* main.m in Sources */,
@@ -562,6 +572,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EvaqAlarm/Resources",
+				);
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -578,6 +592,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alexander Yankovskiy (7KU9HT6JZ6)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EvaqAlarm/Resources",
+				);
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

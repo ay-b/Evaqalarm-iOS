@@ -95,7 +95,7 @@ Remember, that parking at a wrong place may pose other drivers and pedestrians i
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhC-GU-0de" userLabel="Instruction">
-                                                <rect key="frame" x="60" y="61" width="480" height="33"/>
+                                                <rect key="frame" x="30" y="61" width="540" height="33"/>
                                                 <string key="text">Ring: tap to toggle status, hold for alarm.
 You can slide the map.</string>
                                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="12"/>
@@ -145,13 +145,13 @@ You can slide the map.</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="LFk-dd-BvY" firstAttribute="centerY" secondItem="YWx-uC-MTb" secondAttribute="centerY" id="7dW-xG-A2c"/>
-                                            <constraint firstItem="NhC-GU-0de" firstAttribute="leading" secondItem="uOE-5E-Vhq" secondAttribute="leading" constant="60" id="EX1-zd-lCG"/>
+                                            <constraint firstItem="NhC-GU-0de" firstAttribute="leading" secondItem="uOE-5E-Vhq" secondAttribute="leading" constant="30" id="EX1-zd-lCG"/>
                                             <constraint firstItem="L11-vw-3fp" firstAttribute="leading" secondItem="LFk-dd-BvY" secondAttribute="trailing" constant="50" id="Fmr-c7-Qjd"/>
                                             <constraint firstAttribute="bottom" secondItem="NhC-GU-0de" secondAttribute="bottom" constant="16" id="MfD-GS-TzL"/>
                                             <constraint firstItem="LFk-dd-BvY" firstAttribute="leading" secondItem="YWx-uC-MTb" secondAttribute="trailing" constant="50" id="eCJ-Zb-emC"/>
                                             <constraint firstItem="LFk-dd-BvY" firstAttribute="top" secondItem="uOE-5E-Vhq" secondAttribute="top" constant="10" id="fmD-Oa-3Nt"/>
                                             <constraint firstAttribute="centerX" secondItem="LFk-dd-BvY" secondAttribute="centerX" id="ixU-0f-Kv0"/>
-                                            <constraint firstAttribute="trailing" secondItem="NhC-GU-0de" secondAttribute="trailing" constant="60" id="ogg-se-SWm"/>
+                                            <constraint firstAttribute="trailing" secondItem="NhC-GU-0de" secondAttribute="trailing" constant="30" id="ogg-se-SWm"/>
                                             <constraint firstAttribute="height" constant="110" id="pyf-bg-0sG"/>
                                             <constraint firstItem="L11-vw-3fp" firstAttribute="centerY" secondItem="LFk-dd-BvY" secondAttribute="centerY" id="uRg-vX-cPJ"/>
                                         </constraints>

@@ -22,7 +22,8 @@ static const NSTimeInterval kButtonAlphaTimeInterval = 0.3;
 
 @implementation EARequestPermissionsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [NSTimer scheduledTimerWithTimeInterval:kButtonAppearanceTimeInterval target:self selector:@selector(p_showButton) userInfo:nil repeats:NO];
 }

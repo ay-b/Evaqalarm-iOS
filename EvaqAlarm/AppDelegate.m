@@ -15,6 +15,7 @@
 #import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
+#import <taifunoLibrary/TFTaifuno.h>
 
 @interface AppDelegate ()
 
@@ -33,6 +34,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[TFTaifuno sharedInstance] setApiKey:EATaifunoApiKey];
+    
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
@@ -75,6 +78,11 @@
     return YES;
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[TFTaifuno sharedInstance] saveTaifuno];
+}
+
 #pragma mark - Push notifications
 
 - (void)p_requestRegisterNotifications
@@ -93,6 +101,7 @@
 {
     NSString *token = [[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""];
     [EAPreferences setUid:token];
+    [[TFTaifuno sharedInstance] registerDeviceToken:[token stringByReplacingOccurrencesOfString:@" " withString:@""]];
 
     EALog(@"Push token is: %@", token);
 }
@@ -109,6 +118,10 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    if ([userInfo[@"origin"] isEqualToString:@"Taifuno"]) {
+        [[TFTaifuno sharedInstance] didRecieveNewNotification:userInfo];
+    }
+    
     NSMutableDictionary *extendedUserInfo = [userInfo mutableCopy];
     extendedUserInfo[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
 
