@@ -212,7 +212,7 @@ static NSString *const kSenderId = @"senderId";
         self.alarmButton.enabled = YES;
         [self invertParkingState];
         
-        EALog(@"Clear parking error: %@", error);
+        EALog(@"Clear parking error <%@>, %@", error, operation.responseObject);
         [YMMYandexMetrica reportEvent:@"Server error on parking cancell" onFailure:nil];
         [TSMessage showNotificationWithTitle:LOC(@"Can't deactivate parked mode") type:TSMessageNotificationTypeError];
     }];
@@ -241,7 +241,7 @@ static NSString *const kSenderId = @"senderId";
         [YMMYandexMetrica reportEvent:@"Alarm success" onFailure:nil];
         [TSMessage showNotificationWithTitle:LOC(@"Alarm signal sent") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        EALog(@"Set alarm error: %@", error);
+        EALog(@"Set alarm error <%@>, %@", error, operation.responseObject);
         [YMMYandexMetrica reportEvent:@"Server error on send alarm" onFailure:nil];
         [TSMessage showNotificationWithTitle:LOC(@"Can't send alarm signal") type:TSMessageNotificationTypeError];
     }];
@@ -257,7 +257,7 @@ static NSString *const kSenderId = @"senderId";
         
         [TSMessage showNotificationWithTitle:LOC(@"Rate sent") type:TSMessageNotificationTypeSuccess];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        EALog(@"%@ error: %@", praise ? @"Praise" : @"Petition", error);
+        EALog(@"%@ error <%@>, %@", praise ? @"Praise" : @"Petition", error, operation.responseObject);
         [TSMessage showNotificationWithTitle:LOC(@"Error sending rating") type:TSMessageNotificationTypeError];
     }];
     [self p_statusChanged:EAStatusAlarmSkip];
@@ -394,10 +394,12 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)cameraButtonPressed
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:picker animated:YES completion:nil];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
 }
 
 - (IBAction)qrButtonPressed
