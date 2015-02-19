@@ -167,8 +167,8 @@ static const NSTimeInterval kAlertAnimationDuration = 1.8;
     CABasicAnimation *drawAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     drawAnimation.duration = kAlertAnimationDuration;
     drawAnimation.repeatCount = 1.0;
-    drawAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
-    drawAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    drawAnimation.fromValue = @0.0f;
+    drawAnimation.toValue = @1.0f;
     drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
     NSArray *circles = @[[self p_circle1WithColor:kAlarmColor], [self p_circle2WithColor:kAlarmColor], [self p_circle3WithColor:kAlarmColor]];

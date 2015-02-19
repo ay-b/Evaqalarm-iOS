@@ -18,9 +18,9 @@
 @interface EAPreferences : NSObject
 
 @property (weak) id<EAPreferencesDelegate> delegate;
-- (instancetype)initWithDelegate:(id<EAPreferencesDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<EAPreferencesDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
-- (NSInteger)countOfParking;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSInteger countOfParking;
 - (void)incerementParkingCount;
 
 + (void)setUid:(NSString*)uid;
