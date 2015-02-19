@@ -15,7 +15,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
 #import <VK-ios-sdk/VKSdk.h>
-#import <FacebookSDK/FacebookSDK.h>
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>

@@ -12,7 +12,6 @@
 #import "EAMainViewController.h"
 
 #import <vk-ios-sdk/VKSdk.h>
-#import <Facebook-iOS-SDK/FacebookSDK/FacebookSDK.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
 #import <taifunoLibrary/TFTaifuno.h>
@@ -58,7 +57,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [FBAppEvents activateApp];
     [[NSNotificationCenter defaultCenter] postNotificationName:EACheckPermissionsNotification object:self];
 }
 
@@ -71,9 +69,6 @@
 {
     if ([[url scheme] hasPrefix:[NSString stringWithFormat:@"vk%@", EAVKAppKey]]) {
         return [VKSdk processOpenURL:url fromApplication:sourceApplication];
-    }
-    else if ([[url scheme] hasPrefix:[NSString stringWithFormat:@"fb%@", EAFBAppId]]) {
-        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     }
     return YES;
 }
