@@ -41,7 +41,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-mN-4VD">
                                         <rect key="frame" x="95" y="95" width="10" height="10"/>
-                                        <color key="backgroundColor" red="0.0" green="0.13651583033977666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="9Mq-Ex-wfE"/>
                                             <constraint firstAttribute="width" secondItem="fKg-mN-4VD" secondAttribute="height" multiplier="1:1" id="MKC-db-oKm"/>

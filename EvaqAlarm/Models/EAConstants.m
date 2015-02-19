@@ -15,7 +15,7 @@ NSString *const EARequestPermissionsNotification = @"RequestPermissionsNotificat
 
 NSString *const EAAppStoreURL = @"https://itunes.apple.com/ru/app/evaqalarm-save-your-car-from/id940143334?mt=8";
 NSString *const EAYandexMetricApiKey = @"30258";
-NSString *const EATaifunoApiKey = @"41d634106a1e42a2b12ac95f2b6dc056";
+NSString *const EATaifunoApiKey = @"a3e50355255741c0ade1643fbecf4596";
 
 NSString *const EAPushToken = @"PushToken";
 NSString *const EAParkedNow = @"ParkedNow";

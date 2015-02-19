@@ -389,12 +389,17 @@ static NSString *const kSenderId = @"senderId";
         presentationController.sourceView = self.shareButton;
     }
     
+    __weak typeof(self)weakSelf = self;
+    [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+        [weakSelf p_showAlertWithError:activityError];
+    }];
+    
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 - (IBAction)cameraButtonPressed
 {
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -603,6 +608,16 @@ static NSString *const kSenderId = @"senderId";
     self.hintLabel.textColor = isCustomBG ? [UIColor whiteColor] : kDarkGrayColor;
 }
 
+- (void)p_showAlertWithError:(NSError*)error
+{
+    if (error) {
+        [TSMessage showNotificationWithTitle:LOC(@"Can't send post") type:TSMessageNotificationTypeError];
+    }
+    else {
+        [TSMessage showNotificationWithTitle:LOC(@"Post submitted") type:TSMessageNotificationTypeSuccess];
+    }
+}
+
 #pragma mark - Design elements
 
 - (CAShapeLayer*)p_circle1WithColor:(UIColor*)color
@@ -650,75 +665,11 @@ static NSString *const kSenderId = @"senderId";
     return circle;
 }
 
-#pragma mark - Social
-
-- (void)p_showAlertWithError:(NSError*)error
-{
-    if (error) {
-        [TSMessage showNotificationWithTitle:LOC(@"Can't send post") type:TSMessageNotificationTypeError];
-    }
-    else {
-        [TSMessage showNotificationWithTitle:LOC(@"Post submitted") type:TSMessageNotificationTypeSuccess];
-    }
-}
-
-#pragma mark FB
-
-- (void)p_shareToFB
-{
-    FBSession *session = [[FBSession alloc] initWithPermissions:@[@"publish_actions", @"publish_stream"]];
-    [FBSession setActiveSession:session];
-    [session openWithBehavior:FBSessionLoginBehaviorWithFallbackToWebView
-            completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                [self p_publishToFB];
-            }];
-}
-
-- (void)p_publishToFB
-{
-    NSDictionary *params = @{@"link" : EAShareLink,
-                             @"picture": @"",
-                             @"name" : @"",
-                             @"caption" : @"",
-                             @"message" : LOC(@"Shared text")
-                             };
-    
-    [FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        [self p_showAlertWithError:error];
-    }];
-}
-
-#pragma mark VK
-
-- (void)p_shareToVK
-{
-    if ([VKSdk isLoggedIn]) {
-        [self p_publishToVK];
-    }
-    else {
-        [VKSdk authorize:@[VK_PER_WALL, VK_PER_FRIENDS, VK_PER_OFFLINE] revokeAccess:YES forceOAuth:NO inApp:NO];
-    }
-}
-
-- (void)p_publishToVK
-{
-    NSDictionary *parameters = @{@"message" : LOC(@"Shared text"), @"attachments:" : EAShareLink};
-    VKRequest *request = [[VKApi wall] post:parameters];
-    [request executeWithResultBlock:^(VKResponse *response) {
-        EALog(@"Share to vk done");
-        [self p_showAlertWithError:nil];
-    } errorBlock:^(NSError *error) {
-        EALog(@"Share to vk error: %@", error);
-        [self p_showAlertWithError:error];
-    }];
-}
-
 #pragma mark - CLLocation manager delegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.parkingLocation = [locations lastObject];
-    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -742,10 +693,7 @@ static NSString *const kSenderId = @"senderId";
     [self presentViewController:controller animated:YES completion:nil];
 }
 
-- (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken
-{
-    [self p_publishToVK];
-}
+- (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken {}
 
 #pragma mark - EAPreferences delegate
 
