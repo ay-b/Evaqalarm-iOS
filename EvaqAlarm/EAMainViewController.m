@@ -423,6 +423,8 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)tap:(id)sender
 {
+    [self p_updateRegionTimer];
+    
     if (isAnimationStarted) {
         return;
     }
@@ -440,6 +442,8 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)sendAlarm:(UILongPressGestureRecognizer *)sender
 {
+    [self p_updateRegionTimer];
+    
     if (sender.state == UIGestureRecognizerStateBegan) {
         isAlarmSent = YES;
         isAnimationStarted = NO;
@@ -450,6 +454,8 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)startAnimation:(UILongPressGestureRecognizer*)sender
 {
+    [self p_updateRegionTimer];
+    
     if (sender.state == UIGestureRecognizerStateBegan) {
         [self p_startAnimation];
     }
@@ -766,6 +772,16 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
+    [self p_updateRegionTimer];
+}
+
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView
+{
+    [self p_zoomToUserLocation];
+}
+
+- (void)p_updateRegionTimer
+{
     [regionDidChangeTimer invalidate];
     regionDidChangeTimer = [NSTimer scheduledTimerWithTimeInterval:kRegionDidChangeTimeInterval target:self selector:@selector(p_zoomToUserLocation) userInfo:nil repeats:NO];
 }
@@ -780,16 +796,6 @@ static NSString *const kSenderId = @"senderId";
     [self.mapView setRegion:mapRegion animated:YES];
 }
 
-- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView
-{
-    //[self p_zoomToUserLocation];
-}
-
-- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
-{
-    [self p_zoomToUserLocation];
-}
-
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -799,4 +805,3 @@ static NSString *const kSenderId = @"senderId";
 }
 
 @end
-
