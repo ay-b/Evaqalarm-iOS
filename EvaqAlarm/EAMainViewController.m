@@ -18,7 +18,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
-#import <VKActivity/VKActivity.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
 #import <taifunoLibrary/TFTaifuno.h>
 @import AudioToolbox;
@@ -388,13 +387,14 @@ static NSString *const kSenderId = @"senderId";
         UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
         presentationController.sourceView = self.shareButton;
     }
-    
-    __weak typeof(self)weakSelf = self;
-    [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-        [weakSelf p_showAlertWithError:activityError];
-    }];
-    
     [self presentViewController:activityViewController animated:YES completion:nil];
+    
+//    __weak typeof(self)weakSelf = self;
+//    [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+//        if (completed) {
+//            [weakSelf p_showAlertWithError:activityError];
+//        }
+//    }];
 }
 
 - (IBAction)cameraButtonPressed
