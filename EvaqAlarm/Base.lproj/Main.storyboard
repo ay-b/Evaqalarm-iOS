@@ -39,6 +39,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C09-6v-k8r" userLabel="MAIN BUTTON container">
                                 <rect key="frame" x="200" y="155" width="200" height="200"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-mN-4VD">
+                                        <rect key="frame" x="95" y="95" width="10" height="10"/>
+                                        <color key="backgroundColor" red="0.0" green="0.13651583033977666" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="9Mq-Ex-wfE"/>
+                                            <constraint firstAttribute="width" secondItem="fKg-mN-4VD" secondAttribute="height" multiplier="1:1" id="MKC-db-oKm"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0Q-hD-vSb" userLabel="MAIN BUTTON">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -66,7 +79,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="C09-6v-k8r" secondAttribute="height" multiplier="1:1" id="1Ze-d9-aVg"/>
                                     <constraint firstItem="t0Q-hD-vSb" firstAttribute="leading" secondItem="C09-6v-k8r" secondAttribute="leading" id="7o1-9L-YQZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="fKg-mN-4VD" secondAttribute="centerX" id="IOO-jK-V0n"/>
                                     <constraint firstAttribute="width" constant="200" id="VvJ-4a-akn"/>
+                                    <constraint firstAttribute="centerY" secondItem="fKg-mN-4VD" secondAttribute="centerY" id="WkN-Nr-0cr"/>
                                     <constraint firstAttribute="centerX" secondItem="2IT-WU-Ntw" secondAttribute="centerX" id="ZkG-Tf-XBo"/>
                                     <constraint firstAttribute="bottom" secondItem="t0Q-hD-vSb" secondAttribute="bottom" id="e0A-jf-ICK"/>
                                     <constraint firstAttribute="trailing" secondItem="t0Q-hD-vSb" secondAttribute="trailing" id="hHw-4F-gCz"/>
