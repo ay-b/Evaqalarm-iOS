@@ -24,6 +24,7 @@
     //save data
 - (void) saveTaifuno;
     //delete all data (If your user is logged out, for example
+- (void) didBecomeActive;
 - (void) signOut;
 
 @end
