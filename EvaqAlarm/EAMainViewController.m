@@ -498,7 +498,10 @@ static NSString *const kSenderId = @"senderId";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shouldShowView = NO; //![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
+    #if TARGET_IPHONE_SIMULATOR
+    shouldShowView = NO;
+    #endif
     
     if (shouldShowView) {
         if (![EAPreferences isPushEnabled]) {
