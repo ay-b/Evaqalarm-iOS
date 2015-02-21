@@ -668,7 +668,12 @@ static NSString *const kSenderId = @"senderId";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    self.parkingLocation = [locations lastObject];
+    CLLocation *location = [locations lastObject];
+    if (!self.parkingLocation) {
+        self.parkingLocation = location;
+        [self p_zoomToUserLocation];
+    }
+    self.parkingLocation = location;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
