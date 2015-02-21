@@ -36,7 +36,7 @@ static NSString *const kPopAnimation = @"PopAnimation";
 static const NSTimeInterval kMainScreenTimeInterval = 0.5;
 static const NSTimeInterval kHideDisclaimerTimeInterval = 0.2;
 
-static const double kMapZoom = 0.01;
+static const double kMapZoom = 0.001;
 static const NSTimeInterval kRegionDidChangeTimeInterval = 5;
 
 static NSString *const kShareVCStoryboardID = @"ShareVC";
