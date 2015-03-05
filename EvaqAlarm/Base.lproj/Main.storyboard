@@ -275,6 +275,7 @@ You can slide the map.</string>
                         <outlet property="titleLabel" destination="cDi-Wa-xN1" id="H5z-E9-hCv"/>
                         <outlet property="titleOffsetConstraint" destination="9QK-Of-bpj" id="EMc-Cg-1Dn"/>
                         <segue destination="AyA-TV-sW8" kind="presentation" identifier="toSharing" id="Rml-20-nqc"/>
+                        <segue destination="Hcv-92-Vdx" kind="presentation" identifier="toRequestPermissions" animates="NO" id="gIN-Lx-NTb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9r2-xB-Fne" sceneMemberID="firstResponder"/>
@@ -377,7 +378,7 @@ You can slide the map.</string>
                                     <action selector="confirmButtonPressed" destination="AyA-TV-sW8" eventType="touchUpInside" id="Br1-4q-tIh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzR-aa-qMb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EvaqAlarm хорошо работает, когда у приложения много пользователей — расскажи друзьям!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="520" translatesAutoresizingMaskIntoConstraints="NO" id="KzR-aa-qMb">
                                 <rect key="frame" x="40" y="140" width="520" height="50"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -416,7 +417,7 @@ You can slide the map.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-Rh-wHd" customClass="EAConfirmButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxL-Rh-wHd" customClass="EAConfirmButton">
                                 <rect key="frame" x="250" y="496" width="100" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="r2G-8P-AkT"/>

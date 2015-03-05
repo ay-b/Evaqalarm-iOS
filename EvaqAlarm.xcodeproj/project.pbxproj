@@ -17,9 +17,8 @@
 		BD1AD57C1A920BA3005ED64D /* button_alarm_dislike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57A1A920BA3005ED64D /* button_alarm_dislike@2x.png */; };
 		BD1AD57D1A920BA3005ED64D /* button_alarm_like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1AD57B1A920BA3005ED64D /* button_alarm_like@2x.png */; };
 		BD1AD5831A92253A005ED64D /* EARequestPermissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */; };
-		BD1AD5871A9338B1005ED64D /* taifunoLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; };
-		BD1AD5881A933A9A005ED64D /* taifunoLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; };
-		BD1AD5891A933A9A005ED64D /* taifunoLibrary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD1D9D551AA8B5B90056E47E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1D9D531AA8B5B90056E47E /* Crashlytics.framework */; };
+		BD1D9D561AA8B5B90056E47E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1D9D541AA8B5B90056E47E /* Fabric.framework */; };
 		BD2E4C5019FD663500E00FD9 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4D19FD663500E00FD9 /* logo@2x.png */; };
 		BD2E4C5119FD663500E00FD9 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2E4C4E19FD663500E00FD9 /* logo@3x.png */; };
 		BD2F17661A7AECB40066A61D /* EAAlarmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2F17651A7AECB40066A61D /* EAAlarmButton.m */; };
@@ -55,13 +54,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BD1AD58A1A933A9A005ED64D /* Embed Frameworks */ = {
+		BDD4CFFF1A9730A000BFAB1F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BD1AD5891A933A9A005ED64D /* taifunoLibrary.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,8 +81,9 @@
 		BD1AD5811A92253A005ED64D /* EARequestPermissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EARequestPermissionsViewController.h; sourceTree = "<group>"; };
 		BD1AD5821A92253A005ED64D /* EARequestPermissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EARequestPermissionsViewController.m; sourceTree = "<group>"; };
 		BD1AD5851A922810005ED64D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = taifunoLibrary.framework; sourceTree = "<group>"; };
 		BD1AD58F1A93457F005ED64D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BD1D9D531AA8B5B90056E47E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		BD1D9D541AA8B5B90056E47E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		BD2E4C4D19FD663500E00FD9 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		BD2E4C4E19FD663500E00FD9 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		BD2F17641A7AECB40066A61D /* EAAlarmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAAlarmButton.h; sourceTree = "<group>"; };
@@ -136,12 +135,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1D9D561AA8B5B90056E47E /* Fabric.framework in Frameworks */,
 				BDBD6E1E1A7BDCCE00FE12EF /* MapKit.framework in Frameworks */,
-				BD1AD5871A9338B1005ED64D /* taifunoLibrary.framework in Frameworks */,
-				BD1AD5881A933A9A005ED64D /* taifunoLibrary.framework in Frameworks */,
 				BDDE788F1A40937D00E81BCC /* AudioToolbox.framework in Frameworks */,
 				BDC23B0A1A1B826F00849CBA /* Security.framework in Frameworks */,
 				BD919EB919FB7573009B7E55 /* CoreLocation.framework in Frameworks */,
+				BD1D9D551AA8B5B90056E47E /* Crashlytics.framework in Frameworks */,
 				36585C526DCF561B07C857A7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +262,8 @@
 		BD919EBD19FB758A009B7E55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD1D9D531AA8B5B90056E47E /* Crashlytics.framework */,
+				BD1D9D541AA8B5B90056E47E /* Fabric.framework */,
 				BD1AD58F1A93457F005ED64D /* QuartzCore.framework */,
 				BDBD6E1D1A7BDCCE00FE12EF /* MapKit.framework */,
 				BDDE788E1A40937D00E81BCC /* AudioToolbox.framework */,
@@ -276,7 +277,6 @@
 		BD9AC97B19FB96280088150F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BD1AD5861A9338B1005ED64D /* taifunoLibrary.framework */,
 				BD31D04E1A401AE7009A14FD /* Fonts */,
 				BD2E4C4B19FD663500E00FD9 /* Images */,
 				BD9AC97C19FB96280088150F /* alarm.wav */,
@@ -297,7 +297,8 @@
 				BD919E8C19FB7540009B7E55 /* Frameworks */,
 				BD919E8D19FB7540009B7E55 /* Resources */,
 				692729F984AF8D81C0527C8B /* Copy Pods Resources */,
-				BD1AD58A1A933A9A005ED64D /* Embed Frameworks */,
+				BDD4CFFF1A9730A000BFAB1F /* Embed Frameworks */,
+				BD1D9D521AA8B5820056E47E /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -403,6 +404,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BD1D9D521AA8B5820056E47E /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run ebb4c8a042b25aeed61354473a40f86e55d3cee7 af2e75cd4fd061434c4dbf77428f5319df1eec4240d43d8c67fa81eee2821195";
 		};
 		F4233A3DD3CD85BAF3014F72 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -575,6 +590,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EvaqAlarm/Resources",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -595,6 +611,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EvaqAlarm/Resources",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EvaqAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

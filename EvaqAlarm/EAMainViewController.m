@@ -18,7 +18,6 @@
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
-#import <taifunoLibrary/TFTaifuno.h>
 @import AudioToolbox;
 @import MapKit;
 
@@ -148,8 +147,7 @@ static NSString *const kSenderId = @"senderId";
 - (void)viewDidLayoutSubviews
 {
     if (![EAPreferences isPermissionsRequested]) {
-        EARequestPermissionsViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PermissionsVC"];
-        [self presentViewController:vc animated:NO completion:nil];
+        [self performSegueWithIdentifier:@"toRequestPermissions" sender:self];
     }
 }
 
@@ -408,7 +406,6 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)qrButtonPressed
 {
-    [[TFTaifuno sharedInstance] startChatOnViewController:self WithCallback:^(){} ];
 }
 
 - (IBAction)praiseAlarmButtonPressed
