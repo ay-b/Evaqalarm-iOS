@@ -12,9 +12,8 @@
 
 @protocol EAAlarmButtonDelegate <NSObject>
 
-- (void)alarmButton:(EAAlarmButton*)sender setParked:(BOOL)parked;
-
-
+- (void)alarmButton:(EAAlarmButton*)button setParked:(BOOL)parked;
+- (void)alarmButtonSendAlarm:(EAAlarmButton*)button;
 
 @end
 

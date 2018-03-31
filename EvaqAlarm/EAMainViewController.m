@@ -18,6 +18,7 @@
 #import <pop/POP.h>
 #import <TSMessages/TSMessage.h>
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
+#import "TFTaifuno.h"
 @import AudioToolbox;
 @import MapKit;
 
@@ -406,6 +407,7 @@ static NSString *const kSenderId = @"senderId";
 
 - (IBAction)qrButtonPressed
 {
+    [[TFTaifuno sharedInstance] startChatOnViewController:self];
 }
 
 - (IBAction)praiseAlarmButtonPressed
@@ -495,7 +497,7 @@ static NSString *const kSenderId = @"senderId";
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    BOOL shouldShowView = ![EAPreferences fullAccessEnabled];
+    BOOL shouldShowView = NO; //![EAPreferences fullAccessEnabled];
     #if TARGET_IPHONE_SIMULATOR
     shouldShowView = NO;
     #endif

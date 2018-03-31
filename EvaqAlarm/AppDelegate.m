@@ -16,6 +16,7 @@
 #import <YandexMobileMetrica/YandexMobileMetrica.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "TFTaifuno.h"
 
 @interface AppDelegate ()
 
@@ -34,16 +35,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[TFTaifuno sharedInstance] setApiKey:EATaifunoApiKey];
     [Fabric with:@[CrashlyticsKit]];
-    
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-        NSNotification *notification = [NSNotification notificationWithName:EAReceiveAlarmNotification object:self userInfo:userInfo];
-        EAMainViewController *vc = (EAMainViewController*)self.window.rootViewController;
-        [vc receiveAlarm:notification];
+        [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:userInfo];
     }
     
     if ([EAPreferences isPermissionsRequested]) {
@@ -74,6 +73,11 @@
     return YES;
 }
 
+- (void) applicationWillTerminate:(UIApplication *)application
+{
+    [[TFTaifuno sharedInstance] saveTaifuno];
+}
+
 #pragma mark - Push notifications
 
 - (void)p_requestRegisterNotifications
@@ -83,7 +87,8 @@
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
         [application registerUserNotificationSettings:settings];
-    } else {
+    }
+    else {
         [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     }
 }
@@ -92,6 +97,7 @@
 {
     NSString *token = [[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""];
     [EAPreferences setUid:token];
+    [[TFTaifuno sharedInstance] registerDeviceToken:[token stringByReplacingOccurrencesOfString:@" " withString:@""]];
 
     EALog(@"Push token is: %@", token);
 }
@@ -108,12 +114,13 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    
     NSMutableDictionary *extendedUserInfo = [userInfo mutableCopy];
     extendedUserInfo[@"playSound"] = application.applicationState == UIApplicationStateActive ? @(YES) : @(NO);
 
     [[NSNotificationCenter defaultCenter] postNotificationName:EAReceiveAlarmNotification object:self userInfo:extendedUserInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+    
+    [[TFTaifuno sharedInstance] didRecieveNewNotification:userInfo];
 }
 
 @end

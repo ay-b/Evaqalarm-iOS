@@ -25,6 +25,7 @@ static const NSTimeInterval kButtonAlphaTimeInterval = 0.3;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.confirmButton.alpha = 0;
     [NSTimer scheduledTimerWithTimeInterval:kButtonAppearanceTimeInterval target:self selector:@selector(p_showButton) userInfo:nil repeats:NO];
 }
 

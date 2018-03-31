@@ -5,4 +5,6 @@ pod 'AFNetworking', '~> 2.4'
 pod 'pop', '~> 1.0'
 pod 'TSMessages'
 pod 'VK-ios-sdk', '~> 1.0'
-pod 'YandexMobileMetrica'
+pod 'YandexMobileMetrica', '~> 1.6'
+
+pod 'SimulatorStatusMagic', :configurations => ['Debug']

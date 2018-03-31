@@ -8,8 +8,8 @@
 
 #import "EAPreferences.h"
 #import "EAConstants.h"
-@import UIKit;
-@import CoreLocation;
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 static NSString *const kParkingCount = @"ParkingCount";
 static NSString *const kPermissionsRequested = @"PermissionsRequested";

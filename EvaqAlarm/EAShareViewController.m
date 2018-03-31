@@ -34,10 +34,9 @@
 
 - (IBAction)confirmButtonPressed
 {
-    EAMainViewController *vc = (EAMainViewController*)self.presentingViewController;
-    
     [self dismissViewControllerAnimated:YES completion:^{
         if (_sharing) {
+            EAMainViewController *vc = (EAMainViewController*)self.presentingViewController;
             [vc shareButtonPressed];
         }
         else {
